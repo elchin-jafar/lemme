@@ -8,25 +8,25 @@ function HomePage() {
     <div className="bg-gradient-to-r from-[#E5F3FF] to-[#D8E3FF] w-screen h-screen flex flex-col items-center justify-items-center">
       <Link
         to="admin"
-        className="bg-white p-2.5 rounded-[15px] fixed top-[40px] right-[104px]"
+        className="bg-white p-2.5 rounded-[1.5rem] fixed top-[4rem] right-[10.4rem]"
       >
         <Profile color="#85B6FF" />
       </Link>
-      <img src={logo2} alt="" className="w-[429px]" />
-      <div className="relative bg-[#EFA0C6] w-[604px] h-[100px] rounded-[126px] mb-5">
+      <img src={logo2} alt="" className="w-[42.9rem]" />
+      <div className="relative bg-[#EFA0C6] w-[60.4rem] h-[10rem] rounded-[12.6rem] mb-5 flex justify-center items-center">
         <SearchNormal1
-          className="absolute right-[62px] top-[31px]"
+          className="absolute right-[6.2rem] top-[3.1rem]"
           size={37}
           color="#2D264B"
         />
         <input
           type="text"
-          className="bg-[#EFA0C6] text-[#2B2727] rounded-[126px] placeholder-[#2B2727] text-center  text-[36px] outline-none  ml-28 mt-[1.4rem] max-w-[80%]"
+          className="bg-[#EFA0C6] text-[#2B2727] rounded-[12.6rem] placeholder-[#2B2727] text-center  text-[3.6rem] outline-none max-w-[80%]"
           placeholder="Məhsulun adı"
         />
       </div>
       <Link to="test">
-        <div className="bg-[#EFA0C6] text-[#2B2727] w-[604px] h-[100px] text-[36px] rounded-[126px] outline-none flex items-center justify-center cursor-pointer">
+        <div className="bg-[#EFA0C6] text-[#2B2727] w-[60.4rem] h-[10rem] text-[3.6rem] rounded-[12.6rem] outline-none flex items-center justify-center cursor-pointer">
           Dəri tipini müəyyən et
         </div>
       </Link>
