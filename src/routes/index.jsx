@@ -24,6 +24,10 @@ const routes = [
     path: "test",
     element: <>test</>,
   },
+  {
+    path: "admin",
+    element: <>Admin Panel</>,
+  },
 ];
 
 export default routes;
