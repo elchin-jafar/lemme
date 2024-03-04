@@ -1,9 +1,10 @@
 import ProductPage from "../pages/ProductPage";
+import HomePage from "../pages/HomePage/HomePage";
 
 const routes = [
   {
     path: "/",
-    element: <>Home Page</>,
+    element: <HomePage />,
   },
   {
     path: "productPage/:id",
