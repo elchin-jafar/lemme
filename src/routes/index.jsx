@@ -1,5 +1,6 @@
 import ProductPage from "../pages/ProductPage";
 import HomePage from "../pages/HomePage/HomePage";
+import TestPage from "../pages/TestPage/TestPage";
 
 const routes = [
   {
@@ -22,7 +23,7 @@ const routes = [
   },
   {
     path: "test",
-    element: <>test</>,
+    element: <TestPage />,
   },
   {
     path: "admin",
