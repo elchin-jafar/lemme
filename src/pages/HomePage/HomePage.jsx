@@ -79,17 +79,16 @@ function HomePage() {
                   </div>
                 ) : (
                   filteredPeople.map((person) => (
-                    <Combobox.Option
-                      key={person.id}
-                      className={({ active }) =>
-                        `relative cursor-pointer select-none py-2 pl-10 pr-4 text-3xl ${
-                          active ? "bg-teal-600 text-white" : "text-gray-900"
-                        }`
-                      }
-                      value={person}
-                    >
-                      {({ selected, active }) => (
-                        <Link to="productPage/1">
+                    <Link to="productPage/1" key={person.id}>
+                      <Combobox.Option
+                        className={({ active }) =>
+                          `relative cursor-pointer select-none py-2 pl-10 pr-4 text-3xl ${
+                            active ? "bg-teal-600 text-white" : "text-gray-900"
+                          }`
+                        }
+                        value={person}
+                      >
+                        {({ selected, active }) => (
                           <span
                             className={`block truncate ${
                               selected ? "font-medium" : "font-normal"
@@ -97,7 +96,8 @@ function HomePage() {
                           >
                             {person.name}
                           </span>
-                          {/* {selected ? (
+                        )}
+                        {/* {selected ? (
                             <span
                               className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
                                 active ? "text-white" : "text-teal-600"
@@ -109,9 +109,8 @@ function HomePage() {
                               />
                             </span>
                           ) : null} */}
-                        </Link>
-                      )}
-                    </Combobox.Option>
+                      </Combobox.Option>
+                    </Link>
                   ))
                 )}
               </Combobox.Options>
