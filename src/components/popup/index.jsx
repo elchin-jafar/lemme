@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function PopupType() {
     return (
-        <Popover className="h-screen p-5 flex justify-center items-center">
+        <Popover className="h-screen p-5 flex justify-center items-center ">
             <Popover.Button className="absolute z-1">Button</Popover.Button>
             <Popover.Panel>
                 <div className="relative md:max-w-[840px] w-full md:p-10 h-auto shadow-box bg-white px-5 md:px-[60px] pt-[50px] pb-10 rounded-xl z-10">
@@ -17,19 +17,19 @@ function PopupType() {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-10">
                         <Link to="/" className="px-2.5 pt-2.5 group w-full h-[205px] bg-[#eee] hover:bg-white rounded-xl shadow-lg hover:shadow-box flex flex-col justify-center items-center transition duration-300 ease-in-out transform hover:scale-105">
-                            <img className="max-w-[140px] w-full max-h-[140px]  object-cover mb-3" src="src/assets/Rectangle 4.svg" alt="" />
+                            <img className="max-w-[140px] w-full max-h-[140px]  object-cover mb-3" src="../src/assets/Rectangle 4.svg" alt="" />
                             <p className="font-bold text-lg md:text-xl text-center">Quru</p>
                         </Link>
                         <Link to="/" className="px-2.5 pt-2.5 group w-full h-[205px] bg-[#eee] hover:bg-white rounded-xl shadow-lg hover:shadow-box flex flex-col justify-center items-center transition duration-300 ease-in-out transform hover:scale-105">
-                            <img className="max-w-[140px] w-full max-h-[140px] object-cover mb-3" src="src/assets/Rectangle 1.svg" alt="" />
+                            <img className="max-w-[140px] w-full max-h-[140px] object-cover mb-3" src="../src/assets/Rectangle 1.svg" alt="" />
                             <p className="font-bold text-lg md:text-xl text-center">Yağlı</p>
                         </Link>
                         <Link to="/" className="px-2.5 pt-2.5 group w-full h-[205px] bg-[#eee] hover:bg-white rounded-xl shadow-lg hover:shadow-box flex flex-col justify-center items-center transition duration-300 ease-in-out transform hover:scale-105">
-                            <img className="max-w-[140px] w-full max-h-[140px] object-cover mb-3" src="src/assets/Rectangle 3.svg" alt="" />
+                            <img className="max-w-[140px] w-full max-h-[140px] object-cover mb-3" src="../src/assets/Rectangle 3.svg" alt="" />
                             <p className="font-bold text-lg md:text-xl text-center">Qarışıq</p>
                         </Link>
                         <Link to="/" className="px-2.5 pt-2.5 group w-full h-[205px] bg-[#eee] hover:bg-white rounded-xl shadow-lg hover:shadow-box flex flex-col justify-center items-center transition duration-300 ease-in-out transform hover:scale-105">
-                            <img className="max-w-[140px] w-full max-h-[140px] object-cover mb-3" src="src/assets/Rectangle 2.svg" alt="" />
+                            <img className="max-w-[140px] w-full max-h-[140px] object-cover mb-3" src="../src/assets/Rectangle 2.svg" alt="" />
                             <p className="font-bold text-lg md:text-xl text-center">Bilmirəm</p>
                         </Link>
                     </div>

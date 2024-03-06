@@ -1,9 +1,10 @@
 import { Outlet } from "react-router";
+import Product from "../components/product";
 
 function ProductPage() {
   return (
     <>
-      <h1>Product Page</h1>
+      <Product />
       <Outlet />
     </>
   );
