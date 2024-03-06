@@ -13,6 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.18",
+    "antd": "^5.15.1",
     "font-awesome": "^4.7.0",
     "iconsax-react": "^0.0.8",
     "react": "^18.2.0",

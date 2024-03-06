@@ -1,6 +1,7 @@
 import ProductPage from "../pages/ProductPage";
 import HomePage from "../pages/HomePage/HomePage";
 import TestPage from "../pages/TestPage/TestPage";
+import AdminPanel from "../pages/AdminPanel/AdminPanel";
 
 const routes = [
   {
@@ -27,7 +28,7 @@ const routes = [
   },
   {
     path: "admin",
-    element: <>Admin Panel</>,
+    element: <AdminPanel />,
   },
 ];
 
