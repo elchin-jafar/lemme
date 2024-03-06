@@ -82,7 +82,7 @@ export default TestPage;
 function Models() {
   return (
     <>
-      <div className="relative w-[55rem] h-[48rem] 2xl:w-[61rem] 2xl:h-[55rem] border border-yellow-400">
+      <div className="relative w-[55rem] h-[48rem] 2xl:w-[61rem] 2xl:h-[55rem]">
         <div className="p-[3rem] border border-black rounded-full w-[26rem] 2xl:w-max bg-[#F6EFF2] absolute left-[50%] -translate-x-1/2 bottom-0 z-[3]">
           <img src={model_S} alt="" />
         </div>
