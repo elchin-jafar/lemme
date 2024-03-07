@@ -2,6 +2,10 @@ import logo from "../../assets/logo2.png";
 import model_S from "../../assets/models/modelS.png";
 import model_M from "../../assets/models/modelM.png";
 import model_L from "../../assets/models/modelL.png";
+import compressed_S from "../../assets/models/compressed_modelS.png";
+import compressed_M from "../../assets/models/compressed_modelM.png";
+import compressed_L from "../../assets/models/compressed_modelL.png";
+import ProgressiveImg from "../../components/ProgressiveImg/ProgressiveImg";
 import { useState } from "react";
 import ResultModal from "../../components/ResultModal/ResultModal";
 import { useResultModalStore } from "../../store/resultModalStore";
@@ -93,13 +97,13 @@ function Models() {
     <>
       <div className="relative w-[55rem] h-[48rem] 2xl:w-[61rem] 2xl:h-[55rem]">
         <div className="p-[3rem] border border-black rounded-full w-[26rem] 2xl:w-max bg-[#F6EFF2] absolute left-[50%] -translate-x-1/2 bottom-0 z-[3]">
-          <img src={model_S} alt="" />
+          <ProgressiveImg src={model_S} placeholderSrc={compressed_S} alt="" />
         </div>
         <div className="p-[3rem] border border-black rounded-full w-[29rem] 2xl:w-max bg-[#F6EFF2] absolute left-0 -top-[2rem] z-[2]">
-          <img src={model_M} alt="" />
+          <ProgressiveImg src={model_M} placeholderSrc={compressed_M} alt="" />
         </div>
         <div className="p-[3rem] border border-black rounded-full w-[36rem] 2xl:w-max bg-[#F6EFF2] absolute right-0 top-0 z-[1]">
-          <img src={model_L} alt="" />
+          <ProgressiveImg src={model_L} placeholderSrc={compressed_L} alt="" />
         </div>
       </div>
     </>
