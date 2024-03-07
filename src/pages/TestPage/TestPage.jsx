@@ -96,7 +96,7 @@ function Models() {
   return (
     <>
       <div className="relative w-[55rem] h-[48rem] 2xl:w-[61rem] 2xl:h-[55rem]">
-        <div className="p-[3rem] border border-black rounded-full w-[26rem] 2xl:w-max bg-[#F6EFF2] absolute left-[50%] -translate-x-1/2 bottom-0 z-[3]">
+        <div className="p-[3rem] border border-black rounded-full w-[26rem] 2xl:w-max bg-[#F6EFF2] absolute left-[50%] -translate-x-1/2 md:bottom-0 2xl:bottom-[9rem] z-[3]">
           <ProgressiveImg
             src={model_S}
             placeholderSrc={compressed_S}

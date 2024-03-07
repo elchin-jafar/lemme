@@ -33,10 +33,20 @@ const searchResult = (query) =>
         ),
       };
     });
+
+const BASE_URL = "https://lemme.azurewebsites.net/";
+
 function AdminPanel() {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
+
+  useEffect(() => {
+    fetch(`${BASE_URL}api/Product/SearchProductByName?productName=fe`)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
+
   const showModal = () => {
     setOpen(true);
   };
