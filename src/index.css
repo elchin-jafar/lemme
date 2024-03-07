@@ -37,3 +37,12 @@ html {
   -webkit-box-shadow: 0 0 0 0px #efa0c6;
   box-shadow: 0 0 0 0px #efa0c6;
 }
+
+.loading {
+  filter: blur(10px);
+  clip-path: inset(0);
+}
+.loaded {
+  filter: blur(0px);
+  transition: filter 0.5s linear;
+}

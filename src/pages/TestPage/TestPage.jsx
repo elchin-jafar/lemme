@@ -97,13 +97,31 @@ function Models() {
     <>
       <div className="relative w-[55rem] h-[48rem] 2xl:w-[61rem] 2xl:h-[55rem]">
         <div className="p-[3rem] border border-black rounded-full w-[26rem] 2xl:w-max bg-[#F6EFF2] absolute left-[50%] -translate-x-1/2 bottom-0 z-[3]">
-          <ProgressiveImg src={model_S} placeholderSrc={compressed_S} alt="" />
+          <ProgressiveImg
+            src={model_S}
+            placeholderSrc={compressed_S}
+            alt=""
+            width="198"
+            height="198"
+          />
         </div>
         <div className="p-[3rem] border border-black rounded-full w-[29rem] 2xl:w-max bg-[#F6EFF2] absolute left-0 -top-[2rem] z-[2]">
-          <ProgressiveImg src={model_M} placeholderSrc={compressed_M} alt="" />
+          <ProgressiveImg
+            src={model_M}
+            placeholderSrc={compressed_M}
+            alt=""
+            width="228"
+            height="228"
+          />
         </div>
         <div className="p-[3rem] border border-black rounded-full w-[36rem] 2xl:w-max bg-[#F6EFF2] absolute right-0 top-0 z-[1]">
-          <ProgressiveImg src={model_L} placeholderSrc={compressed_L} alt="" />
+          <ProgressiveImg
+            src={model_L}
+            placeholderSrc={compressed_L}
+            alt=""
+            width="298"
+            height="298"
+          />
         </div>
       </div>
     </>
