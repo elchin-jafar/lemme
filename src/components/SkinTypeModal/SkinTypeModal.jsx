@@ -1,13 +1,13 @@
 import { Modal } from "antd";
 import { Link } from "react-router-dom";
-import { useModalStore } from "../../store/modalStore";
+import { useSkinTypeModalStore } from "../../store/skinTypeModalStore";
 
-function CustomModal() {
+function SkinTypeModal() {
   const {
     isOpen: isModalOpen,
     open: openModal,
     close: closeModal,
-  } = useModalStore((state) => state);
+  } = useSkinTypeModalStore((state) => state);
 
   const handleCancel = () => {
     console.log("Clicked cancel button");
@@ -90,4 +90,4 @@ function CustomModal() {
   );
 }
 
-export default CustomModal;
+export default SkinTypeModal;

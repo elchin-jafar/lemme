@@ -2,10 +2,10 @@ import logo from "../../assets/logo.png";
 import logo2 from "../../assets/logo2.png";
 import { Profile, SearchNormal1 } from "iconsax-react";
 import { Link } from "react-router-dom";
-import { useModalStore } from "../../store/modalStore";
+import { useSkinTypeModalStore } from "../../store/skinTypeModalStore";
 import { Fragment, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
-import CustomModal from "../../components/Modal/Modal";
+import SkinTypeModal from "../../components/SkinTypeModal/SkinTypeModal";
 
 const people = [
   { id: 1, name: "Wade Cooper" },
@@ -23,7 +23,7 @@ function HomePage() {
     isOpen: isModalOpen,
     open: openModal,
     close: closeModal,
-  } = useModalStore((state) => state);
+  } = useSkinTypeModalStore((state) => state);
 
   const filteredPeople =
     query === ""
@@ -124,7 +124,7 @@ function HomePage() {
           </div>
         </Combobox>
       </div>
-      <CustomModal />
+      <SkinTypeModal />
       <Link to="test">
         <div className="bg-[#EFA0C6] text-[#2B2727] w-[60.4rem] h-[10rem] text-[3.6rem] rounded-[12.6rem] outline-none flex items-center justify-center cursor-pointer">
           Dəri tipini müəyyən et

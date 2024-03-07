@@ -3,6 +3,8 @@ import model_S from "../../assets/models/modelS.png";
 import model_M from "../../assets/models/modelM.png";
 import model_L from "../../assets/models/modelL.png";
 import { useState } from "react";
+import ResultModal from "../../components/ResultModal/ResultModal";
+import { useResultModalStore } from "../../store/resultModalStore";
 
 const questions = [
   {
@@ -33,6 +35,12 @@ const questions = [
 
 function TestPage() {
   const [q, setQ] = useState({});
+
+  const {
+    isOpen: isModalOpen,
+    open: openModal,
+    close: closeModal,
+  } = useResultModalStore((state) => state);
 
   function handleAnswer(questionIndex, answerIndex = 0) {
     const key = `s${questionIndex + 1}`;
@@ -68,11 +76,12 @@ function TestPage() {
       </div>
 
       <div
-        onClick={() => console.log(q)}
+        onClick={openModal}
         className="px-[2.9rem] py-[1rem] text-[2rem] font-bold text-white bg-[#56A8FF] rounded-[1.5rem] w-fit cursor-pointer mt-[4rem]"
       >
         Cavabı al
       </div>
+      <ResultModal />
     </div>
   );
 }
