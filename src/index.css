@@ -22,7 +22,18 @@ html {
   display: none;
 }
 
-.bg{
-  background: linear-gradient(180deg, #B0DDFF 0%, #FFE8F5 100%);
-  background: linear-gradient(180deg, color(display-p3 0.7255 0.8627 0.9922) 0%, color(display-p3 1 0.9137 0.9569) 100%);
+.bg {
+  background: linear-gradient(180deg, #b0ddff 0%, #ffe8f5 100%);
+  background: linear-gradient(
+    180deg,
+    color(display-p3 0.7255 0.8627 0.9922) 0%,
+    color(display-p3 1 0.9137 0.9569) 100%
+  );
+}
+
+.ant-input:focus {
+  border-color: #efa0c6;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0px #efa0c6;
+  box-shadow: 0 0 0 0px #efa0c6;
 }
