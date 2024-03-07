@@ -1,6 +1,10 @@
 import { Modal } from "antd";
 import { Link } from "react-router-dom";
 import { useSkinTypeModalStore } from "../../store/skinTypeModalStore";
+import dry from "../../assets/dry.svg";
+import oily from "../../assets/oily.svg";
+import mixed from "../../assets/mixed.svg";
+import idk from "../../assets/idk.svg";
 
 function SkinTypeModal() {
   const {
@@ -43,7 +47,7 @@ function SkinTypeModal() {
           >
             <img
               className="max-w-[140px] w-full max-h-[140px]  object-cover mb-3"
-              src="../src/assets/Rectangle 4.svg"
+              src={dry}
               alt=""
             />
             <p className="font-bold text-lg md:text-xl text-center">Quru</p>
@@ -55,7 +59,7 @@ function SkinTypeModal() {
           >
             <img
               className="max-w-[140px] w-full max-h-[140px] object-cover mb-3"
-              src="../src/assets/Rectangle 1.svg"
+              src={oily}
               alt=""
             />
             <p className="font-bold text-lg md:text-xl text-center">Yağlı</p>
@@ -67,7 +71,7 @@ function SkinTypeModal() {
           >
             <img
               className="max-w-[140px] w-full max-h-[140px] object-cover mb-3"
-              src="../src/assets/Rectangle 3.svg"
+              src={mixed}
               alt=""
             />
             <p className="font-bold text-lg md:text-xl text-center">Qarışıq</p>
@@ -79,7 +83,7 @@ function SkinTypeModal() {
           >
             <img
               className="max-w-[140px] w-full max-h-[140px] object-cover mb-3"
-              src="../src/assets/Rectangle 2.svg"
+              src={idk}
               alt=""
             />
             <p className="font-bold text-lg md:text-xl text-center">Bilmirəm</p>
