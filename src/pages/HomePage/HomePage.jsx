@@ -3,37 +3,63 @@ import logo2 from "../../assets/logo2.png";
 import { Profile, SearchNormal1 } from "iconsax-react";
 import { Link } from "react-router-dom";
 import { useSkinTypeModalStore } from "../../store/skinTypeModalStore";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useCallback } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import SkinTypeModal from "../../components/SkinTypeModal/SkinTypeModal";
+import { getProductByName } from "../../utils/apiUtils";
+import debounce from "../../utils/debounce";
 
-const people = [
-  { id: 1, name: "Wade Cooper" },
-  { id: 2, name: "Arlene Mccoy" },
-  { id: 3, name: "Devon Webb" },
-  { id: 4, name: "Tom Cook" },
-  { id: 5, name: "Tanya Fox" },
-  { id: 6, name: "Hellen Schmidt" },
-];
+// const people = [
+//   { id: 1, name: "Wade Cooper" },
+//   { id: 2, name: "Arlene Mccoy" },
+//   { id: 3, name: "Devon Webb" },
+//   { id: 4, name: "Tom Cook" },
+//   { id: 5, name: "Tanya Fox" },
+//   { id: 6, name: "Hellen Schmidt" },
+// ];
 
 function HomePage() {
-  const [selected, setSelected] = useState(people[0]);
-  const [query, setQuery] = useState("");
+  const [selected, setSelected] = useState(0);
+  // const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+
   const {
     isOpen: isModalOpen,
     open: openModal,
     close: closeModal,
   } = useSkinTypeModalStore((state) => state);
 
-  const filteredPeople =
-    query === ""
-      ? people
-      : people.filter((person) =>
-          person.name
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
-        );
+  const debounceOnChange = useCallback(debounce(onChange, 300), []);
+
+  const searchProduct = async (value) => {
+    const response = await getProductByName(value);
+    const data = response.data;
+    console.log("data", data);
+    setResults(
+      data.map((res) => {
+        const { id, name } = res;
+        return { id, name };
+      })
+    );
+  };
+
+  console.log("results", results);
+  console.log("selected", selected);
+
+  function onChange(value) {
+    if (!value) setResults([]);
+    value && searchProduct(value);
+  }
+
+  // const filteredPeople =
+  //   query === ""
+  //     ? people
+  //     : people.filter((person) =>
+  //         person.name
+  //           .toLowerCase()
+  //           .replace(/\s+/g, "")
+  //           .includes(query.toLowerCase().replace(/\s+/g, ""))
+  //       );
 
   return (
     <div className="bg-gradient-to-r from-[#E5F3FF] to-[#D8E3FF] w-screen h-screen pt-[4rem] flex flex-col items-center justify-items-center">
@@ -65,7 +91,7 @@ function HomePage() {
                 className="bg-[#EFA0C6] text-[#2B2727] rounded-[12.6rem] placeholder-[#2B2727] text-center  text-[3.6rem] outline-none"
                 placeholder="Məhsulun adı"
                 // displayValue={(person) => person.name}
-                onChange={(event) => setQuery(event.target.value)}
+                onChange={(e) => debounceOnChange(e.target.value)}
               />
               <Combobox.Button className="absolute inset-y-0 right-24 flex items-center">
                 <SearchNormal1 size={37} color="#2D264B" />
@@ -76,23 +102,23 @@ function HomePage() {
               leave="transition ease-in duration-100"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
-              afterLeave={() => setQuery("")}
+              // afterLeave={() => setQuery("")}
             >
               <Combobox.Options className="absolute left-0 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-                {filteredPeople.length === 0 && query !== "" ? (
+                {results?.length === 0 ? (
                   <div className="relative cursor-not-allowed text-3xl select-none px-4 py-2 text-gray-700">
                     Nothing found.
                   </div>
                 ) : (
-                  filteredPeople.map((person) => (
-                    <Link onClick={openModal}>
+                  results.map((product) => (
+                    <Link onClick={openModal} key={product.id}>
                       <Combobox.Option
                         className={({ active }) =>
                           `relative cursor-pointer select-none py-2 pl-10 pr-4 text-3xl ${
                             active ? "bg-teal-600 text-white" : "text-gray-900"
                           }`
                         }
-                        value={person}
+                        value={product.id}
                       >
                         {({ selected, active }) => (
                           <span
@@ -100,7 +126,7 @@ function HomePage() {
                               selected ? "font-medium" : "font-normal"
                             }`}
                           >
-                            {person.name}
+                            {product.name}
                           </span>
                         )}
                         {/* {selected ? (
@@ -124,7 +150,7 @@ function HomePage() {
           </div>
         </Combobox>
       </div>
-      <SkinTypeModal />
+      <SkinTypeModal productId={selected} />
       <Link to="test">
         <div className="bg-[#EFA0C6] text-[#2B2727] w-[60.4rem] h-[10rem] text-[3.6rem] rounded-[12.6rem] outline-none flex items-center justify-center cursor-pointer">
           Dəri tipini müəyyən et
