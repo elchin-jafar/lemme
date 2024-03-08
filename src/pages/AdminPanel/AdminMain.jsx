@@ -1,13 +1,17 @@
 import { User } from "iconsax-react";
 import { Flex, Button } from "antd";
 import { Link } from "react-router-dom";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 function AdminMain() {
   return (
     <Flex justify="start" align="start" gap="large">
-      <div>
+      <Flex vertical gap="large">
         <User size="32" color="#85B6FF" />
-      </div>
+        <Link to="/">
+          <Button icon={<ArrowLeftOutlined />} />
+        </Link>
+      </Flex>
       <div>
         <p className="text-[3.8rem] font-semibold">Ana səhifə</p>
         <Flex gap="large">

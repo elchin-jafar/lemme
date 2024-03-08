@@ -4,6 +4,7 @@ import TestPage from "../pages/TestPage/TestPage";
 import AdminLayout from "../layouts/AdminLayout";
 import AdminMain from "../pages/AdminPanel/AdminMain";
 import AdminProducts from "../pages/AdminPanel/AdminProducts";
+import AdminAddProduct from "../pages/AdminPanel/AdminAddProduct";
 import AdminEditProduct from "../pages/AdminPanel/AdminEditProduct";
 import Login from "../pages/Login/Login";
 
@@ -35,6 +36,10 @@ const routes = [
       {
         path: "products",
         element: <AdminProducts />,
+      },
+      {
+        path: "addProduct",
+        element: <AdminAddProduct />,
       },
       {
         path: "editProduct/:id",

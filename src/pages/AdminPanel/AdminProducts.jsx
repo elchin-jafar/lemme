@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { User } from "iconsax-react";
-import { Flex, Skeleton, Space, Table, Tag } from "antd";
+import { User, ArrowLeft, Add } from "iconsax-react";
+import { Flex, Skeleton, Space, Table, Tag, Button } from "antd";
+import { PlusOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { getAll } from "../../utils/apiUtils";
 const { Column } = Table;
@@ -28,11 +29,20 @@ function AdminProducts() {
 
   return (
     <Flex justify="start" align="start" gap="large">
-      <div>
+      <Flex vertical gap="middle">
         <User size="32" color="#85B6FF" />
-      </div>
+        <Link to="/admin/main">
+          {" "}
+          <Button icon={<ArrowLeftOutlined />} />{" "}
+        </Link>
+      </Flex>
       <div>
-        <p className="text-[3.8rem] font-semibold">Məhsul siyahısı</p>
+        <Flex align="center" gap="large">
+          <p className="text-[3.8rem] font-semibold">Məhsul siyahısı</p>
+          <Link to="/admin/addProduct">
+            <Button icon={<PlusOutlined />}>Əlavə et</Button>
+          </Link>
+        </Flex>
         <div className="w-[70rem]">
           {isLoading ? (
             <Skeleton active />
