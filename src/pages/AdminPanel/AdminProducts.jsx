@@ -54,7 +54,7 @@ function AdminProducts() {
                 title="Action"
                 key="action"
                 render={(_, record) => (
-                  <Space size="middle">
+                  <Space size="middle" key={record.id}>
                     <Link
                       to={`/admin/editProduct/${record.id}`}
                       onClick={() => console.log(record)}

@@ -55,7 +55,7 @@ function AdminAddProduct() {
           </Form.Item>
           <Form.Item label="Dəri növü:" name="Dəri növü">
             <Select
-              defaultValue="dry"
+              //   defaultValue="dry" need to use initialValues of form instead
               style={{
                 width: 120,
               }}
