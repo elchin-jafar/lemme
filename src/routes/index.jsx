@@ -1,7 +1,11 @@
 import ProductPage from "../pages/ProductPage";
 import HomePage from "../pages/HomePage/HomePage";
 import TestPage from "../pages/TestPage/TestPage";
-import AdminPanel from "../pages/AdminPanel/AdminPanel";
+import AdminLayout from "../layouts/AdminLayout";
+import AdminMain from "../pages/AdminPanel/AdminMain";
+import AdminProducts from "../pages/AdminPanel/AdminProducts";
+import AdminEditProduct from "../pages/AdminPanel/AdminEditProduct";
+import Login from "../pages/Login/Login";
 
 const routes = [
   {
@@ -11,16 +15,6 @@ const routes = [
   {
     path: "productPage/:id",
     element: <ProductPage />,
-    children: [
-      {
-        path: "ingredients",
-        element: <>Ingredients</>,
-      },
-      {
-        path: "usage",
-        element: <>How To Use</>,
-      },
-    ],
   },
   {
     path: "test",
@@ -28,7 +22,25 @@ const routes = [
   },
   {
     path: "admin",
-    element: <AdminPanel />,
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "main",
+        element: <AdminMain />,
+      },
+      {
+        path: "products",
+        element: <AdminProducts />,
+      },
+      {
+        path: "editProduct/:id",
+        element: <AdminEditProduct />,
+      },
+    ],
   },
 ];
 

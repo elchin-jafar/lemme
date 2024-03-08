@@ -7,6 +7,7 @@ const api = axios.create({
   baseURL: BASE_URL,
 });
 
+//PRODUCT APIs
 export const addProduct = (productData) => {
   return api.post(endpoints.product.add, productData);
 };
@@ -31,4 +32,9 @@ export const getProductByName = (name) => {
   return api.get(endpoints.product.byName, {
     params: { productName: name },
   });
+};
+
+//USER APIs
+export const login = (userData) => {
+  return api.post(endpoints.user.login, userData);
 };

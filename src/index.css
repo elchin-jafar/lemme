@@ -50,3 +50,7 @@ html {
 .ant-modal-content {
   border-radius: 20px;
 }
+
+.ant-btn-primary {
+  background-color: #1677ff;
+}
