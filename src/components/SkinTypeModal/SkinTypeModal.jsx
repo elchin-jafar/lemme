@@ -26,18 +26,7 @@ function SkinTypeModal({ productId }) {
         // confirmLoading={confirmLoading}
         onCancel={handleCancel}
         width={800}
-        footer={[
-          <div className="pt-8 md:pt-[37px] flex justify-center items-center">
-            <Link to={`/productPage/${productId}`}>
-              <button
-                onClick={closeModal}
-                className="px-5 py-2.5 bg-[#56A8FF] hover:bg-[#56A8FF] shadow-lg hover:shadow-box rounded-xl text-white transition duration-300 ease-in-out transform hover:scale-105"
-              >
-                Davam et
-              </button>
-            </Link>
-          </div>,
-        ]}
+        footer={[]}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-10">
           <Link
@@ -87,6 +76,16 @@ function SkinTypeModal({ productId }) {
               alt=""
             />
             <p className="font-bold text-lg md:text-xl text-center">Bilmirəm</p>
+          </Link>
+        </div>
+        <div className="pt-8 md:pt-[37px] flex justify-center items-center">
+          <Link to={`/productPage/${productId}`}>
+            <button
+              onClick={closeModal}
+              className="px-5 py-2.5 bg-[#56A8FF] hover:bg-[#56A8FF] shadow-lg hover:shadow-box rounded-xl text-white transition duration-300 ease-in-out transform hover:scale-105"
+            >
+              Davam et
+            </button>
           </Link>
         </div>
       </Modal>

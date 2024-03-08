@@ -9,18 +9,18 @@ import SkinTypeModal from "../../components/SkinTypeModal/SkinTypeModal";
 import { getProductByName } from "../../utils/apiUtils";
 import debounce from "../../utils/debounce";
 
-const people = [
-  { id: 1, name: "Wade Cooper" },
-  { id: 2, name: "Arlene Mccoy" },
-  { id: 3, name: "Devon Webb" },
-  { id: 4, name: "Tom Cook" },
-  { id: 5, name: "Tanya Fox" },
-  { id: 6, name: "Hellen Schmidt" },
-];
+// const people = [
+//   { id: 1, name: "Wade Cooper" },
+//   { id: 2, name: "Arlene Mccoy" },
+//   { id: 3, name: "Devon Webb" },
+//   { id: 4, name: "Tom Cook" },
+//   { id: 5, name: "Tanya Fox" },
+//   { id: 6, name: "Hellen Schmidt" },
+// ];
 
 function HomePage() {
-  const [selected, setSelected] = useState();
-  const [query, setQuery] = useState("");
+  const [selected, setSelected] = useState(0);
+  // const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
   const {
@@ -51,15 +51,15 @@ function HomePage() {
     value && searchProduct(value);
   }
 
-  const filteredPeople =
-    query === ""
-      ? people
-      : people.filter((person) =>
-          person.name
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
-        );
+  // const filteredPeople =
+  //   query === ""
+  //     ? people
+  //     : people.filter((person) =>
+  //         person.name
+  //           .toLowerCase()
+  //           .replace(/\s+/g, "")
+  //           .includes(query.toLowerCase().replace(/\s+/g, ""))
+  //       );
 
   return (
     <div className="bg-gradient-to-r from-[#E5F3FF] to-[#D8E3FF] w-screen h-screen pt-[4rem] flex flex-col items-center justify-items-center">
@@ -102,7 +102,7 @@ function HomePage() {
               leave="transition ease-in duration-100"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
-              afterLeave={() => setQuery("")}
+              // afterLeave={() => setQuery("")}
             >
               <Combobox.Options className="absolute left-0 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
                 {results?.length === 0 ? (
@@ -111,7 +111,7 @@ function HomePage() {
                   </div>
                 ) : (
                   results.map((product) => (
-                    <Link onClick={openModal}>
+                    <Link onClick={openModal} key={product.id}>
                       <Combobox.Option
                         className={({ active }) =>
                           `relative cursor-pointer select-none py-2 pl-10 pr-4 text-3xl ${
