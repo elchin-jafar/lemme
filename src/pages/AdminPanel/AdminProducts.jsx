@@ -3,7 +3,7 @@ import { User, ArrowLeft, Add } from "iconsax-react";
 import { Flex, Skeleton, Space, Table, Tag, Button } from "antd";
 import { PlusOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { getAll } from "../../utils/apiUtils";
+import { getAll, deleteProduct } from "../../utils/apiUtils";
 const { Column } = Table;
 
 function AdminProducts() {
@@ -23,6 +23,13 @@ function AdminProducts() {
     }
     getRoll();
   }, []);
+
+  // async function handleDeleteProduct(id) {
+  //   const res = await deleteProduct(id);
+  //   if (res.ok) {
+  //     console.log(res);
+  //   }
+  // }
 
   console.log(isLoading);
   console.log(productList);
