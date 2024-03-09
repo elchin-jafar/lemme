@@ -7,6 +7,12 @@ const endpoints = {
     byId: (id) => `/api/Product/GetProductById/${id}`,
     byName: "/api/Product/SearchProductByName",
   },
+  user: {
+    register: "/api/User/RegisterUser",
+    getAll: "/api/User/GetAllUsers",
+    byId: "/api/User/GetUserById",
+    login: "/api/User/Login",
+  },
 };
 
 export default endpoints;
