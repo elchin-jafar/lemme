@@ -24,12 +24,16 @@ function AdminProducts() {
     getRoll();
   }, []);
 
-  // async function handleDeleteProduct(id) {
-  //   const res = await deleteProduct(id);
-  //   if (res.ok) {
-  //     console.log(res);
-  //   }
-  // }
+  async function handleDeleteProduct(id) {
+    try {
+      const res = await deleteProduct(id);
+      if (res.ok) {
+        console.log(res);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   console.log(isLoading);
   console.log(productList);
@@ -63,12 +67,12 @@ function AdminProducts() {
                 render={(_, record) => (
                   <Space size="middle" key={record.id}>
                     <Link
-                      to={`/admin/editProduct/${record.id}`}
+                      // to={`/admin/editProduct/${record.id}`}
                       onClick={() => console.log(record)}
                     >
                       Edit
                     </Link>
-                    <a>Delete</a>
+                    <a onClick={() => handleDeleteProduct(record.id)}>Delete</a>
                   </Space>
                 )}
               />

@@ -17,7 +17,7 @@ export const editProduct = (productData) => {
 };
 
 export const deleteProduct = (id) => {
-  return api.post(endpoints.product.delete, id);
+  return api.post(endpoints.product.delete(id));
 };
 
 export const getAll = () => {
