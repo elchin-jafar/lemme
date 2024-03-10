@@ -20,6 +20,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           // colorIconHover: "#EFA0C6",
         },
         components: {
+          Button: {
+            contentFontSizeLG: 20,
+          },
           // Input: {
           //   colorPrimaryBorder: "#EFA0C6",
           //   colorPrimaryBgHover: "#EFA0C6",
@@ -34,16 +37,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           //   colorBorder: "#EFA0C6",
           //   activeBorderColor: "#EFA0C6",
           // },
-          Button: {
-            primaryColor: "#000",
-            colorPrimaryBg: "rgb(22, 119, 255)",
-            // colorPrimaryBorder: "#EFA0C6",
-            // colorPrimaryBgHover: "rgb(22, 119, 255)",
-            // colorPrimaryBorderHover: "#EFA0C6",
-            // colorPrimaryHover: "#EFA0C6",
-            // colorPrimaryActive: "#EFA0C6",
-            // colorPrimaryTextHover: "#EFA0C6",
-          },
           // Select: {
           //   colorBorder: "#EFA0C6",
           //   optionActiveBg: "#EFA0C6",

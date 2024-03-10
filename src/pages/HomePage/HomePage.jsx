@@ -64,8 +64,8 @@ function HomePage() {
   return (
     <div className="bg-gradient-to-r from-[#E5F3FF] to-[#D8E3FF] w-screen h-screen pt-[4rem] flex flex-col items-center justify-items-center">
       <Link
-        to="admin"
-        className="bg-white p-[10px] rounded-[1.5rem] fixed top-[4rem] right-10 sm:right-[10.4rem]"
+        to="admin/main"
+        className="bg-white p-2.5 rounded-[1.5rem] fixed top-[4rem] right-[10.4rem]"
       >
         <Profile color="#85B6FF" />
       </Link>

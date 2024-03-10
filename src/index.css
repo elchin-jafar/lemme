@@ -49,3 +49,7 @@ html {
 .custom-modal .ant-modal-content {
   border-radius: 15px; 
 }
+
+.ant-btn-primary {
+  background-color: #1677ff;
+}
