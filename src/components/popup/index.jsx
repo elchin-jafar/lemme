@@ -10,7 +10,7 @@ function PopupType() {
             <Popover.Panel>
                 <div className="relative md:max-w-[840px] w-full md:p-10 h-auto shadow-box bg-white px-5 md:px-[60px] pt-[50px] pb-10 rounded-xl z-10">
                     <div className="flex gap-5 justify-between pb-5 md:pb-10 items-center">
-                        <h1 className="font-bold text-xl md:text-2xl">Dəri tipinizi qeyd edin</h1>
+                        <h1 className="font-bold text-xl md:text-2xl">Dəri tipinizi qeyd edin:</h1>
                         <Link to="/" className=" w-[30px] h-[30px] md:w-[50px] md:h-[50px] bg-[#d9d9d9] hover:bg-white flex justify-center items-center rounded-full shadow-btn hover:shadow-box">
                             <FontAwesomeIcon className="text-[20px] md:text-[30px] text-[#828282]" icon={faTimes} />
                         </Link>
