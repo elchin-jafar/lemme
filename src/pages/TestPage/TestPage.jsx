@@ -52,40 +52,44 @@ function TestPage() {
     setQ((prevState) => ({ ...prevState, [key]: value }));
   }
   return (
-    <div className="bg-gradient-to-r from-[#E5F3FF] to-[#D8E3FF] w-screen h-screen pt-20 pl-28 pb-[7rem]">
-      <h2 className="text-[6rem] font-bold">
-        Dəri tipini müəyyən etmək üçün test
-      </h2>
-      <img
-        src={logo}
-        alt="logo"
-        className="w-[22rem] h-[13.9rem] fixed right-[7rem] top-[4rem]"
-      />
-      <p className="text-[2.5rem] font-normal">
-        Burada 4 dəri növündən sizə hansının məxsus olacağını biləcəyik:
-      </p>
-
-      <div className="max-h-[60%] flex gap-[10rem] 2xl:gap-[20rem]">
-        <div className="overflow-y-scroll scrollbar-hide  max-w-[50%] mt-[3.5rem]">
-          {questions.map((q, index) => (
-            <Question
-              q={q}
-              index={index}
-              handleAnswer={handleAnswer}
-              key={index}
-            />
-          ))}
+    <div className="bg-gradient-to-r from-[#E5F3FF] to-[#D8E3FF] w-full h-auto pt-20 px-16 pb-14">
+      <div className="max-w-[1500px] w-full mx-auto">
+        <div className="flex justify-between items-center ">
+          <h2 className="text-[25px] sm:text-[60px] font-bold">
+            Dəri tipini müəyyən etmək üçün test
+          </h2>
+          <img
+            src={logo}
+            alt="logo"
+            className="w-[22rem] h-[13.9rem] hidden lg:flex"
+          />
         </div>
-        <Models />
-      </div>
+        
+        <p className="text-[25px] hidden md:flex font-normal">
+          Burada 4 dəri növündən sizə hansının məxsus olacağını biləcəyik:
+        </p>
 
-      <div
-        onClick={openModal}
-        className="px-[2.9rem] py-[1rem] text-[2rem] font-bold text-white bg-[#56A8FF] rounded-[1.5rem] w-fit cursor-pointer mt-[4rem]"
-      >
-        Cavabı al
+        <div className="flex justify-between gap-[43px] pt-[50px]">
+          <div className="max-w-[677px] w-full px-2.5">
+            {questions.map((q, index) => (
+              <Question
+                q={q}
+                index={index}
+                handleAnswer={handleAnswer}
+                key={index}
+              />
+            ))}
+          </div>
+          <Models />
+        </div>
+        <div
+          onClick={openModal}
+          className="px-[2.9rem] py-[1rem] text-[2rem] font-bold text-white bg-[#56A8FF] rounded-[1.5rem] w-fit cursor-pointer mt-[4rem]"
+        >
+          Cavabı al
+        </div>
+        <ResultModal />
       </div>
-      <ResultModal />
     </div>
   );
 }
@@ -95,32 +99,26 @@ export default TestPage;
 function Models() {
   return (
     <>
-      <div className="relative w-[55rem] h-[48rem] 2xl:w-[61rem] 2xl:h-[55rem]">
-        <div className="p-[3rem] border border-black rounded-full w-[26rem] 2xl:w-max bg-[#F6EFF2] absolute left-[50%] -translate-x-1/2 md:bottom-0 2xl:bottom-[9rem] z-[3]">
+      <div className="relative max-w-[603px] h-[548px] mt-[122px] w-full hidden lg:flex">
+        <div className="p-[3rem] border border-black rounded-full max-w-[204px]  xl:max-w-[284px] w-full  bg-[#F6EFF2] absolute lg:left-[80px] lg:bottom-[170px] xl:left-[96px] xl:bottom-[2rem] z-[3]">
           <ProgressiveImg
             src={model_S}
             placeholderSrc={compressed_S}
             alt=""
-            width="198"
-            height="198"
           />
         </div>
-        <div className="p-[3rem] border border-black rounded-full w-[29rem] 2xl:w-max bg-[#F6EFF2] absolute left-0 -top-[2rem] z-[2]">
+        <div className="p-[3rem] border border-black rounded-full max-w-[258px]  xl:max-w-[318px] w-full  bg-[#F6EFF2] absolute xl:left-0  z-[2] ">
           <ProgressiveImg
             src={model_M}
             placeholderSrc={compressed_M}
             alt=""
-            width="228"
-            height="228"
           />
         </div>
-        <div className="p-[3rem] border border-black rounded-full w-[36rem] 2xl:w-max bg-[#F6EFF2] absolute right-0 top-0 z-[1]">
+        <div className="p-[3rem] border border-black rounded-full max-w-[326px] xl:max-w-[386px] w-full bg-[#F6EFF2] absolute lg:right-[20px] lg:top-[30px] xl:right-0 xl:top-[59px] z-[1]">
           <ProgressiveImg
             src={model_L}
             placeholderSrc={compressed_L}
             alt=""
-            width="298"
-            height="298"
           />
         </div>
       </div>
@@ -137,12 +135,12 @@ function Question({ q, index, handleAnswer }) {
   return (
     <>
       <div>
-        <p className="text-[2.5rem] font-bold">{q.question}</p>
+        <p className="text-[17px] sm:text-[25px] max-w-[677px] w-full font-bold">{q.question}</p>
         <div className="flex gap-x-[1.5rem]">
           {q.answers.map((a, i) => (
             <p
               key={i}
-              className={`text-[2rem] font-normal py-[1rem] px-[2rem] cursor-pointer rounded-[3.5rem] w-fit ${
+              className={`text-[12px] sm:text-[20px] font-normal py-[10px] px-[20px] my-[20px] cursor-pointer rounded-[3.5rem] w-fit ${
                 selected == i
                   ? "bg-[#EFA0C6] text-white"
                   : "bg-white text-black"

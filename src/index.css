@@ -46,7 +46,6 @@ html {
   filter: blur(0px);
   transition: filter 0.5s linear;
 }
-
-.ant-modal-content {
-  border-radius: 20px;
+.custom-modal .ant-modal-content {
+  border-radius: 15px; 
 }

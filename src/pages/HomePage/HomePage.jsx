@@ -65,7 +65,7 @@ function HomePage() {
     <div className="bg-gradient-to-r from-[#E5F3FF] to-[#D8E3FF] w-screen h-screen pt-[4rem] flex flex-col items-center justify-items-center">
       <Link
         to="admin"
-        className="bg-white p-2.5 rounded-[1.5rem] fixed top-[4rem] right-[10.4rem]"
+        className="bg-white p-[10px] rounded-[1.5rem] fixed top-[4rem] right-10 sm:right-[10.4rem]"
       >
         <Profile color="#85B6FF" />
       </Link>
@@ -83,18 +83,18 @@ function HomePage() {
         />
       </div> */}
 
-      <div className="relative bg-[#EFA0C6] w-[60.4rem] h-[10rem] rounded-[12.6rem] mb-5 flex justify-center items-center">
+      <div className="relative z-20 bg-[#EFA0C6] sm:w-[60.4rem] w-[300px] h-[100px] sm:h-[10rem] rounded-[12.6rem] mb-5 flex justify-center items-center">
         <Combobox value={selected} onChange={setSelected}>
           <div className="mt-1">
-            <div className="bg-[#EFA0C6] text-[#2B2727] rounded-[12.6rem] placeholder-[#2B2727] text-center  text-[3.6rem] outline-none max-w-[80%]">
+            <div className="bg-[#EFA0C6] text-[#2B2727] rounded-[12.6rem] placeholder-[#2B2727] text-center text-[20px]  sm:text-[3.6rem] outline-none max-w-[80%]">
               <Combobox.Input
-                className="bg-[#EFA0C6] text-[#2B2727] rounded-[12.6rem] placeholder-[#2B2727] text-center  text-[3.6rem] outline-none"
+                className="bg-[#EFA0C6] text-[#2B2727] h-[9.6rem] rounded-[12.6rem] placeholder-[#2B2727] text-center text-[20] sm:text-[3.6rem] outline-none"
                 placeholder="Məhsulun adı"
                 // displayValue={(person) => person.name}
                 onChange={(e) => debounceOnChange(e.target.value)}
               />
               <Combobox.Button className="absolute inset-y-0 right-24 flex items-center">
-                <SearchNormal1 size={37} color="#2D264B" />
+                <SearchNormal1 className="sm:text-[37px] text-[20px]" color="#2D264B" />
               </Combobox.Button>
             </div>
             <Transition
@@ -114,8 +114,8 @@ function HomePage() {
                     <Link onClick={openModal} key={product.id}>
                       <Combobox.Option
                         className={({ active }) =>
-                          `relative cursor-pointer select-none py-2 pl-10 pr-4 text-3xl ${
-                            active ? "bg-teal-600 text-white" : "text-gray-900"
+                          `relative cursor-pointer select-none py-2 pl-10 pr-4 text-[20px] sm:text-3xl ${
+                            active ? "bg-teal-600 text-white" : "bg-white text-gray-900"
                           }`
                         }
                         value={product.id}
@@ -151,12 +151,12 @@ function HomePage() {
         </Combobox>
       </div>
       <SkinTypeModal productId={selected} />
-      <Link to="test">
-        <div className="bg-[#EFA0C6] text-[#2B2727] w-[60.4rem] h-[10rem] text-[3.6rem] rounded-[12.6rem] outline-none flex items-center justify-center cursor-pointer">
+      <Link to="test" className="relative z-10">
+        <div className="bg-[#EFA0C6] text-[#2B2727] sm:w-[60.4rem] w-[300px] h-[10rem] text-[20px] sm:text-[3.6rem] rounded-[12.6rem] outline-none flex items-center justify-center cursor-pointer">
           Dəri tipini müəyyən et
         </div>
       </Link>
-      <img src={logo} alt="" className="fixed -bottom-8 -right-8" />
+      <img src={logo} alt="" className="fixed -bottom-8 -right-8 z-0" />
     </div>
   );
 }
