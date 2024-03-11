@@ -38,3 +38,7 @@ export const getProductByName = (name) => {
 export const login = (userData) => {
   return api.post(endpoints.user.login, userData);
 };
+
+export const register = (userData) => {
+  return api.post(endpoints.user.register, userData);
+};
