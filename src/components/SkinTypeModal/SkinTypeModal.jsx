@@ -20,16 +20,16 @@ function SkinTypeModal({ productId }) {
   return (
     <>
       <Modal
-        title={<h1 className="text-[25px] sm:text-[40px] p-[22px] md:p-[30px] ">Dəri tipinizi qeyd edin:</h1>}
+        title={<h1 className="text-[25px] sm:text-[30px] px-[22px] md:px-[15px] py-[15px]">Dəri tipinizi qeyd edin:</h1>}
         open={isModalOpen}
         // onOk={handleOk}
         // confirmLoading={confirmLoading}
         onCancel={handleCancel}
         className="custom-modal"
-        width={800}
+        width={700}
         footer={[]}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4  gap-[20px] md:gap-10 p-0 md:p-[30px] place-items-center">
+        <div className="grid grid-cols-2 md:grid-cols-4  gap-[20px] md:gap-10 p-0 md:p-[15px] place-items-center">
           <Link
             onClick={closeModal}
             to={`/productPage/${productId}`}
@@ -79,7 +79,7 @@ function SkinTypeModal({ productId }) {
             <p className="font-bold text-[25px] text-center pb-[10px]">Bilmirəm</p>
           </Link>
         </div>
-        <div className="pt-8 md:pt-[37px] flex justify-center items-center">
+        <div className="pt-8 md:pt-[27px] flex justify-center items-center">
           <Link to={`/productPage/${productId}`}>
             <button
               onClick={closeModal}
