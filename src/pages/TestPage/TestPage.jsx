@@ -92,7 +92,7 @@ function TestPage({ productId }) {
       openModal();
     } catch (err) {
       console.log(err);
-      message.error("Zəhmət olmasa bütün suallara cavab verin");
+      message.error("Zəhmət olmasa suallara cavab verin");
     } finally {
       setIsLoading(false);
     }

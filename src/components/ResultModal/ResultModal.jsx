@@ -22,6 +22,8 @@ function ResultModal({
     (state) => state
   );
 
+  console.log("activeProductId", activeProductId);
+
   const handleThumbsUpClick = () => {
     setSelectedButton("thumbsUp");
     fakePostRequest("Like");

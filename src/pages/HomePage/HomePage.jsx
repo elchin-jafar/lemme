@@ -9,15 +9,6 @@ import SkinTypeModal from "../../components/SkinTypeModal/SkinTypeModal";
 import { getProductByName } from "../../utils/apiUtils";
 import debounce from "../../utils/debounce";
 
-// const people = [
-//   { id: 1, name: "Wade Cooper" },
-//   { id: 2, name: "Arlene Mccoy" },
-//   { id: 3, name: "Devon Webb" },
-//   { id: 4, name: "Tom Cook" },
-//   { id: 5, name: "Tanya Fox" },
-//   { id: 6, name: "Hellen Schmidt" },
-// ];
-
 function HomePage() {
   const [selected, setSelected] = useState(0);
   // const [query, setQuery] = useState("");
@@ -114,7 +105,10 @@ function HomePage() {
                 onChange={(e) => debounceOnChange(e.target.value)}
               />
               <Combobox.Button className="absolute inset-y-0 right-24 flex items-center">
-                <SearchNormal1 className="sm:text-[37px] text-[20px]" color="#2D264B" />
+                <SearchNormal1
+                  className="sm:text-[37px] text-[20px]"
+                  color="#2D264B"
+                />
               </Combobox.Button>
             </div>
             <Transition
@@ -135,7 +129,9 @@ function HomePage() {
                       <Combobox.Option
                         className={({ active }) =>
                           `relative cursor-pointer select-none py-2 pl-10 pr-4 text-[20px] sm:text-3xl ${
-                            active ? "bg-teal-600 text-white" : "bg-white text-gray-900"
+                            active
+                              ? "bg-teal-600 text-white"
+                              : "bg-white text-gray-900"
                           }`
                         }
                         value={product.id}
