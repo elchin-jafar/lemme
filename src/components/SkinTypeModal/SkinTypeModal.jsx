@@ -1,17 +1,29 @@
 import { Modal } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSkinTypeModalStore } from "../../store/skinTypeModalStore";
+import { useActiceProductStore } from "../../store/activeProductStore";
 import dry from "../../assets/dry.svg";
 import oily from "../../assets/oily.svg";
 import mixed from "../../assets/mixed.svg";
 import idk from "../../assets/idk.svg";
 
 function SkinTypeModal({ productId }) {
+  const navigate = useNavigate();
   const {
     isOpen: isModalOpen,
     open: openModal,
     close: closeModal,
   } = useSkinTypeModalStore((state) => state);
+
+  const { activeProductId, setActiveProductId } = useActiceProductStore(
+    (state) => state
+  );
+
+  const handleIdk = () => {
+    setActiveProductId(productId);
+    closeModal();
+    navigate("test");
+  };
 
   const handleCancel = () => {
     console.log("Clicked cancel button");
@@ -20,7 +32,11 @@ function SkinTypeModal({ productId }) {
   return (
     <>
       <Modal
-        title={<h1 className="text-[25px] sm:text-[30px] px-[22px] md:px-[15px] py-[15px]">Dəri tipinizi qeyd edin:</h1>}
+        title={
+          <h1 className="text-[25px] sm:text-[30px] px-[22px] md:px-[15px] py-[15px]">
+            Dəri tipinizi qeyd edin:
+          </h1>
+        }
         open={isModalOpen}
         // onOk={handleOk}
         // confirmLoading={confirmLoading}
@@ -64,11 +80,12 @@ function SkinTypeModal({ productId }) {
               src={mixed}
               alt=""
             />
-            <p className="font-bold text-[25px] text-center pb-[10px]">Qarışıq</p>
+            <p className="font-bold text-[25px] text-center pb-[10px]">
+              Qarışıq
+            </p>
           </Link>
           <Link
-            onClick={closeModal}
-            to="test"
+            onClick={handleIdk}
             className="px-2.5 pt-2.5 group w-[160px] md:w-full h-[205px] bg-[#eee] hover:bg-white rounded-[30px] shadow-lg hover:shadow-box flex flex-col justify-around sm:justify-between items-center transition duration-300 ease-in-out transform hover:scale-105"
           >
             <img
@@ -76,7 +93,9 @@ function SkinTypeModal({ productId }) {
               src={idk}
               alt=""
             />
-            <p className="font-bold text-[25px] text-center pb-[10px]">Bilmirəm</p>
+            <p className="font-bold text-[25px] text-center pb-[10px]">
+              Bilmirəm
+            </p>
           </Link>
         </div>
         <div className="pt-8 md:pt-[27px] flex justify-center items-center">

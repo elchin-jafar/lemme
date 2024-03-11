@@ -13,6 +13,9 @@ const endpoints = {
     byId: "/api/User/GetUserById",
     login: "/api/User/Login",
   },
+  skinType: {
+    determine: (counts) => `api/SkinType/DetermineSkinType/${counts}`,
+  },
 };
 
 export default endpoints;

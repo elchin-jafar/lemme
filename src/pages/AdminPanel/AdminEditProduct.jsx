@@ -1,9 +1,23 @@
 import { Flex, Button, Form, Input, Select } from "antd";
 import { User } from "iconsax-react";
 import ImgUpload from "../../components/ImgUpload/ImgUpload";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useAdminProductsStore } from "../../store/adminProductsStore";
+// import { useAdminImagesStore } from "../../store/adminImagesStore";
 
 function AdminEditProduct() {
+  const { productList, setList } = useAdminProductsStore();
+  const { id } = useParams();
+  // const { imagesList } = useAdminImagesStore((state) => state);
+  // console.log("zustand images on edit", imagesList);
+  console.log("id", id);
+  console.log("zustand prod list", productList);
+  console.log(
+    "zuu",
+    productList.map((el) => el.id == id)
+  );
+  const initial = productList.filter((prod) => prod.id == id);
+  console.log(initial);
   return (
     <Flex justify="start" align="start" gap="large">
       <div>
@@ -20,16 +34,15 @@ function AdminEditProduct() {
           </Link>
         </Flex>
 
-        <Form>
-          <Form.Item label="Məhsul adı:" name="Məhsul adı">
+        <Form initialValues={initial.at(0)}>
+          <Form.Item label="Məhsul adı:" name="name">
             <Input size="large" />
           </Form.Item>
-          <Form.Item label="Əsaslandırıcı:" name="Əsaslandırıcı">
+          <Form.Item label="Əsaslandırıcı:" name="overview">
             <Input size="large" />
           </Form.Item>
-          <Form.Item label="Dəri növü:" name="Dəri növü">
+          <Form.Item label="Dəri növü:" name="skinType">
             <Select
-              defaultValue="dry"
               style={{
                 width: 120,
               }}
@@ -50,17 +63,12 @@ function AdminEditProduct() {
               ]}
             />
           </Form.Item>
-          <Form.Item label="Məhsulun şəkilləri:" name="Məhsulun şəkilləri">
-            <ImgUpload />
-          </Form.Item>
-          <Form.Item label="İlk baxışda:" name="İlk baxışda">
-            <textarea
-              className="border border-black"
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-            ></textarea>
+          <Form.Item
+            label="Məhsulun şəkilləri:"
+            name="images"
+            initialValue={initial.at(0)?.images?.fileBase64}
+          >
+            <ImgUpload initialList={initial} />
           </Form.Item>
         </Form>
       </div>

@@ -5,6 +5,10 @@ const BASE_URL = "https://lemme.azurewebsites.net/";
 
 const api = axios.create({
   baseURL: BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
 });
 
 //PRODUCT APIs
@@ -17,7 +21,7 @@ export const editProduct = (productData) => {
 };
 
 export const deleteProduct = (id) => {
-  return api.post(endpoints.product.delete(id));
+  return api.delete(endpoints.product.delete(id));
 };
 
 export const getAll = () => {
@@ -37,4 +41,9 @@ export const getProductByName = (name) => {
 //USER APIs
 export const login = (userData) => {
   return api.post(endpoints.user.login, userData);
+};
+
+//SKIN TYPE APIs
+export const determineSkinType = (counts) => {
+  return api.get(endpoints.skinType.determine(counts));
 };

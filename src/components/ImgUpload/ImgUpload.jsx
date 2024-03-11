@@ -10,11 +10,28 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-function ImgUpload() {
+function ImgUpload({ getData, initialList }) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState([]);
+
+  console.log("filelist in upload component", fileList);
+  // console.log(
+  //   "initial in upload component",
+  //   initialList.map((img) => `data:image/png;base64,${previewImage}`)
+  // );
+  let base64Initial;
+  if (initialList) {
+    console.log("initial", initialList);
+    base64Initial = initialList.at(0).images.map((el) => ({
+      fileBase64: `data:image/png;base64,${el.fileBase64}`,
+      ...el,
+    }));
+    console.log("base64Initial", base64Initial);
+  }
+  // console.log("imgUpload", fileList);
+  console.log("preview", previewImage);
 
   const handleCancel = () => setPreviewOpen(false);
   const handlePreview = async (file) => {
@@ -27,7 +44,10 @@ function ImgUpload() {
       file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
     );
   };
-  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+  const handleChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+    getData(fileList);
+  };
   const uploadButton = (
     <button
       style={{
