@@ -2,13 +2,10 @@ import { Modal } from "antd";
 import { Link } from "react-router-dom";
 import { useResultModalStore } from "../../store/resultModalStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faThumbsDown,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
+import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
-function ResultModal() {
+function ResultModal({ productId, selectedAnswers, selectedVariant }) {
   const [selectedButton, setSelectedButton] = useState(null);
 
   const handleThumbsUpClick = () => {
@@ -22,11 +19,11 @@ function ResultModal() {
   };
 
   const fakePostRequest = (buttonType) => {
-    console.log(`"${buttonType}"düğmesine tıklandı, fake post gönderildi.`);
+    console.log(`"${buttonType}" düğmesine tıklandı, fake post gönderildi.`);
   };
 
   const {
-    isOpen: isModalOpen,  
+    isOpen: isModalOpen,
     close: closeModal,
   } = useResultModalStore((state) => state);
 
@@ -34,14 +31,23 @@ function ResultModal() {
     console.log("Clicked cancel button");
     closeModal();
   };
+
+  const resultText = {
+    A: "Quru və ya həssas dəriniz ola bilər.",
+    B: "Dərinizin normal və ya qarışıq olması ehtimalı var.",
+    C: "Dəriniz yağlı və ya sızanaqlara meylli ola bilər."
+  };
+
+  const handleResultButtonClick = () => {
+    console.log(`Seçilen variant: ${selectedVariant}`);
+  };
+
   return (
     <>
       <Modal
         title={<h1 className="text-[25px] md:text-[40px] px-0 md:px-[30px] pt-[30px]">Nəticə</h1>}
         open={isModalOpen}
         className="custom-modal"
-        // onOk={handleOk}
-        // confirmLoading={confirmLoading}
         onCancel={handleCancel}
         width={800}
         footer={[]}
@@ -49,7 +55,8 @@ function ResultModal() {
       >
         <div className="md:px-[30px] px-0">
           <p className="md:text-[25px] text-[15px]">
-            Sizin dəri tipiniz qurudur. Bu mərhələdən sonra sizin baxış
+            <span>{resultText[selectedVariant]}</span>
+            Bu mərhələdən sonra sizin baxış
             keçirdiyiniz məhsullarda əgər sizin dərinizə uyğundursa{" "}
             <span className="text-[#50AB64] underline">Yaşıl</span> əksinə uyğun
             deyilsə <span className="text-[#ff3100] underline">Qırmızı </span>
@@ -75,7 +82,7 @@ function ResultModal() {
             <button onClick={handleThumbsUpClick}>
               <FontAwesomeIcon
                 className={`text-[43px] md:text-[74px] text-[#50AB64] ${
-                  selectedButton === "thumbsUp" ? "opacity-1" : "opacity-[0.4]"
+                  selectedButton === "thumbsUp" ? "" : "text-[#eaeef1]"
                 }`}
                 icon={faThumbsUp}
               />
@@ -83,7 +90,7 @@ function ResultModal() {
             <button onClick={handleThumbsDownClick}>
               <FontAwesomeIcon
                 className={`text-[43px] md:text-[74px] text-[#FF3100] ${
-                  selectedButton === "thumbsDown" ? "opacity-1" : "opacity-[0.4]"
+                  selectedButton === "thumbsDown" ? "" : "text-[#eaeef1]"
                 }`}
                 icon={faThumbsDown}
               />
@@ -91,10 +98,13 @@ function ResultModal() {
           </div>
         </div>
         <div className="pt-[37px] flex justify-center items-center">
-          <Link to="/" onClick={closeModal}>
-            <button className="px-5 py-2.5 bg-[#56A8FF] hover:bg-[#5095df] shadow-lg hover:shadow-box rounded-xl text-white">
-              Ana menyuya qayıt
-            </button>
+        <Link to={`/productPage/${productId}`}>
+          <button
+            onClick={handleResultButtonClick}
+            className="px-5 py-2.5 bg-[#56A8FF] hover:bg-[#5095df] shadow-lg hover:shadow-box rounded-xl text-white"
+          >
+            Davam et
+          </button>
           </Link>
         </div>
       </Modal>

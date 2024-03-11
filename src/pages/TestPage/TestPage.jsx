@@ -1,3 +1,4 @@
+import { useState } from "react";
 import logo from "../../assets/logo2.png";
 import model_S from "../../assets/models/modelS.png";
 import model_M from "../../assets/models/modelM.png";
@@ -6,51 +7,66 @@ import compressed_S from "../../assets/models/compressed_modelS.png";
 import compressed_M from "../../assets/models/compressed_modelM.png";
 import compressed_L from "../../assets/models/compressed_modelL.png";
 import ProgressiveImg from "../../components/ProgressiveImg/ProgressiveImg";
-import { useState } from "react";
 import ResultModal from "../../components/ResultModal/ResultModal";
 import { useResultModalStore } from "../../store/resultModalStore";
 
 const questions = [
   {
-    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    answers: ["uno", "dos", "tres"],
+    question: "1. Təmizləndikdən sonra dəriniz necə hiss edir?",
+    answers: ["Sıx və quru", "Rahat və balanslı", "Yağlı və ya nəzərəçarpan parıltı ilə"],
   },
   {
-    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    answers: ["uno", "dos", "tres"],
+    question: "2. Nə qədər tez-tez qırışlar və ya ləkələr yaşayırsınız?",
+    answers: ["Nadir hallarda və ya heç vaxt", "Hərdən", "Tez-tez"],
   },
   {
-    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    answers: ["uno", "dos", "tres"],
+    question: "3. Dəriniz günəşə necə reaksiya verir?",
+    answers: ["Asanlıqla yanır, həssasdır", "Tans yavaş-yavaş, normal", "Nadir hallarda yanır, tez-tez qaralır, yağlıdır"],
   },
   {
-    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    answers: ["uno", "dos", "tres"],
+    question: "4. Dərinizin quruluşu necədir?",
+    answers: ["İncə məsamələr, hamar tekstura", "Orta məsamələr, balanslaşdırılmış tekstura", "Genişlənmiş məsamələr, kobud tekstura"],
   },
   {
-    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    answers: ["uno", "dos", "tres"],
-  },
-  {
-    question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    answers: ["uno", "dos", "tres"],
-  },
+    question: "5. Nəmləndirici tətbiq etdikdən bir neçə saat sonra dəriniz necə hiss edir?",
+    answers: ["Hələ sıx və quru", "Nəmlənmiş və rahatdır", "Yağlı və ya yağlı"],
+  }
 ];
 
-function TestPage() {
-  const [q, setQ] = useState({});
-
-  const {
-    isOpen: isModalOpen,
-    open: openModal,
-    close: closeModal,
-  } = useResultModalStore((state) => state);
+function TestPage({ productId }) {
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const { open: openModal } = useResultModalStore((state) => state);
 
   function handleAnswer(questionIndex, answerIndex = 0) {
     const key = `s${questionIndex + 1}`;
     const value = answerIndex + 1;
-    setQ((prevState) => ({ ...prevState, [key]: value }));
+    setSelectedAnswers((prevAnswers) => ({ ...prevAnswers, [key]: value }));
   }
+
+  function getMostFrequentVariant() {
+    const counts = { A: 0, B: 0, C: 0 };
+    for (const key of Object.values(selectedAnswers)) {
+      if (key === 1) counts['A']++;
+      else if (key === 2) counts['B']++;
+      else if (key === 3) counts['C']++;
+    }
+    let mostFrequentVariant = 'A';
+    let maxCount = counts['A'];
+    if (counts['B'] > maxCount) {
+      mostFrequentVariant = 'B';
+      maxCount = counts['B'];
+    }
+    if (counts['C'] > maxCount) {
+      mostFrequentVariant = 'C';
+    }
+    return mostFrequentVariant;
+  }
+
+  function handleCavabiAlClick() {
+    const mostFrequentVariant = getMostFrequentVariant();
+    openModal({ mostFrequentVariant });
+  }
+
   return (
     <div className="bg-gradient-to-r from-[#E5F3FF] to-[#D8E3FF] w-full h-auto pt-20 px-16 pb-14">
       <div className="max-w-[1500px] w-full mx-auto">
@@ -64,7 +80,7 @@ function TestPage() {
             className="w-[22rem] h-[13.9rem] hidden lg:flex"
           />
         </div>
-        
+
         <p className="text-[25px] hidden md:flex font-normal">
           Burada 4 dəri növündən sizə hansının məxsus olacağını biləcəyik:
         </p>
@@ -83,18 +99,16 @@ function TestPage() {
           <Models />
         </div>
         <div
-          onClick={openModal}
+          onClick={handleCavabiAlClick}
           className="px-[2.9rem] py-[1rem] text-[2rem] font-bold text-white bg-[#56A8FF] rounded-[1.5rem] w-fit cursor-pointer mt-[4rem]"
         >
           Cavabı al
         </div>
-        <ResultModal />
+        <ResultModal productId={productId} selectedAnswers={selectedAnswers} selectedVariant={getMostFrequentVariant()} />
       </div>
     </div>
   );
 }
-
-export default TestPage;
 
 function Models() {
   return (
@@ -127,31 +141,31 @@ function Models() {
 }
 
 function Question({ q, index, handleAnswer }) {
-  const [selected, setSelected] = useState();
-  function handleClick(index, i) {
-    handleAnswer(index, i);
-    setSelected(i);
+  const [selected, setSelected] = useState(null);
+
+  function handleClick(answerIndex) {
+    setSelected(answerIndex);
+    handleAnswer(index, answerIndex);
   }
+
   return (
-    <>
-      <div>
-        <p className="text-[17px] sm:text-[25px] max-w-[677px] w-full font-bold">{q.question}</p>
-        <div className="flex gap-x-[1.5rem]">
-          {q.answers.map((a, i) => (
-            <p
-              key={i}
-              className={`text-[12px] sm:text-[20px] font-normal py-[10px] px-[20px] my-[20px] cursor-pointer rounded-[3.5rem] w-fit ${
-                selected == i
-                  ? "bg-[#EFA0C6] text-white"
-                  : "bg-white text-black"
-              }`}
-              onClick={() => handleClick(index, i)}
-            >
-              {a}
-            </p>
-          ))}
-        </div>
+    <div>
+      <p className="text-[17px] sm:text-[25px] max-w-[677px] w-full font-bold">{q.question}</p>
+      <div className="flex gap-x-[1.5rem]">
+        {q.answers.map((answer, answerIndex) => (
+          <p
+            key={answerIndex}
+            className={`text-[12px] text-center sm:text-[16px] font-normal py-[10px] px-[20px] my-[20px] cursor-pointer rounded-[3.5rem] w-fit ${
+              selected === answerIndex ? "bg-[#EFA0C6] text-white" : "bg-white text-black"
+            }`}
+            onClick={() => handleClick(answerIndex)}
+          >
+            {answer}
+          </p>
+        ))}
       </div>
-    </>
+    </div>
   );
 }
+
+export default TestPage;
