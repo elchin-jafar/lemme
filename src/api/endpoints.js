@@ -15,6 +15,8 @@ const endpoints = {
   },
   skinType: {
     determine: (counts) => `api/SkinType/DetermineSkinType/${counts}`,
+    checkSuit: (id, skinType) =>
+      `api/SkinType/CheckIfSuitsSkinType/${id}/${skinType}`,
   },
 };
 

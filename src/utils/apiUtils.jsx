@@ -47,3 +47,7 @@ export const login = (userData) => {
 export const determineSkinType = (counts) => {
   return api.get(endpoints.skinType.determine(counts));
 };
+
+export const checkSuit = (id, skinType) => {
+  return api.get(endpoints.skinType.checkSuit(id, skinType));
+};
