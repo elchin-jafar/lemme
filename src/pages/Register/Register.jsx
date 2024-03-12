@@ -11,6 +11,13 @@ function Register() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [role, setRole] = useState("admin");
+  const resetValues = () => {
+    setFirstName("");
+    setEmail("");
+    setPassword("");
+    setLastName("");
+    setUsername("");
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -28,8 +35,11 @@ function Register() {
     };
 
     register(values)
-      .then((res) => res.status === 200 && alert("user succesfully created"))
+      .then((res) => {
+        res.status === 200 && alert("user succesfully created");
+      })
       .catch((err) => console.log(err));
+    resetValues();
   };
   return (
     <Flex justify="start" align="start" gap="large">
@@ -43,6 +53,7 @@ function Register() {
           Last name
         </label>
         <input
+          defaultValue={lastName}
           onChange={(e) => setLastName(e.target.value)}
           size="large"
           placeholder="last name"
@@ -53,6 +64,7 @@ function Register() {
           first name
         </label>
         <input
+          defaultValue={firstName}
           size="large"
           placeholder="first name"
           onChange={(e) => setFirstName(e.target.value)}
@@ -63,6 +75,7 @@ function Register() {
           email
         </label>
         <input
+          defaultValue={email}
           size="large"
           placeholder="email"
           onChange={(e) => setEmail(e.target.value)}
@@ -74,6 +87,7 @@ function Register() {
           Username
         </label>
         <input
+          defaultValue={username}
           onChange={(e) => setUsername(e.target.value)}
           size="large"
           placeholder="Username"
@@ -85,6 +99,7 @@ function Register() {
           Şifrə
         </label>
         <input
+          defaultValue={password}
           size="large"
           onChange={(e) => setPassword(e.target.value)}
           placeholder="password"
