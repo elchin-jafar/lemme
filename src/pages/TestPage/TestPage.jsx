@@ -9,6 +9,7 @@ import compressed_L from "../../assets/models/compressed_modelL.png";
 import ProgressiveImg from "../../components/ProgressiveImg/ProgressiveImg";
 import ResultModal from "../../components/ResultModal/ResultModal";
 import { useResultModalStore } from "../../store/resultModalStore";
+import { useUserSkinType } from "../../store/userSkinType";
 import { determineSkinType } from "../../utils/apiUtils";
 import { Spin, message } from "antd";
 
@@ -54,6 +55,8 @@ function TestPage({ productId }) {
   const [isLoading, setIsLoading] = useState(false);
   const { open: openModal } = useResultModalStore((state) => state);
 
+  const { setSkinType } = useUserSkinType((state) => state);
+
   function handleAnswer(questionIndex, answerIndex = 0) {
     const key = `s${questionIndex + 1}`;
     const value = answerIndex + 1;
@@ -89,6 +92,7 @@ function TestPage({ productId }) {
       // const data = await res.json();
       console.log("determined skin type", res.data.type);
       setTestResult(res.data.type);
+      setSkinType(res.data.type.toLowerCase());
       openModal();
     } catch (err) {
       console.log(err);

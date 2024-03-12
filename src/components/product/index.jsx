@@ -4,29 +4,52 @@ import ImageSlider from "./slider";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { getProductById } from "../../utils/apiUtils";
+import { getProductById, checkSuit } from "../../utils/apiUtils";
 import { useActiceProductStore } from "../../store/activeProductStore";
+import { useUserSkinType } from "../../store/userSkinType";
+import { Spin } from "antd";
 
 function Product() {
   const [activeButton, setActiveButton] = useState("firstView");
+  const [isProdSuits, setIsProdSuits] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const [productData, setProductData] = useState(null);
   const { activeProductId, setActiveProductId } = useActiceProductStore(
     (state) => state
   );
 
+  const { skinType } = useUserSkinType((state) => state);
+
   console.log("activeProductId on prod page", activeProductId);
+  console.log("isProdSuits", isProdSuits);
   const handleInfoChange = (title) => {
     setActiveButton(title);
   };
 
   useEffect(() => {
     const fetchData = async () => {
+      // try {
+      //   const response = await getProductById(id);
+      //   console.log(response.data);
+      //   setProductData(response.data);
+      // } catch (error) {
+      //   console.error("An error occurred while fetching product info:", error);
+      // }
+
       try {
-        const response = await getProductById(id);
-        setProductData(response.data);
-      } catch (error) {
-        console.error("An error occurred while fetching product info:", error);
+        setIsLoading(true);
+        const promise = await Promise.all([
+          getProductById(id),
+          checkSuit(id, skinType),
+        ]);
+        console.log("promise", promise);
+        setProductData(promise.at(0).data);
+        setIsProdSuits(promise.at(1).data.response);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -52,7 +75,14 @@ function Product() {
     setActiveProductId(0);
   }
 
-  return (
+  
+  return isLoading ? (
+    <div className="h-screen flex items-center justify-stretch border border-black">
+      <div className="w-screen my-[2rem] mx-0 py-[3rem] px-[5rem] text-center rounded-[4px]">
+        <Spin size="large" />
+      </div>
+    </div>
+  ) : (
     <div className=" flex justify-center h-auto">
       <div className="max-w-[1319px] py-[14px] px-[22px] w-full md:px-[30px] md:py-[10px]">
         <div className="flex justify-between items-center gap-3 pb-2.5 lg:pb-[15px]">
@@ -60,9 +90,21 @@ function Product() {
             <h1 className="flex font-bold text-[20px] lg:text-[30px] text-[#212121] ">
               Məhsulun adı
             </h1>
-            <span className=" w-[140px] h-[24px] px-[10.5px] py-[3px]  lg:px-5 lg:py-2.5 lg:w-[238px] lg:h-[34px] rounded-lg text-white font-bold text-[12px] lg:text-[16px] bg-[#50AB64]">
+            {/* <span className=" w-[140px] h-[24px] px-[10.5px] py-[3px]  lg:px-5 lg:py-2.5 lg:w-[238px] lg:h-[34px] rounded-lg text-white font-bold text-[12px] lg:text-[16px] bg-[#50AB64]">
               dəri tipinizə uyğundur
-            </span>
+            </span> */}
+            {isProdSuits ? (
+              <span className=" w-[140px] h-[26px] px-[10.5px] py-[3px]  lg:px-5 lg:py-2.5 lg:w-[238px] lg:h-[34px] rounded-lg text-white font-bold text-[12px] lg:text-[16px] bg-[#50AB64]">
+                dəri tipinizə uyğundur
+              </span>
+            ) : (
+              <span className=" w-[150px] h-[26px] px-[10.5px] py-[3px]  lg:px-5 lg:py-2.5 lg:w-[238px] lg:h-[34px] rounded-lg text-white font-bold text-[12px] lg:text-[16px] bg-[#FF3100]">
+                dəri tipinizə uyğun deyil
+              </span>
+            )}
+            {/* <span className=" w-[140px] h-[26px] px-[10.5px] py-[6px]  lg:px-5 lg:py-2.5 lg:w-[238px] lg:h-[44px] rounded-lg text-white font-bold text-[12px] lg:text-[20px] bg-[#50AB64]">
+              dəri tipinizə uyğundur
+            </span> */}
           </div>
           <div
             className="w-[34px] h-[34px] lg:w-[150px] lg:h-[100px]"

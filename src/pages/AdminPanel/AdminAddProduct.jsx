@@ -90,7 +90,7 @@ function AdminAddProduct() {
           <Form.Item label="Məhsul adı:" name="name">
             <Input size="large" />
           </Form.Item>
-          <Form.Item label="Əsaslandırıcı:" name="overview">
+          <Form.Item label="İlk baxışda:" name="overview">
             <Input size="large" />
           </Form.Item>
           <Form.Item label="İstifadə qaydası:" name="howToUse">
@@ -108,15 +108,15 @@ function AdminAddProduct() {
               onChange={(value) => console.log(value)}
               options={[
                 {
-                  value: "dry",
+                  value: "quru",
                   label: "Quru",
                 },
                 {
-                  value: "oily",
+                  value: "yağlı",
                   label: "Yağlı",
                 },
                 {
-                  value: "mixed",
+                  value: "qarışıq",
                   label: "Qarışıq",
                 },
               ]}

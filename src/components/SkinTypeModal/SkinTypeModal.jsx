@@ -2,6 +2,7 @@ import { Modal } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useSkinTypeModalStore } from "../../store/skinTypeModalStore";
 import { useActiceProductStore } from "../../store/activeProductStore";
+import { useUserSkinType } from "../../store/userSkinType";
 import dry from "../../assets/dry.svg";
 import oily from "../../assets/oily.svg";
 import mixed from "../../assets/mixed.svg";
@@ -19,6 +20,8 @@ function SkinTypeModal({ productId }) {
     (state) => state
   );
 
+  const { setSkinType } = useUserSkinType((state) => state);
+
   const handleIdk = () => {
     setActiveProductId(productId);
     closeModal();
@@ -27,6 +30,21 @@ function SkinTypeModal({ productId }) {
 
   const handleCancel = () => {
     console.log("Clicked cancel button");
+    closeModal();
+  };
+
+  const handleDry = () => {
+    setSkinType("quru");
+    closeModal();
+  };
+
+  const handleOily = () => {
+    setSkinType("yağlı");
+    closeModal();
+  };
+
+  const handleMixed = () => {
+    setSkinType("qarışıq");
     closeModal();
   };
   return (
@@ -47,7 +65,7 @@ function SkinTypeModal({ productId }) {
       >
         <div className="grid grid-cols-2 md:grid-cols-4  gap-[20px] md:gap-10 p-0 md:p-[15px] place-items-center">
           <Link
-            onClick={closeModal}
+            onClick={handleDry}
             to={`/productPage/${productId}`}
             className="px-2.5 pt-2.5 group w-[160px] md:w-full h-[205px] bg-[#eee] hover:bg-white rounded-[30px] shadow-lg hover:shadow-box flex flex-col justify-around sm:justify-between items-center transition duration-300 ease-in-out transform hover:scale-105"
           >
@@ -59,7 +77,7 @@ function SkinTypeModal({ productId }) {
             <p className="font-bold text-[25px] text-center pb-[10px]">Quru</p>
           </Link>
           <Link
-            onClick={closeModal}
+            onClick={handleOily}
             to={`/productPage/${productId}`}
             className="px-2.5 pt-2.5 group w-[160px] md:w-full h-[205px] bg-[#eee] hover:bg-white rounded-[30px] shadow-lg hover:shadow-box flex flex-col justify-around sm:justify-between items-center transition duration-300 ease-in-out transform hover:scale-105"
           >
@@ -71,7 +89,7 @@ function SkinTypeModal({ productId }) {
             <p className="font-bold text-[25px] text-center pb-[10px]">Yağlı</p>
           </Link>
           <Link
-            onClick={closeModal}
+            onClick={handleMixed}
             to={`/productPage/${productId}`}
             className="px-2.5 pt-2.5 group w-[160px] md:w-full h-[205px] bg-[#eee] hover:bg-white rounded-[30px] shadow-lg hover:shadow-box flex flex-col justify-around sm:justify-between items-center transition duration-300 ease-in-out transform hover:scale-105"
           >
