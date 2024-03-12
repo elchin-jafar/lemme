@@ -99,12 +99,12 @@ function SkinTypeModal({ productId }) {
           </Link>
         </div>
         <div className="pt-8 md:pt-[27px] flex justify-center items-center">
-          <Link to={`/productPage/${productId}`}>
+          <Link to="/">
             <button
               onClick={closeModal}
               className="px-5 py-2.5 bg-[#56A8FF] hover:bg-[#56A8FF] shadow-lg hover:shadow-box rounded-[30px] text-white transition duration-300 ease-in-out transform hover:scale-105"
             >
-              Davam et
+              Ana menyuya qayıt
             </button>
           </Link>
         </div>

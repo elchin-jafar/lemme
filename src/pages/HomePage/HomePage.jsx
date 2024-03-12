@@ -10,8 +10,7 @@ import { getProductByName } from "../../utils/apiUtils";
 import debounce from "../../utils/debounce";
 
 function HomePage() {
-  const [selected, setSelected] = useState(0);
-  // const [query, setQuery] = useState("");
+  const [selectedProductID, setSelectedProductID] = useState(null); // State to store selected product ID
   const [results, setResults] = useState([]);
   const [showPlaceholder, setShowPlaceholder] = useState(false);
   const inputRef = useRef(null);
@@ -54,22 +53,12 @@ function HomePage() {
   };
 
   console.log("results", results);
-  console.log("selected", selected);
+  console.log("selected", selectedProductID);
 
   function onChange(value) {
     if (!value) setResults([]);
     value && searchProduct(value);
   }
-
-  // const filteredPeople =
-  //   query === ""
-  //     ? people
-  //     : people.filter((person) =>
-  //         person.name
-  //           .toLowerCase()
-  //           .replace(/\s+/g, "")
-  //           .includes(query.toLowerCase().replace(/\s+/g, ""))
-  //       );
 
   return (
     <div className="bg-gradient-to-r from-[#E5F3FF] to-[#D8E3FF] w-screen h-screen pt-[4rem] flex flex-col items-center justify-items-center">
@@ -80,21 +69,9 @@ function HomePage() {
         <Profile color="#85B6FF" />
       </Link>
       <img src={logo2} alt="" className="w-[42.9rem]" />
-      {/* <div className="relative bg-[#EFA0C6] w-[60.4rem] h-[10rem] rounded-[12.6rem] mb-5 flex justify-center items-center">
-        <SearchNormal1
-          className="absolute right-[6.2rem] top-[3.1rem]"
-          size={37}
-          color="#2D264B"
-        />
-        <input
-          type="text"
-          className="bg-[#EFA0C6] text-[#2B2727] rounded-[12.6rem] placeholder-[#2B2727] text-center  text-[3.6rem] outline-none max-w-[80%]"
-          placeholder="Məhsulun adı"
-        />
-      </div> */}
 
       <div className="relative z-20 bg-transparent sm:w-[60.4rem]  h-[100px] sm:h-[9.1rem] rounded-[12.6rem] mb-5 flex justify-center items-center">
-        <Combobox value={selected} onChange={setSelected}>
+        <Combobox value={selectedProductID} onChange={setSelectedProductID}>
           <div className="mt-1">
             <div className="bg-[#EFA0C6] text-[#2B2727] rounded-[12.6rem] placeholder-[#2B2727] text-center text-[20px]  sm:text-[3.6rem] outline-none max-w-[80%]">
               <Combobox.Input
@@ -145,18 +122,6 @@ function HomePage() {
                             {product.name}
                           </span>
                         )}
-                        {/* {selected ? (
-                            <span
-                              className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                active ? "text-white" : "text-teal-600"
-                              }`}
-                            >
-                              <CheckIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          ) : null} */}
                       </Combobox.Option>
                     </Link>
                   ))
@@ -166,7 +131,7 @@ function HomePage() {
           </div>
         </Combobox>
       </div>
-      <SkinTypeModal productId={selected} />
+      <SkinTypeModal productId={selectedProductID} />
       <Link to="test" className="relative z-10">
         <div className="bg-[#EFA0C6] text-[#2B2727] sm:w-[60.4rem] w-[300px] h-[10rem] text-[20px] sm:text-[3.6rem] rounded-[12.6rem] outline-none flex items-center justify-center cursor-pointer">
           Dəri tipini müəyyən et
@@ -178,3 +143,4 @@ function HomePage() {
 }
 
 export default HomePage;
+

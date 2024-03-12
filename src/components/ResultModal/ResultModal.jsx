@@ -121,12 +121,12 @@ function ResultModal({
               </button>
             </Link>
           ) : (
-            <Link to="/">
+            <Link to={`/productPage/${productId}`}>
               <button
                 onClick={closeModal}
                 className="px-5 py-2.5 bg-[#56A8FF] hover:bg-[#5095df] shadow-lg hover:shadow-box rounded-xl text-white"
               >
-                Ana menyuya qayıt
+                Davam et
               </button>
             </Link>
           )}
