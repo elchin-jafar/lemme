@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowRight } from "iconsax-react";
 import { Link, useParams } from "react-router-dom";
-import ImageSlider from "./slider";
+// import ImageSlider from "./slider";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -8,10 +8,10 @@ import { getProductById, checkSuit } from "../../utils/apiUtils";
 import { useActiceProductStore } from "../../store/activeProductStore";
 import { useUserSkinType } from "../../store/userSkinType";
 import { Spin } from "antd";
-import Fancy from "../FancyBox/FancyBox";
-import CarouselFancy from "../FancyBox/Carousel";
+import Fancy from "../../components/FancyBox/FancyBox";
+import CarouselFancy from "../../components/FancyBox/Carousel";
 
-function Product() {
+function ProductPage() {
   const [activeButton, setActiveButton] = useState("firstView");
   const [isProdSuits, setIsProdSuits] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -295,4 +295,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default ProductPage;

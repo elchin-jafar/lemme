@@ -1,4 +1,4 @@
-import ProductPage from "../pages/ProductPage";
+import ProductPage from "../pages/ProductPage/ProductPage";
 import HomePage from "../pages/HomePage/HomePage";
 import TestPage from "../pages/TestPage/TestPage";
 import AdminLayout from "../layouts/AdminLayout";
