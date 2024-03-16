@@ -10,6 +10,7 @@ import { useUserSkinType } from "../../store/userSkinType";
 import { Spin } from "antd";
 import Fancy from "../../components/FancyBox/FancyBox";
 import CarouselFancy from "../../components/FancyBox/Carousel";
+import ImgBase64 from "../../components/ImgBase64/ImgBase64";
 
 function ProductPage() {
   const [activeButton, setActiveButton] = useState("firstView");
@@ -25,6 +26,7 @@ function ProductPage() {
 
   console.log("activeProductId on prod page", activeProductId);
   console.log("isProdSuits", isProdSuits);
+  console.log("productData", productData);
   const handleInfoChange = (title) => {
     setActiveButton(title);
   };
@@ -144,7 +146,18 @@ function ProductPage() {
               // Sample options
               options={{ infinite: false }}
             >
-              <div
+              {productData?.images?.map((img, index) => (
+                <div
+                  key={index}
+                  className="f-carousel__slide"
+                  data-fancybox="gallery"
+                  data-src={`data:image/jpeg;base64,${img}/1600x1200`}
+                  data-thumb-src={`data:image/jpeg;base64,${img}/200x150`}
+                >
+                  <ImgBase64 data={img} alt="product image" />
+                </div>
+              ))}
+              {/* <div
                 className="f-carousel__slide"
                 data-fancybox="gallery"
                 data-src="https://lipsum.app/id/60/1600x1200"
@@ -208,7 +221,7 @@ function ProductPage() {
                   width="400"
                   height="300"
                 />
-              </div>
+              </div> */}
             </CarouselFancy>
           </Fancy>
 

@@ -13,7 +13,11 @@ const api = axios.create({
 
 //PRODUCT APIs
 export const addProduct = (productData) => {
-  return api.post(endpoints.product.add, productData);
+  return api.post(endpoints.product.add, productData, {
+    headers: {
+      "Content-Type": "/",
+    },
+  });
 };
 
 export const editProduct = (productData) => {

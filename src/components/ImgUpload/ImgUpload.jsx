@@ -36,6 +36,7 @@ function ImgUpload({ getData, initialList }) {
   const handleCancel = () => setPreviewOpen(false);
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
+      console.log("file.originFileObj", file.originFileObj);
       file.preview = await getBase64(file.originFileObj);
     }
     setPreviewImage(file.url || file.preview);
