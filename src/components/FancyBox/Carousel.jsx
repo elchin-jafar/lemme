@@ -9,7 +9,7 @@ import "@fancyapps/ui/dist/carousel/carousel.thumbs.css";
 const defaults = {
   Dots: false,
   Thumbs: {
-    type: "classic",
+    type: "modern",
   },
 };
 

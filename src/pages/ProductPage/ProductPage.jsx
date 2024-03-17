@@ -151,8 +151,8 @@ function ProductPage() {
                   key={index}
                   className="f-carousel__slide"
                   data-fancybox="gallery"
-                  data-src={`data:image/jpeg;base64,${img}/1600x1200`}
-                  data-thumb-src={`data:image/jpeg;base64,${img}/200x150`}
+                  data-src={`data:image/jpeg;base64,${img}`}
+                  data-thumb-src={`data:image/jpeg;base64,${img}`}
                 >
                   <ImgBase64 data={img} alt="product image" />
                 </div>
