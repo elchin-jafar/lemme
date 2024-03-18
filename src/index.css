@@ -52,9 +52,29 @@ html {
   transition: filter 0.5s linear;
 }
 .custom-modal .ant-modal-content {
-  border-radius: 15px; 
+  border-radius: 15px;
 }
 
 .ant-btn-primary {
   background-color: #1677ff;
+}
+
+.f-carousel__nav button {
+  background-color: white;
+  border-radius: 50%;
+}
+
+.f-carousel__nav button:hover {
+  background-color: white !important;
+}
+
+.f-carousel__nav button:first-child {
+  left: 95%;
+}
+
+.f-carousel__nav button:last-child {
+  position: absolute;
+  /* transform: translateX(-5px); */
+  left: -5% !important;
+  /* top: 10%; */
 }

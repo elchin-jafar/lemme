@@ -17,20 +17,31 @@ function ImgUpload({ getData, initialList }) {
   const [fileList, setFileList] = useState([]);
 
   console.log("filelist in upload component", fileList);
+  console.log("initialList".initialList);
   // console.log(
   //   "initial in upload component",
   //   initialList.map((img) => `data:image/png;base64,${previewImage}`)
   // );
-  let base64Initial;
-  if (initialList) {
-    console.log("initial", initialList);
-    base64Initial = initialList.at(0).images.map((el) => ({
-      fileBase64: `data:image/png;base64,${el.fileBase64}`,
-      ...el,
-    }));
-    console.log("base64Initial", base64Initial);
-  }
+  // let base64Initial;
+  // if (initialList) {
+  //   console.log("initial", initialList);
+  //   base64Initial = initialList.at(0).images.map((el) => ({
+  //     fileBase64: `data:image/png;base64,${el.fileBase64}`,
+  //     ...el,
+  //   }));
+  //   console.log("base64Initial", base64Initial);
+  // }
+
   // console.log("imgUpload", fileList);
+
+  const defaultImages = initialList.at(0).images.map((el, index) => ({
+    uid: index,
+    name: index,
+    status: "done",
+    url: `data:image/jpeg;base64,${el}`,
+  }));
+  console.log("defaultImages", defaultImages);
+
   console.log("preview", previewImage);
 
   const handleCancel = () => setPreviewOpen(false);
@@ -75,6 +86,7 @@ function ImgUpload({ getData, initialList }) {
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
+        defaultFileList={defaultImages}
       >
         {fileList.length >= 8 ? null : uploadButton}
       </Upload>

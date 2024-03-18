@@ -17,7 +17,7 @@ function AdminEditProduct() {
     productList.map((el) => el.id == id)
   );
   const initial = productList.filter((prod) => prod.id == id);
-  console.log(initial);
+  console.log("initial", initial);
   return (
     <Flex justify="start" align="start" gap="large">
       <div>
@@ -66,7 +66,7 @@ function AdminEditProduct() {
           <Form.Item
             label="Məhsulun şəkilləri:"
             name="images"
-            initialValue={initial.at(0)?.images?.fileBase64}
+            // initialValue={initial.at(0)?.images?.fileBase64}
           >
             <ImgUpload initialList={initial} />
           </Form.Item>

@@ -9,7 +9,12 @@ function Login() {
         <User size="32" color="#85B6FF" />
       </div>
       <div>
-        <p className="text-[3.8rem] font-semibold">Daxil ol</p>
+        <Flex align="center" gap="large">
+          <p className="text-[3.8rem] font-semibold">Daxil ol</p>
+          <Link to="/admin/register">
+            <Button>Register</Button>
+          </Link>
+        </Flex>
         <label htmlFor="user" className="text-[3rem] font-semibold">
           Username
         </label>

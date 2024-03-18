@@ -17,7 +17,7 @@ function ProductPage() {
   const [isProdSuits, setIsProdSuits] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
-  const [productData, setProductData] = useState(null);
+  const [productData, setProductData] = useState({});
   const { activeProductId, setActiveProductId } = useActiceProductStore(
     (state) => state
   );
@@ -27,6 +27,7 @@ function ProductPage() {
   console.log("activeProductId on prod page", activeProductId);
   console.log("isProdSuits", isProdSuits);
   console.log("productData", productData);
+  console.log("skinType", skinType);
   const handleInfoChange = (title) => {
     setActiveButton(title);
   };
@@ -132,7 +133,7 @@ function ProductPage() {
         <h1 className="py-2.5 px-3 font-bold text-[20px] flex lg:hidden">
           {infoText[activeButton].title}
         </h1>
-        <div className="flex flex-col sm:items-center md:flex-col lg:flex-row gap-[10px] lg:gap-[50px]">
+        <div className="flex flex-col max-w-[40rem] sm:items-center sm:max-w-[40rem] md:flex-col md:max-w-[40rem] lg:flex-row gap-[10px] lg:gap-[50px] lg:max-w-[68rem]">
           {/* <ImageSlider /> */}
           <Fancy
             // Sample options

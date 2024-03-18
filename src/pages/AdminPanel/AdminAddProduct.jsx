@@ -7,6 +7,7 @@ import { addProduct } from "../../utils/apiUtils";
 import { useState, useId } from "react";
 import { useAdminImagesStore } from "../../store/adminImagesStore";
 import endpoints from "../../api/endpoints";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import { UploadOutlined } from "@ant-design/icons";
 
 function AdminAddProduct() {
@@ -52,6 +53,7 @@ const { Option } = Select;
 
 const MyForm2 = () => {
   const [images, setImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
 
   console.log("images state", images);
@@ -59,6 +61,7 @@ const MyForm2 = () => {
   const onFinish = async (values) => {
     console.log("values", values);
     try {
+      setIsLoading(true);
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("overview", values.overview);
@@ -86,6 +89,8 @@ const MyForm2 = () => {
     } catch (error) {
       console.error("Error submitting form:", error);
       message.error("Failed to submit form");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -114,89 +119,115 @@ const MyForm2 = () => {
   }
 
   return (
-    <Form
-      form={form}
-      onFinish={onFinish}
-      initialValues={{ images: [], storeIds: [] }}
-      labelCol={{ span: 6 }}
-      wrapperCol={{ span: 14 }}
-    >
-      <Form.Item
-        label="Name"
-        name="name"
-        rules={[{ required: true, message: "Please input your name!" }]}
+    <Flex justify="start" align="start" gap="large">
+      <User size="32" color="#85B6FF" />
+
+      <Form
+        className="w-full"
+        form={form}
+        onFinish={onFinish}
+        initialValues={{ images: [], storeIds: [] }}
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 14 }}
       >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        label="Overview"
-        name="overview"
-        rules={[{ required: true, message: "Please input overview!" }]}
-      >
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item
-        label="How to Use"
-        name="howToUse"
-        rules={[{ required: true, message: "Please input how to use!" }]}
-      >
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item
-        label="Ingredients"
-        name="ingredients"
-        rules={[{ required: true, message: "Please input ingredients!" }]}
-      >
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item
-        label="Skin Type"
-        name="skinType"
-        rules={[{ required: true, message: "Please select skin type!" }]}
-      >
-        <Select placeholder="Select skin type">
-          <Option value="quru">Quru</Option>
-          <Option value="yağlı">Yağlı</Option>
-          <Option value="qarışıq">Qarışıq</Option>
-          <Option value="bütün">Bütün</Option>
-        </Select>
-      </Form.Item>
-      <Form.Item
-        label="Images"
-        name="images"
-        valuePropName="fileList"
-        getValueFromEvent={normFile}
-        rules={[{ required: true, message: "Please upload images!" }]}
-      >
-        <Upload
-          beforeUpload={beforeUpload}
-          listType="picture-card"
-          action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-          // fileList={images}
-          // maxCount={3}
-          maxFileSize={10485760} // 10MB
-          onChange={handleChange}
+        <Flex align="center" gap="small">
+          <p className="text-[3.8rem] font-semibold mr-[2rem] ml-[41rem]">
+            Məhsul
+          </p>
+          {isLoading ? (
+            <div className="w-[10rem] h-[3.2ren] text-center">
+              <Spin />
+            </div>
+          ) : (
+            <Button type="primary" htmlType="submit">
+              Yadda saxla
+            </Button>
+          )}
+
+          <Link to="/admin/products">
+            <Button type="primary" danger>
+              Ləvğ et
+            </Button>
+          </Link>
+        </Flex>
+
+        <Form.Item
+          label="Name"
+          name="name"
+          rules={[{ required: true, message: "Please input your name!" }]}
         >
-          {/* <Button icon={<UploadOutlined />}>Click to upload</Button> */}
-          click
-        </Upload>
-      </Form.Item>
-      <Form.Item
-        label="Store IDs"
-        name="storeIds"
-        rules={[{ required: true, message: "Please select store IDs!" }]}
-      >
-        <Select placeholder="Select store IDs">
-          <Option value={1}>Store 1</Option>
-          <Option value={2}>Store 2</Option>
-          <Option value={3}>Store 3</Option>
-        </Select>
-      </Form.Item>
-      <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Overview"
+          name="overview"
+          rules={[{ required: true, message: "Please input overview!" }]}
+        >
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item
+          label="How to Use"
+          name="howToUse"
+          rules={[{ required: true, message: "Please input how to use!" }]}
+        >
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item
+          label="Ingredients"
+          name="ingredients"
+          rules={[{ required: true, message: "Please input ingredients!" }]}
+        >
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item
+          label="Skin Type"
+          name="skinType"
+          rules={[{ required: true, message: "Please select skin type!" }]}
+        >
+          <Select placeholder="Select skin type">
+            <Option value="quru">Quru</Option>
+            <Option value="yağlı">Yağlı</Option>
+            <Option value="qarışıq">Qarışıq</Option>
+            <Option value="bütün">Bütün</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item
+          label="Images"
+          name="images"
+          valuePropName="fileList"
+          getValueFromEvent={normFile}
+          rules={[{ required: true, message: "Please upload images!" }]}
+        >
+          <Upload
+            beforeUpload={beforeUpload}
+            listType="picture-card"
+            action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+            // fileList={images}
+            // maxCount={3}
+            maxFileSize={10485760} // 10MB
+            onChange={handleChange}
+          >
+            {/* <Button icon={<UploadOutlined />}>Click to upload</Button> */}
+            click
+          </Upload>
+        </Form.Item>
+        <Form.Item
+          label="Store IDs"
+          name="storeIds"
+          rules={[{ required: true, message: "Please select store IDs!" }]}
+        >
+          <Select placeholder="Select store IDs">
+            <Option value={1}>Store 1</Option>
+            <Option value={2}>Store 2</Option>
+            <Option value={3}>Store 3</Option>
+          </Select>
+        </Form.Item>
+        {/* <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item> */}
+      </Form>
+    </Flex>
   );
 };
