@@ -15,7 +15,7 @@ const api = axios.create({
 export const addProduct = (productData) => {
   return api.post(endpoints.product.add, productData, {
     headers: {
-      "Content-Type": "/",
+      "Content-Type": "multipart/form-data",
     },
   });
 };
@@ -45,6 +45,10 @@ export const getProductByName = (name) => {
 //USER APIs
 export const login = (userData) => {
   return api.post(endpoints.user.login, userData);
+};
+
+export const register = (userData) => {
+  return api.post(endpoints.user.register, userData);
 };
 
 //SKIN TYPE APIs

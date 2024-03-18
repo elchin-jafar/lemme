@@ -47,8 +47,6 @@ function AdminAddProduct() {
 
 export default AdminAddProduct;
 
-import axios from "axios";
-
 const { Option } = Select;
 
 const MyForm2 = () => {
@@ -73,15 +71,7 @@ const MyForm2 = () => {
         formData.append("images", file.originFileObj);
       });
       console.log("formData", formData);
-      const response = await axios.post(
-        `https://lemme.azurewebsites.net/${endpoints.product.add}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await addProduct(formData);
 
       console.log("Form submission successful:", response.data);
       message.success("Form submitted successfully");
@@ -131,24 +121,7 @@ const MyForm2 = () => {
         wrapperCol={{ span: 14 }}
       >
         <Flex align="center" gap="small">
-          <p className="text-[3.8rem] font-semibold mr-[2rem] ml-[41rem]">
-            Məhsul
-          </p>
-          {isLoading ? (
-            <div className="w-[10rem] h-[3.2ren] text-center">
-              <Spin />
-            </div>
-          ) : (
-            <Button type="primary" htmlType="submit">
-              Yadda saxla
-            </Button>
-          )}
-
-          <Link to="/admin/products">
-            <Button type="primary" danger>
-              Ləvğ et
-            </Button>
-          </Link>
+          <p className="text-[3.8rem] font-semibold mr-[2rem]">Məhsul</p>
         </Flex>
 
         <Form.Item
@@ -221,6 +194,23 @@ const MyForm2 = () => {
             <Option value={2}>Store 2</Option>
             <Option value={3}>Store 3</Option>
           </Select>
+        </Form.Item>
+        <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
+          {isLoading ? (
+            <div className="w-[10rem] h-[3.2ren] text-center mr-4">
+              <Spin />
+            </div>
+          ) : (
+            <Button type="primary" htmlType="submit" className="mr-4">
+              Yadda saxla
+            </Button>
+          )}
+
+          <Link to="/admin/products">
+            <Button type="primary" danger>
+              Ləvğ et
+            </Button>
+          </Link>
         </Form.Item>
         {/* <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
           <Button type="primary" htmlType="submit">
