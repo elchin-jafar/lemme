@@ -72,7 +72,7 @@ function HomePage() {
   //       );
 
   return (
-    <div className="w-full h-auto pt-[4rem] flex flex-col items-center justify-items-center">
+    <div className="w-full sm:h-auto md:h-screen pt-[4rem] flex flex-col items-center justify-items-center bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
       <Link
         to="admin/main"
         className="bg-white p-2.5 rounded-[1.5rem] fixed top-[4rem] right-[10.4rem]"

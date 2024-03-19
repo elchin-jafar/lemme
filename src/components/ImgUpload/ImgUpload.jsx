@@ -34,12 +34,22 @@ function ImgUpload({ getData, initialList }) {
 
   // console.log("imgUpload", fileList);
 
-  const defaultImages = initialList.at(0).images.map((el, index) => ({
-    uid: index,
-    name: index,
-    status: "done",
-    url: `data:image/jpeg;base64,${el}`,
-  }));
+  // const defaultImages = initialList.at(0).images.map((el, index) => ({
+  //   uid: index,
+  //   name: index,
+  //   status: "done",
+  //   url: `data:image/jpeg;base64,${el}`,
+  // }));
+
+  const defaultImages = [
+    {
+      uid: "1",
+      name: "coolImage",
+      status: "done",
+      url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwallpapers.com%2Fcool-pictures&psig=AOvVaw1cfIJZ9ntQVdMSNwNhkVGr&ust=1710959853723000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLDK86P8gIUDFQAAAAAdAAAAABAE",
+    },
+  ];
+
   console.log("defaultImages", defaultImages);
 
   console.log("preview", previewImage);
@@ -58,7 +68,7 @@ function ImgUpload({ getData, initialList }) {
   };
   const handleChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
-    getData(fileList);
+    // getData(fileList);
   };
   const uploadButton = (
     <button

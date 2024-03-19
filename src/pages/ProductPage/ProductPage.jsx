@@ -81,13 +81,13 @@ function ProductPage() {
   }
 
   return isLoading ? (
-    <div className="h-screen flex items-center justify-stretch border border-black">
+    <div className="h-screen flex items-center justify-stretch borde bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
       <div className="w-screen my-[2rem] mx-0 py-[3rem] px-[5rem] text-center rounded-[4px]">
         <Spin size="large" />
       </div>
     </div>
   ) : (
-    <div className=" flex justify-center h-auto">
+    <div className=" flex justify-center sm:h-auto md:h-screen bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
       <div className="max-w-[1319px] py-[14px] px-[22px] w-full md:px-[30px] md:py-[10px]">
         <div className="flex justify-between items-center gap-3 pb-2.5 lg:pb-[15px]">
           <div className="flex md:items-center lg:items-start flex-col gap-[15px] md:flex-row lg:flex-col">

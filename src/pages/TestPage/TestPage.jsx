@@ -84,7 +84,7 @@ function TestPage({ productId }) {
     return result;
   }
 
-  async function handleCavabiAlClick() {
+  async function getAnswer() {
     const answersCount = getAnswersCount();
     try {
       setIsLoading(true);
@@ -106,7 +106,7 @@ function TestPage({ productId }) {
   }
 
   return (
-    <div className="w-full h-auto px-16 pb-[15px]">
+    <div className="w-full h-auto px-16 pb-[15px] bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
       <div className="max-w-[1500px] w-full mx-auto">
         <div className="flex justify-between items-center ">
           <h2 className="text-[20px] sm:text-[30px] font-bold">
@@ -142,7 +142,7 @@ function TestPage({ productId }) {
           </div>
         ) : (
           <div
-            onClick={handleCavabiAlClick}
+            onClick={getAnswer}
             className="px-[2.9rem] py-[10px] mt-[10px] text-[2rem] font-bold text-white bg-[#56A8FF] rounded-[1.5rem] w-fit cursor-pointer "
           >
             Cavabı al

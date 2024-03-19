@@ -4,9 +4,8 @@ import ImgUpload from "../../components/ImgUpload/ImgUpload";
 // import Upload from "../../components/Upload/Upload";
 import { Link, useNavigate } from "react-router-dom";
 import { addProduct } from "../../utils/apiUtils";
-import { useState, useId } from "react";
+import { useState } from "react";
 import { useAdminImagesStore } from "../../store/adminImagesStore";
-import endpoints from "../../api/endpoints";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { UploadOutlined } from "@ant-design/icons";
 
