@@ -88,11 +88,13 @@ function AdminProducts() {
             <Skeleton active />
           ) : (
             <Table dataSource={productList} bordered>
-              <Column title="Name" dataIndex="name" key="firstName" />
+              <Column title="Məhsulun adı" dataIndex="name" key="firstName" />
+              <Column title="Dəri tipi" dataIndex="skinType" key="skinType" />
 
               <Column
-                title="Action"
+                title="Redaktə et / Sil"
                 key="action"
+                width="10px"
                 render={(_, record) => (
                   <Space size="middle" key={record.id}>
                     <Link

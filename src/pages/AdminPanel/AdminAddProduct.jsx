@@ -86,43 +86,45 @@ function AdminAddProduct() {
         form={form}
         onFinish={onFinish}
         initialValues={{ images: [], storeIds: [] }}
-        labelCol={{ span: 2 }}
-        wrapperCol={{ span: 10 }}
+        labelCol={{ span: 4 }}
+        wrapperCol={{ span: 14 }}
       >
         <Flex align="center" gap="small">
-          <p className="text-[3.8rem] font-semibold mr-[2rem]">Məhsul</p>
+          <p className="text-[3.8rem] font-semibold mr-[2rem]">
+            Məhsul əlavə et
+          </p>
         </Flex>
 
         <Form.Item
-          label="Name"
+          label="Məhsulun adı"
           name="name"
           rules={[{ required: true, message: "Please input your name!" }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="Overview"
+          label="Ümumi baxış"
           name="overview"
           rules={[{ required: true, message: "Please input overview!" }]}
         >
           <Input.TextArea />
         </Form.Item>
         <Form.Item
-          label="How to Use"
+          label="İstifadə qaydası"
           name="howToUse"
           rules={[{ required: true, message: "Please input how to use!" }]}
         >
           <Input.TextArea />
         </Form.Item>
         <Form.Item
-          label="Ingredients"
+          label="İnqredientlər"
           name="ingredients"
           rules={[{ required: true, message: "Please input ingredients!" }]}
         >
           <Input.TextArea />
         </Form.Item>
         <Form.Item
-          label="Skin Type"
+          label="Dəri tipi"
           name="skinType"
           rules={[{ required: true, message: "Please select skin type!" }]}
         >
@@ -134,7 +136,7 @@ function AdminAddProduct() {
           </Select>
         </Form.Item>
         <Form.Item
-          label="Images"
+          label="Məhsulun şəkilləri"
           name="images"
           valuePropName="fileList"
           getValueFromEvent={normFile}
@@ -148,7 +150,7 @@ function AdminAddProduct() {
           />
         </Form.Item>
         <Form.Item
-          label="Store IDs"
+          label="Mağaza ID-si"
           name="storeIds"
           rules={[{ required: true, message: "Please select store IDs!" }]}
         >
@@ -158,7 +160,7 @@ function AdminAddProduct() {
             <Option value={3}>Store 3</Option>
           </Select>
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 2, span: 10 }}>
+        <Form.Item wrapperCol={{ offset: 4, span: 14 }}>
           {isLoading ? (
             <Button className="w-[10rem] mr-4" disabled>
               <Spin className="ml-2" />

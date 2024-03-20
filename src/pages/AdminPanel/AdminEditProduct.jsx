@@ -280,7 +280,9 @@ function AdminEditProduct() {
           wrapperCol={{ span: 10 }}
         >
           <Flex align="center" gap="small">
-            <p className="text-[3.8rem] font-semibold mr-[2rem]">Məhsul</p>
+            <p className="text-[3.8rem] font-semibold mr-[2rem]">
+              Məhsulu redaktə et
+            </p>
           </Flex>
 
           <Form.Item
