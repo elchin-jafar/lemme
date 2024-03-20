@@ -61,6 +61,7 @@ function ImgUpload({ ...props }) {
     if (!file.url && !file.preview) {
       console.log("file.originFileObj", file.originFileObj);
       file.preview = await getBase64(file.originFileObj);
+      console.log("I wonder what", file);
     }
     setPreviewImage(file.url || file.preview);
     setPreviewOpen(true);

@@ -17,39 +17,62 @@ const props = {
       console.log(file, fileList);
     }
   },
-  defaultFileList: [
-    {
-      uid: "1",
-      name: "xxx.png",
-      status: "uploading",
-      url: "http://www.baidu.com/xxx.png",
-      percent: 33,
-    },
-    {
-      uid: "2",
-      name: "yyy.png",
-      status: "done",
-      url: "http://www.baidu.com/yyy.png",
-    },
-    {
-      uid: "3",
-      name: "zzz.png",
-      status: "error",
-      response: "Server Error 500",
-      // custom error message to show
-      url: "http://www.baidu.com/zzz.png",
-    },
-  ],
+  // defaultFileList: [
+  //   {
+  //     uid: "1",
+  //     name: "xxx.png",
+  //     status: "uploading",
+  //     url: "http://www.baidu.com/xxx.png",
+  //     percent: 33,
+  //   },
+  //   {
+  //     uid: "2",
+  //     name: "yyy.png",
+  //     status: "done",
+  //     url: "http://www.baidu.com/yyy.png",
+  //   },
+  //   {
+  //     uid: "3",
+  //     name: "zzz.png",
+  //     status: "error",
+  //     response: "Server Error 500",
+  //     // custom error message to show
+  //     url: "http://www.baidu.com/zzz.png",
+  //   },
+  // ],
 };
+
+const getBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
 
 function AdminEditProduct() {
   const [isLoading, setIsLoading] = useState(false);
   const [putImages, setPutImages] = useState([]);
   const { productList, setList } = useAdminProductsStore();
   const [fileState, setFileState] = useState(null);
+  const [curImage, setCurImage] = useState("");
+
+  const [form] = Form.useForm();
 
   const { id } = useParams();
   const initial = productList.filter((prod) => prod.id == id);
+  const obj = initial.at(0);
+  const newObj = {
+    ...obj,
+    images: obj.images.map((file, index) => ({
+      uid: index,
+      name: `img${index}.png`,
+      status: "done",
+      url: file,
+    })),
+  };
+
+  console.log("newObj", newObj);
 
   useEffect(() => {
     function base64ToBlob(base64String, contentType) {
@@ -76,6 +99,7 @@ function AdminEditProduct() {
     console.log("initial", initial);
     // setPutImages(initial.at(0).images);
     console.log("check effect", initial.at(0).images.at(0));
+    setCurImage(initial.at(0).images.at(0));
     const fileName = "example.jpg"; // Provide the desired file name
     const contentType = "image/jpeg"; // Specify the content type of the image
     const convertedFile = base64ToFile(
@@ -83,10 +107,12 @@ function AdminEditProduct() {
       fileName,
       contentType
     );
+
     // setFileState(convertedFile);
     console.log("convertedFile", convertedFile);
     const finalForm = new Array(convertedFile);
     console.log("final from", finalForm);
+
     setPutImages(finalForm);
     console.log("niggest file", putImages);
   }, [initial.at(0).images]);
@@ -172,7 +198,8 @@ function AdminEditProduct() {
 
         <Form
           className="w-full"
-          // initialValues={initial.at(0)}
+          form={form}
+          initialValues={newObj}
           // form={form}
           // onFinish={onFinish}
           // initialValues={{ images: [], storeIds: [] }}
@@ -238,7 +265,18 @@ function AdminEditProduct() {
               maxFileSize={10485760} // 10MB
               handlePreview={handlePreview}
             /> */}
-            <Upload {...props}>
+            <Upload
+              defaultFileList={[
+                {
+                  uid: "1",
+                  name: "xxx.png",
+                  status: "uploaded",
+                  url: curImage,
+                  percent: 33,
+                },
+              ]}
+              {...props}
+            >
               <Button icon={<UploadOutlined />}>Upload</Button>
             </Upload>
           </Form.Item>
