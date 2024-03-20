@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Modal, Upload } from "antd";
+import { useAdminImagesStore } from "../../store/adminImagesStore";
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -10,13 +11,14 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-function ImgUpload({ getData, initialList }) {
+function ImgUpload({ ...props }) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState([]);
+  // const [fileList, setFileList] = useState([]);
+  const { imagesState, setImagesState } = useAdminImagesStore((state) => state);
 
-  console.log("filelist in upload component", fileList);
+  // console.log("filelist in upload component", fileList);
   console.log("initialList".initialList);
   // console.log(
   //   "initial in upload component",
@@ -66,10 +68,9 @@ function ImgUpload({ getData, initialList }) {
       file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
     );
   };
-  const handleChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-    // getData(fileList);
-  };
+  // const handleChange = ({ fileList: newFileList }) => {
+  //   setImagesState(newFileList.map((file) => file.originFileObj));
+  // };
   const uploadButton = (
     <button
       style={{
@@ -91,14 +92,15 @@ function ImgUpload({ getData, initialList }) {
   return (
     <>
       <Upload
+        {...props}
         action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
         listType="picture-card"
-        fileList={fileList}
+        // fileList={imagesState}
         onPreview={handlePreview}
-        onChange={handleChange}
-        defaultFileList={defaultImages}
+        // onChange={handleChange}
+        // defaultFileList={defaultImages}
       >
-        {fileList.length >= 8 ? null : uploadButton}
+        {imagesState.length >= 8 ? null : uploadButton}
       </Upload>
       <Modal
         open={previewOpen}

@@ -49,6 +49,10 @@ html {
   background-color: #1677ff;
 }
 
+/* .ant-col-6 {
+  flex: 0 0 9%;
+} */
+
 .f-carousel__nav button {
   background-color: white;
   border-radius: 50%;

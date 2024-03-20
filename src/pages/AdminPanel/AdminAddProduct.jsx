@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { Flex, Button, Form, Input, Select, Spin, message, Upload } from "antd";
+const { Option } = Select;
 import { User } from "iconsax-react";
 import ImgUpload from "../../components/ImgUpload/ImgUpload";
 // import Upload from "../../components/Upload/Upload";
 import { Link, useNavigate } from "react-router-dom";
 import { addProduct } from "../../utils/apiUtils";
-import { useState } from "react";
 import { useAdminImagesStore } from "../../store/adminImagesStore";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { UploadOutlined } from "@ant-design/icons";
@@ -12,75 +13,43 @@ import { UploadOutlined } from "@ant-design/icons";
 function AdminAddProduct() {
   const [isLoading, setIsLoading] = useState(false);
   const { imagesState, setImagesState } = useAdminImagesStore((state) => state);
+  console.log("imagesState on add", imagesState);
   // const { imagesList, setImages } = useAdminImagesStore((state) => state);
   //   const nameInput = Form.useWatch("name", form);
   const navigate = useNavigate();
 
-  // async function onFinish() {
-  //   form.setFieldValue(
-  //     "images",
-  //     imagesState.map(
-  //       (img) =>
-  //         fileName: img.name,
-  //         fileBase64: img.thumbUrl.split(",").at(1),
-  //         img?.originFileObj
-  //     )
-  //   );
-  //   form.setFieldValue("storeIds", [0]);
-  //   console.log("all", form.getFieldsValue());
-  //   try {
-  //     setIsLoading(true);
-  //     await addProduct(form.getFieldsValue());
-  //     navigate("/admin/products");
-  //   } catch (err) {
-  //     if (err) {
-  //       console.log(err);
-  //       message.error("Please fill all fields");
-  //     }
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // }
-  return <MyForm2 />;
-}
-
-export default AdminAddProduct;
-
-const { Option } = Select;
-
-const MyForm2 = () => {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [images, setImages] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
 
-  console.log("images state", images);
+  // console.log("images state", images);
 
   const onFinish = async (values) => {
     console.log("values", values);
-    try {
-      setIsLoading(true);
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("overview", values.overview);
-      formData.append("howToUse", values.howToUse);
-      formData.append("ingredients", values.ingredients);
-      formData.append("skinType", values.skinType);
-      formData.append("storeIds", values.storeIds);
-      values.images.forEach((file) => {
-        formData.append("images", file.originFileObj);
-      });
-      console.log("formData", formData);
-      const response = await addProduct(formData);
+    // try {
+    //   setIsLoading(true);
+    //   const formData = new FormData();
+    //   formData.append("name", values.name);
+    //   formData.append("overview", values.overview);
+    //   formData.append("howToUse", values.howToUse);
+    //   formData.append("ingredients", values.ingredients);
+    //   formData.append("skinType", values.skinType);
+    //   formData.append("storeIds", values.storeIds);
+    //   values.images.forEach((file) => {
+    //     formData.append("images", file.originFileObj);
+    //   });
+    //   console.log("formData", formData);
+    //   const response = await addProduct(formData);
 
-      console.log("Form submission successful:", response.data);
-      message.success("Form submitted successfully");
-      form.resetFields();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      message.error("Failed to submit form");
-    } finally {
-      setIsLoading(false);
-    }
+    //   console.log("Form submission successful:", response.data);
+    //   message.success("Form submitted successfully");
+    //   form.resetFields();
+    // } catch (error) {
+    //   console.error("Error submitting form:", error);
+    //   message.error("Failed to submit form");
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   const normFile = (e) => {
@@ -103,7 +72,7 @@ const MyForm2 = () => {
       "handle change",
       fileList.map((file) => file.originFileObj)
     );
-    setImages(fileList.map((file) => file.originFileObj));
+    setImagesState(fileList.map((file) => file.originFileObj));
     // form.setFieldValue("images", fileList);
   }
 
@@ -116,8 +85,8 @@ const MyForm2 = () => {
         form={form}
         onFinish={onFinish}
         initialValues={{ images: [], storeIds: [] }}
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 14 }}
+        labelCol={{ span: 2 }}
+        wrapperCol={{ span: 10 }}
       >
         <Flex align="center" gap="small">
           <p className="text-[3.8rem] font-semibold mr-[2rem]">Məhsul</p>
@@ -170,18 +139,12 @@ const MyForm2 = () => {
           getValueFromEvent={normFile}
           rules={[{ required: true, message: "Please upload images!" }]}
         >
-          <Upload
+          <ImgUpload
             beforeUpload={beforeUpload}
-            listType="picture-card"
-            action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-            // fileList={images}
-            // maxCount={3}
-            maxFileSize={10485760} // 10MB
+            fileList={imagesState}
             onChange={handleChange}
-          >
-            {/* <Button icon={<UploadOutlined />}>Click to upload</Button> */}
-            click
-          </Upload>
+            maxFileSize={10485760} // 10MB
+          />
         </Form.Item>
         <Form.Item
           label="Store IDs"
@@ -194,11 +157,11 @@ const MyForm2 = () => {
             <Option value={3}>Store 3</Option>
           </Select>
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
+        <Form.Item wrapperCol={{ offset: 2, span: 10 }}>
           {isLoading ? (
-            <div className="w-[10rem] h-[3.2ren] text-center mr-4">
-              <Spin />
-            </div>
+            <Button className="w-[10rem] mr-4" disabled>
+              <Spin className="ml-2" />
+            </Button>
           ) : (
             <Button type="primary" htmlType="submit" className="mr-4">
               Yadda saxla
@@ -211,12 +174,9 @@ const MyForm2 = () => {
             </Button>
           </Link>
         </Form.Item>
-        {/* <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item> */}
       </Form>
     </Flex>
   );
-};
+}
+
+export default AdminAddProduct;

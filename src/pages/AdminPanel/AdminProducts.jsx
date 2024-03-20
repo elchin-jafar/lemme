@@ -10,7 +10,13 @@ import {
   message,
   Popconfirm,
 } from "antd";
-import { PlusOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  ArrowLeftOutlined,
+  DeleteOutlined,
+  DeleteFilled,
+  EditOutlined,
+} from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { getAll, deleteProduct } from "../../utils/apiUtils";
 import { useAdminProductsStore } from "../../store/adminProductsStore";
@@ -93,7 +99,7 @@ function AdminProducts() {
                       to={`/admin/editProduct/${record.id}`}
                       onClick={() => console.log(record)}
                     >
-                      Edit
+                      <Button type="dashed" icon={<EditOutlined />} />
                     </Link>
                     {/* <a onClick={() => handleDeleteProduct(record.id)}>Delete</a> */}
                     <Popconfirm
@@ -104,7 +110,7 @@ function AdminProducts() {
                       okText="Yes"
                       cancelText="No"
                     >
-                      <Button danger>Delete</Button>
+                      <Button type="primary" danger icon={<DeleteOutlined />} />
                     </Popconfirm>
                   </Space>
                 )}
