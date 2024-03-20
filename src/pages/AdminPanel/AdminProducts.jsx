@@ -10,7 +10,13 @@ import {
   message,
   Popconfirm,
 } from "antd";
-import { PlusOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  ArrowLeftOutlined,
+  DeleteOutlined,
+  DeleteFilled,
+  EditOutlined,
+} from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { getAll, deleteProduct } from "../../utils/apiUtils";
 import { useAdminProductsStore } from "../../store/adminProductsStore";
@@ -82,18 +88,20 @@ function AdminProducts() {
             <Skeleton active />
           ) : (
             <Table dataSource={productList} bordered>
-              <Column title="Name" dataIndex="name" key="firstName" />
+              <Column title="Məhsulun adı" dataIndex="name" key="firstName" />
+              <Column title="Dəri tipi" dataIndex="skinType" key="skinType" />
 
               <Column
-                title="Action"
+                title="Redaktə et / Sil"
                 key="action"
+                width="10px"
                 render={(_, record) => (
                   <Space size="middle" key={record.id}>
                     <Link
                       to={`/admin/editProduct/${record.id}`}
                       onClick={() => console.log(record)}
                     >
-                      Edit
+                      <Button type="dashed" icon={<EditOutlined />} />
                     </Link>
                     {/* <a onClick={() => handleDeleteProduct(record.id)}>Delete</a> */}
                     <Popconfirm
@@ -104,7 +112,7 @@ function AdminProducts() {
                       okText="Yes"
                       cancelText="No"
                     >
-                      <Button danger>Delete</Button>
+                      <Button type="primary" danger icon={<DeleteOutlined />} />
                     </Popconfirm>
                   </Space>
                 )}

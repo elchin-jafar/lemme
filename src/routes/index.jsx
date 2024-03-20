@@ -1,4 +1,4 @@
-import ProductPage from "../pages/ProductPage";
+import ProductPage from "../pages/ProductPage/ProductPage";
 import HomePage from "../pages/HomePage/HomePage";
 import TestPage from "../pages/TestPage/TestPage";
 import AdminLayout from "../layouts/AdminLayout";
@@ -7,6 +7,7 @@ import AdminProducts from "../pages/AdminPanel/AdminProducts";
 import AdminAddProduct from "../pages/AdminPanel/AdminAddProduct";
 import AdminEditProduct from "../pages/AdminPanel/AdminEditProduct";
 import Login from "../pages/Login/Login";
+import Register from "../pages/Login/Register";
 
 const routes = [
   {
@@ -28,6 +29,10 @@ const routes = [
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
       },
       {
         path: "main",

@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowRight } from "iconsax-react";
 import { Link, useParams } from "react-router-dom";
-import ImageSlider from "./slider";
+// import ImageSlider from "./slider";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -8,15 +8,16 @@ import { getProductById, checkSuit } from "../../utils/apiUtils";
 import { useActiceProductStore } from "../../store/activeProductStore";
 import { useUserSkinType } from "../../store/userSkinType";
 import { Spin } from "antd";
-import Fancy from "../FancyBox/FancyBox";
-import CarouselFancy from "../FancyBox/Carousel";
+import Fancy from "../../components/FancyBox/FancyBox";
+import CarouselFancy from "../../components/FancyBox/Carousel";
+import ImgBase64 from "../../components/ImgBase64/ImgBase64";
 
-function Product() {
+function ProductPage() {
   const [activeButton, setActiveButton] = useState("firstView");
   const [isProdSuits, setIsProdSuits] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
-  const [productData, setProductData] = useState(null);
+  const [productData, setProductData] = useState({});
   const { activeProductId, setActiveProductId } = useActiceProductStore(
     (state) => state
   );
@@ -25,6 +26,8 @@ function Product() {
 
   console.log("activeProductId on prod page", activeProductId);
   console.log("isProdSuits", isProdSuits);
+  console.log("productData", productData);
+  console.log("skinType", skinType);
   const handleInfoChange = (title) => {
     setActiveButton(title);
   };
@@ -78,13 +81,13 @@ function Product() {
   }
 
   return isLoading ? (
-    <div className="h-screen flex items-center justify-stretch border border-black">
+    <div className="h-screen flex items-center justify-stretch borde bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
       <div className="w-screen my-[2rem] mx-0 py-[3rem] px-[5rem] text-center rounded-[4px]">
         <Spin size="large" />
       </div>
     </div>
   ) : (
-    <div className=" flex justify-center h-auto">
+    <div className=" flex justify-center sm:h-auto md:h-screen bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
       <div className="max-w-[1319px] py-[14px] px-[22px] w-full md:px-[30px] md:py-[10px]">
         <div className="flex justify-between items-center gap-3 pb-2.5 lg:pb-[15px]">
           <div className="flex md:items-center lg:items-start flex-col gap-[15px] md:flex-row lg:flex-col">
@@ -130,7 +133,7 @@ function Product() {
         <h1 className="py-2.5 px-3 font-bold text-[20px] flex lg:hidden">
           {infoText[activeButton].title}
         </h1>
-        <div className="flex flex-col sm:items-center md:flex-col lg:flex-row gap-[10px] lg:gap-[50px]">
+        <div className="flex flex-col max-w-[40rem] sm:items-center sm:max-w-[40rem] md:flex-col md:max-w-[40rem] lg:flex-row gap-[10px] lg:gap-[50px] lg:max-w-[68rem]">
           {/* <ImageSlider /> */}
           <Fancy
             // Sample options
@@ -144,7 +147,18 @@ function Product() {
               // Sample options
               options={{ infinite: false }}
             >
-              <div
+              {productData?.images?.map((img, index) => (
+                <div
+                  key={index}
+                  className="f-carousel__slide"
+                  data-fancybox="gallery"
+                  data-src={`data:image/jpeg;base64,${img}`}
+                  data-thumb-src={`data:image/jpeg;base64,${img}`}
+                >
+                  <ImgBase64 data={img} alt="product image" />
+                </div>
+              ))}
+              {/* <div
                 className="f-carousel__slide"
                 data-fancybox="gallery"
                 data-src="https://lipsum.app/id/60/1600x1200"
@@ -208,7 +222,7 @@ function Product() {
                   width="400"
                   height="300"
                 />
-              </div>
+              </div> */}
             </CarouselFancy>
           </Fancy>
 
@@ -295,4 +309,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default ProductPage;

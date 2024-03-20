@@ -9,7 +9,6 @@ html {
   width: auto;
   height: auto;
   min-height: 100%;
-  background: linear-gradient(180deg, #b0ddff 0%, #ffe8f5 100%);
 }
 
 .shadow-btn {
@@ -25,15 +24,6 @@ html {
 
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
-}
-
-.bg {
-  background: linear-gradient(180deg, #b0ddff 0%, #ffe8f5 100%);
-  background: linear-gradient(
-    180deg,
-    color(display-p3 0.7255 0.8627 0.9922) 0%,
-    color(display-p3 1 0.9137 0.9569) 100%
-  );
 }
 
 .ant-input:focus {
@@ -52,9 +42,35 @@ html {
   transition: filter 0.5s linear;
 }
 .custom-modal .ant-modal-content {
-  border-radius: 15px; 
+  border-radius: 15px;
 }
 
 .ant-btn-primary {
   background-color: #1677ff;
+}
+
+/* .ant-col-6 {
+  flex: 0 0 9%;
+} */
+
+.f-carousel__nav button {
+  background-color: white;
+  border-radius: 50%;
+}
+
+.f-carousel__nav button:hover {
+  background-color: white !important;
+}
+
+.f-carousel__nav button:first-child {
+  left: 95%;
+}
+
+.f-carousel__nav button:last-child {
+  position: absolute;
+  left: -5% !important;
+}
+
+.f-carousel__viewport {
+  max-height: 62vh;
 }

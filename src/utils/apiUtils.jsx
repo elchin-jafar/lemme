@@ -13,11 +13,33 @@ const api = axios.create({
 
 //PRODUCT APIs
 export const addProduct = (productData) => {
-  return api.post(endpoints.product.add, productData);
+  console.log("productData on add apiUtil", productData.getAll("images"));
+  return api.post(endpoints.product.add, productData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
-export const editProduct = (productData) => {
-  return api.post(endpoints.product.edit, productData);
+export const editProduct = (
+  id,
+  name,
+  overview,
+  howToUse,
+  ingredients,
+  skinType,
+  productData
+) => {
+  console.log("prod on apiUtil", productData);
+  return api.put(
+    `${endpoints.product.edit}?Id=${id}&Name=${name}&Overview=${overview}&HowToUse=${howToUse}&Ingredients=${ingredients}&SkinType=${skinType}`,
+    productData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
 };
 
 export const deleteProduct = (id) => {
@@ -41,6 +63,10 @@ export const getProductByName = (name) => {
 //USER APIs
 export const login = (userData) => {
   return api.post(endpoints.user.login, userData);
+};
+
+export const register = (userData) => {
+  return api.post(endpoints.user.register, userData);
 };
 
 //SKIN TYPE APIs

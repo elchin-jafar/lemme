@@ -12,6 +12,7 @@ const endpoints = {
     getAll: "/api/User/GetAllUsers",
     byId: "/api/User/GetUserById",
     login: "/api/User/Login",
+    delete: (id) => `api/User/DeleteUser/${id}`,
   },
   skinType: {
     determine: (counts) => `api/SkinType/DetermineSkinType/${counts}`,

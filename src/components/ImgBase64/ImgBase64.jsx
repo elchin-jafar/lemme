@@ -2,13 +2,13 @@
 
 function ImgBase64({ data, alt, ...props }) {
   return (
-    <img 
+    <img
       {...props}
       src={`data:image/jpeg;base64,${data}`}
       alt={alt}
+      width="400"
+      height="300"
     />
-
-    
   );
 }
 
