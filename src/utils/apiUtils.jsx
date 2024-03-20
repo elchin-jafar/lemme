@@ -13,6 +13,7 @@ const api = axios.create({
 
 //PRODUCT APIs
 export const addProduct = (productData) => {
+  console.log("productData on add apiUtil", productData.getAll("images"));
   return api.post(endpoints.product.add, productData, {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -20,8 +21,25 @@ export const addProduct = (productData) => {
   });
 };
 
-export const editProduct = (productData) => {
-  return api.post(endpoints.product.edit, productData);
+export const editProduct = (
+  id,
+  name,
+  overview,
+  howToUse,
+  ingredients,
+  skinType,
+  productData
+) => {
+  console.log("prod on apiUtil", productData);
+  return api.put(
+    `${endpoints.product.edit}?Id=${id}&Name=${name}&Overview=${overview}&HowToUse=${howToUse}&Ingredients=${ingredients}&SkinType=${skinType}`,
+    productData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
 };
 
 export const deleteProduct = (id) => {

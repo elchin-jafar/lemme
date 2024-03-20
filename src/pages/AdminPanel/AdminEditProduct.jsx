@@ -1,4 +1,4 @@
-import { Flex, Button, Form, Input, Select, Upload } from "antd";
+import { Flex, Button, Form, Input, Select, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { User } from "iconsax-react";
 import ImgUpload from "../../components/ImgUpload/ImgUpload";
@@ -7,8 +7,30 @@ import { useAdminProductsStore } from "../../store/adminProductsStore";
 import { useEffect, useState } from "react";
 import { useAdminImagesStore } from "../../store/adminImagesStore";
 import ImgBase64 from "../../components/ImgBase64/ImgBase64";
+import { editProduct } from "../../utils/apiUtils";
 // import base64ToFile from "../../utils/Base64toFileConverter";
 // import { useAdminImagesStore } from "../../store/adminImagesStore";
+
+function base64ToBlob(base64String) {
+  var byteCharacters = atob(base64String);
+  var byteNumbers = new Array(byteCharacters.length);
+  for (var i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  var byteArray = new Uint8Array(byteNumbers);
+  // var blob = new Blob([byteArray], { type: contentType });
+  const newURL = URL.createObjectURL(
+    new Blob([byteArray], { type: "text/plain" })
+  );
+  console.log("url", newURL);
+  return newURL;
+}
+
+function base64ToFile(base64String, fileName, contentType) {
+  var blob = base64ToBlob(base64String, contentType);
+  var file = new File([blob], fileName, { type: contentType });
+  return file;
+}
 
 const props = {
   action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
@@ -75,7 +97,7 @@ function AdminEditProduct() {
   console.log("newObj", newObj);
 
   useEffect(() => {
-    function base64ToBlob(base64String, contentType) {
+    function base64ToBlob(base64String) {
       var byteCharacters = atob(base64String);
       var byteNumbers = new Array(byteCharacters.length);
       for (var i = 0; i < byteCharacters.length; i++) {
@@ -133,7 +155,58 @@ function AdminEditProduct() {
   // }, [initial]);
   console.log("img itself", putImages.at(0));
 
-  function handlePreview(file) {}
+  const onChange = ({ file, fileList }) => {
+    if (file.status !== "uploading") {
+      console.log(file, fileList);
+    }
+  };
+
+  const onFinish = async (values) => {
+    console.log("edit values", values);
+    const images = values.images;
+    const nonFiles = images.filter(
+      (file) => !Object.hasOwn(file, "originFileObj")
+    );
+    console.log("nonFiles", nonFiles.length);
+    const nonFilesQuantity = nonFiles.length;
+    images.splice(
+      0,
+      nonFilesQuantity,
+      ...nonFiles.map((el) => base64ToFile(el.url, el.name, "image/jpeg"))
+    );
+    try {
+      const formData = new FormData();
+      formData.append("id", id);
+      formData.append("name", values.name);
+      formData.append("overview", values.overview);
+      formData.append("howToUse", values.howToUse);
+      formData.append("ingredients", values.ingredients);
+      formData.append("skinType", values.skinType);
+      values.images.forEach((file) => {
+        if (Object.hasOwn(file, "originFileObj")) {
+          formData.append("Images", file.originFileObj);
+        } else {
+          formData.append("Images", file);
+        }
+      });
+      console.log("formData on Edit", formData.getAll("Images"));
+      const response = await editProduct(
+        id,
+        formData.get("name"),
+        formData.get("overview"),
+        formData.get("howToUse"),
+        formData.get("ingredients"),
+        formData.get("skinType"),
+        formData.getAll("Images")
+      );
+      console.log("Form submission successful:", response.data);
+      message.success("Form submitted successfully");
+      form.resetFields();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      message.error("Failed to submit form");
+    }
+  };
 
   return (
     <>
@@ -201,7 +274,7 @@ function AdminEditProduct() {
           form={form}
           initialValues={newObj}
           // form={form}
-          // onFinish={onFinish}
+          onFinish={onFinish}
           // initialValues={{ images: [], storeIds: [] }}
           labelCol={{ span: 2 }}
           wrapperCol={{ span: 10 }}
@@ -254,6 +327,12 @@ function AdminEditProduct() {
             label="Images"
             name="images"
             valuePropName="fileList"
+            getValueFromEvent={(e) => {
+              if (Array.isArray(e)) {
+                return e;
+              }
+              return e && e.fileList;
+            }}
             // getValueFromEvent={normFile}
             rules={[{ required: true, message: "Please upload images!" }]}
           >
@@ -266,15 +345,16 @@ function AdminEditProduct() {
               handlePreview={handlePreview}
             /> */}
             <Upload
-              defaultFileList={[
-                {
-                  uid: "1",
-                  name: "xxx.png",
-                  status: "uploaded",
-                  url: curImage,
-                  percent: 33,
-                },
-              ]}
+              // defaultFileList={[
+              //   {
+              //     uid: "1",
+              //     name: "xxx.png",
+              //     status: "uploaded",
+              //     url: curImage,
+              //     percent: 33,
+              //   },
+              // ]}
+              defaultFileList={newObj.images}
               {...props}
             >
               <Button icon={<UploadOutlined />}>Upload</Button>

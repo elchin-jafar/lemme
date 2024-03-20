@@ -26,30 +26,30 @@ function AdminAddProduct() {
 
   const onFinish = async (values) => {
     console.log("values", values);
-    // try {
-    //   setIsLoading(true);
-    //   const formData = new FormData();
-    //   formData.append("name", values.name);
-    //   formData.append("overview", values.overview);
-    //   formData.append("howToUse", values.howToUse);
-    //   formData.append("ingredients", values.ingredients);
-    //   formData.append("skinType", values.skinType);
-    //   formData.append("storeIds", values.storeIds);
-    //   values.images.forEach((file) => {
-    //     formData.append("images", file.originFileObj);
-    //   });
-    //   console.log("formData", formData);
-    //   const response = await addProduct(formData);
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("overview", values.overview);
+      formData.append("howToUse", values.howToUse);
+      formData.append("ingredients", values.ingredients);
+      formData.append("skinType", values.skinType);
+      formData.append("storeIds", values.storeIds);
+      values.images.forEach((file) => {
+        formData.append("images", file.originFileObj);
+      });
+      console.log("formData", formData.get("images"));
+      const response = await addProduct(formData);
 
-    //   console.log("Form submission successful:", response.data);
-    //   message.success("Form submitted successfully");
-    //   form.resetFields();
-    // } catch (error) {
-    //   console.error("Error submitting form:", error);
-    //   message.error("Failed to submit form");
-    // } finally {
-    //   setIsLoading(false);
-    // }
+      console.log("Form submission successful:", response.data);
+      message.success("Form submitted successfully");
+      form.resetFields();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      message.error("Failed to submit form");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const normFile = (e) => {
@@ -68,6 +68,7 @@ function AdminAddProduct() {
   };
 
   function handleChange({ fileList }) {
+    console.log("filelist on adding lol", fileList);
     console.log(
       "handle change",
       fileList.map((file) => file.originFileObj)
