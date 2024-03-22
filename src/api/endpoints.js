@@ -5,7 +5,8 @@ const endpoints = {
     delete: (id) => `/api/Product/DeleteProduct/${id}`,
     getAll: "/api/Product/GetAllProducts",
     byId: (id) => `/api/Product/GetProductById/${id}`,
-    byName: "/api/Product/SearchProductByName",
+    // byName: "/api/Product/SearchProductByName",
+    byName: (query) => `/api/Product/SearchProductByName/${query}`,
   },
   store: {
     add: "/api/Store/AddStore",

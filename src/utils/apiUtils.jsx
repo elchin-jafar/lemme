@@ -54,10 +54,14 @@ export const getProductById = (id) => {
   return api.get(endpoints.product.byId(id));
 };
 
+// export const getProductByName = (name) => {
+//   return api.get(endpoints.product.byName, {
+//     params: { productName: name },
+//   });
+// };
+
 export const getProductByName = (name) => {
-  return api.get(endpoints.product.byName, {
-    params: { productName: name },
-  });
+  return api.get(endpoints.product.byName(name));
 };
 
 //STORE APIs
