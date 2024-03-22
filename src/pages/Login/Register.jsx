@@ -20,10 +20,21 @@ function Register() {
   };
 
   async function handleRegister(values) {
-    console.log(values);
+    console.log("register data", values);
     try {
-      const response = await register(values);
-      console.log(response);
+      const registerData = new FormData();
+      registerData.append("firstName", values.firstName);
+      registerData.append("lastName", values.lastName);
+      registerData.append("email", values.email);
+      registerData.append("password", values.password);
+      registerData.append("userName", values.username);
+      const rolesObj = values.roles.map((role) => {
+        return { name: role };
+      });
+      registerData.append("roles", rolesObj);
+      console.log("rooes", registerData.getAll("roles"));
+      // const response = await register(values);
+      // console.log(response);
     } catch (err) {
       console.log(err.message);
       message(err.message);

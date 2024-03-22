@@ -1,13 +1,13 @@
 import { Flex, Button, Form, Input, Select, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { User } from "iconsax-react";
-import ImgUpload from "../../components/ImgUpload/ImgUpload";
+import ImgUpload from "../../../components/ImgUpload/ImgUpload";
 import { Link, useParams } from "react-router-dom";
-import { useAdminProductsStore } from "../../store/adminProductsStore";
+import { useAdminProductsStore } from "../../../store/adminProductsStore";
 import { useEffect, useState } from "react";
-import { useAdminImagesStore } from "../../store/adminImagesStore";
-import ImgBase64 from "../../components/ImgBase64/ImgBase64";
-import { editProduct } from "../../utils/apiUtils";
+import { useAdminImagesStore } from "../../../store/adminImagesStore";
+import ImgBase64 from "../../../components/ImgBase64/ImgBase64";
+import { editProduct } from "../../../utils/apiUtils";
 // import base64ToFile from "../../utils/Base64toFileConverter";
 // import { useAdminImagesStore } from "../../store/adminImagesStore";
 
@@ -72,7 +72,7 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-function AdminEditProduct() {
+function EditProduct() {
   const [isLoading, setIsLoading] = useState(false);
   const [putImages, setPutImages] = useState([]);
   const { productList, setList } = useAdminProductsStore();
@@ -396,4 +396,4 @@ function AdminEditProduct() {
   );
 }
 
-export default AdminEditProduct;
+export default EditProduct;

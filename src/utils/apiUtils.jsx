@@ -60,6 +60,27 @@ export const getProductByName = (name) => {
   });
 };
 
+//STORE APIs
+export const addStore = (storeData) => {
+  return api.post(endpoints.store.add, storeData);
+};
+
+export const editStore = (storeData) => {
+  return api.put(endpoints.store.edit, storeData);
+};
+
+export const deleteStore = (id) => {
+  return api.delete(endpoints.store.delete(id));
+};
+
+export const getAllStores = () => {
+  return api.get(endpoints.store.getAll);
+};
+
+export const getStoreById = (id) => {
+  return api.get(endpoints.store.byId(id));
+};
+
 //USER APIs
 export const login = (userData) => {
   return api.post(endpoints.user.login, userData);

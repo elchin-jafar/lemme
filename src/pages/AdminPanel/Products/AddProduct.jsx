@@ -1,22 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Flex, Button, Form, Input, Select, Spin, message, Upload } from "antd";
 const { Option } = Select;
 import { User } from "iconsax-react";
-import ImgUpload from "../../components/ImgUpload/ImgUpload";
+import ImgUpload from "../../../components/ImgUpload/ImgUpload";
 // import Upload from "../../components/Upload/Upload";
 import { Link, useNavigate } from "react-router-dom";
-import { addProduct } from "../../utils/apiUtils";
-import { useAdminImagesStore } from "../../store/adminImagesStore";
+import { addProduct, getAllStores } from "../../../utils/apiUtils";
+import { useAdminImagesStore } from "../../../store/adminImagesStore";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { UploadOutlined } from "@ant-design/icons";
 
-function AdminAddProduct() {
+function AddProduct() {
   const [isLoading, setIsLoading] = useState(false);
+  const [stores, setStores] = useState([]);
   const { imagesState, setImagesState } = useAdminImagesStore((state) => state);
   console.log("imagesState on add", imagesState);
   // const { imagesList, setImages } = useAdminImagesStore((state) => state);
   //   const nameInput = Form.useWatch("name", form);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getStores() {
+      const stores = await getAllStores();
+      console.log("stores for add", stores.data);
+      setStores(stores.data);
+    }
+
+    getStores();
+  }, []);
 
   // const [images, setImages] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
@@ -44,6 +55,7 @@ function AdminAddProduct() {
       console.log("Form submission successful:", response.data);
       message.success("Form submitted successfully");
       form.resetFields();
+      navigate(-1);
     } catch (error) {
       console.error("Error submitting form:", error);
       message.error("Failed to submit form");
@@ -155,9 +167,14 @@ function AdminAddProduct() {
           rules={[{ required: true, message: "Please select store IDs!" }]}
         >
           <Select placeholder="Select store IDs">
-            <Option value={1}>Store 1</Option>
+            {/* <Option value={1}>Store 1</Option>
             <Option value={2}>Store 2</Option>
-            <Option value={3}>Store 3</Option>
+            <Option value={3}>Store 3</Option> */}
+            {stores?.map((store) => (
+              <Option
+                value={store.id}
+              >{`${store.name} (${store.adress})`}</Option>
+            ))}
           </Select>
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 4, span: 14 }}>
@@ -182,4 +199,4 @@ function AdminAddProduct() {
   );
 }
 
-export default AdminAddProduct;
+export default AddProduct;

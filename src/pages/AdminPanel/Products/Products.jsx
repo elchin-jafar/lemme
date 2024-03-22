@@ -14,21 +14,19 @@ import {
   PlusOutlined,
   ArrowLeftOutlined,
   DeleteOutlined,
-  DeleteFilled,
   EditOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { getAll, deleteProduct } from "../../utils/apiUtils";
-import { useAdminProductsStore } from "../../store/adminProductsStore";
+import { getAll, deleteProduct } from "../../../utils/apiUtils";
+import { useAdminProductsStore } from "../../../store/adminProductsStore";
 const { Column } = Table;
 
-function AdminProducts() {
-  // const [productList, setList] = useState([]);
+function Products() {
   const [isLoading, setIsLoading] = useState(false);
   const { productList, setList } = useAdminProductsStore((state) => state);
 
   useEffect(() => {
-    async function getRoll() {
+    async function getProds() {
       try {
         setIsLoading(true);
         const res = await getAll();
@@ -38,16 +36,12 @@ function AdminProducts() {
         setIsLoading(false);
       }
     }
-    getRoll();
+    getProds();
   }, []);
 
   async function handleDeleteProduct(id) {
     try {
-      const res = await deleteProduct(id);
-      if (res.ok) {
-        // setList(productList.filter((prod) => prod.id != id));
-        // console.log("updatedList", productList);
-      }
+      await deleteProduct(id);
     } catch (err) {
       console.log(err);
     }
@@ -60,11 +54,7 @@ function AdminProducts() {
     handleDeleteProduct(id);
     setList(productList.filter((prod) => prod.id != id));
     console.log("updatedList", productList);
-    message.success("Product Deleted");
-  };
-  const cancel = (e) => {
-    console.log(e);
-    message.error("Cancelled");
+    message.success("Məhsul silindi");
   };
 
   return (
@@ -87,7 +77,11 @@ function AdminProducts() {
           {isLoading ? (
             <Skeleton active />
           ) : (
-            <Table dataSource={productList} bordered>
+            <Table
+              dataSource={productList}
+              bordered
+              pagination={{ pageSize: 5 }}
+            >
               <Column title="Məhsulun adı" dataIndex="name" key="firstName" />
               <Column title="Dəri tipi" dataIndex="skinType" key="skinType" />
 
@@ -103,14 +97,12 @@ function AdminProducts() {
                     >
                       <Button type="dashed" icon={<EditOutlined />} />
                     </Link>
-                    {/* <a onClick={() => handleDeleteProduct(record.id)}>Delete</a> */}
                     <Popconfirm
-                      title="Delete the product"
-                      description="Are you sure to delete this product?"
+                      title="Məhsulu sil"
+                      description="Məhsulu silmək istədiyinizə əminsinizmi?"
                       onConfirm={() => confirm(record.id)}
-                      onCancel={cancel}
-                      okText="Yes"
-                      cancelText="No"
+                      okText="Bəli"
+                      cancelText="Xeyr"
                     >
                       <Button type="primary" danger icon={<DeleteOutlined />} />
                     </Popconfirm>
@@ -125,4 +117,4 @@ function AdminProducts() {
   );
 }
 
-export default AdminProducts;
+export default Products;

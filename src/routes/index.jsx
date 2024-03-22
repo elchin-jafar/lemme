@@ -2,10 +2,15 @@ import ProductPage from "../pages/ProductPage/ProductPage";
 import HomePage from "../pages/HomePage/HomePage";
 import TestPage from "../pages/TestPage/TestPage";
 import AdminLayout from "../layouts/AdminLayout";
-import AdminMain from "../pages/AdminPanel/AdminMain";
-import AdminProducts from "../pages/AdminPanel/AdminProducts";
-import AdminAddProduct from "../pages/AdminPanel/AdminAddProduct";
-import AdminEditProduct from "../pages/AdminPanel/AdminEditProduct";
+//PRODUCTS
+import MainMenu from "../pages/AdminPanel/Products/MainMenu";
+import Products from "../pages/AdminPanel/Products/Products";
+import AddProduct from "../pages/AdminPanel/Products/AddProduct";
+import EditProduct from "../pages/AdminPanel/Products/EditProduct";
+//STORES
+import AddStore from "../pages/AdminPanel/Stores/AddStore";
+import EditStore from "../pages/AdminPanel/Stores/EditStore";
+import Stores from "../pages/AdminPanel/Stores/Stores";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Login/Register";
 
@@ -36,19 +41,31 @@ const routes = [
       },
       {
         path: "main",
-        element: <AdminMain />,
+        element: <MainMenu />,
       },
       {
         path: "products",
-        element: <AdminProducts />,
+        element: <Products />,
       },
       {
         path: "addProduct",
-        element: <AdminAddProduct />,
+        element: <AddProduct />,
       },
       {
         path: "editProduct/:id",
-        element: <AdminEditProduct />,
+        element: <EditProduct />,
+      },
+      {
+        path: "addStore",
+        element: <AddStore />,
+      },
+      {
+        path: "editStore/:id",
+        element: <EditStore />,
+      },
+      {
+        path: "stores",
+        element: <Stores />,
       },
     ],
   },

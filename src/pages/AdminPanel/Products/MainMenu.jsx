@@ -3,7 +3,7 @@ import { Flex, Button } from "antd";
 import { Link } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
-function AdminMain() {
+function MainMenu() {
   return (
     <Flex justify="start" align="start" gap="large">
       <Flex vertical gap="large">
@@ -16,16 +16,30 @@ function AdminMain() {
         <p className="text-[3.8rem] font-semibold">Ana səhifə</p>
         <Flex gap="large">
           <Flex gap="small" vertical>
-            <Button size="large">Mağaza</Button>
+            <Link>
+              <Button className="w-[21rem]" size="large">
+                Mağaza
+              </Button>
+            </Link>
             <Button size="large">Ümumi</Button>
-            <Button size="large">
-              <Link to="../products"> Məhsul siyahısı</Link>
-            </Button>
-            <Button size="large">Mağaza əlavə et</Button>
+            <Link to="../products">
+              <Button className="w-[21rem]" size="large">
+                Məhsul siyahısı
+              </Button>
+            </Link>
+            <Link to="../addStore">
+              <Button className="w-[21rem]" size="large">
+                Mağaza əlavə et
+              </Button>
+            </Link>
           </Flex>
           <Flex gap="small" vertical>
             <Button size="large">Yeni məhsul əlavə et</Button>
-            <Button size="large">Məhsulu redaktə et</Button>
+            <Link to="../stores">
+              <Button className="w-[21rem]" size="large">
+                Mağaza siyahısı
+              </Button>
+            </Link>
             <Button size="large">Yeni sual əlavə et</Button>
             <Button size="large">Sual redaktə et</Button>
           </Flex>
@@ -35,4 +49,4 @@ function AdminMain() {
   );
 }
 
-export default AdminMain;
+export default MainMenu;
