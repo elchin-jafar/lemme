@@ -1,7 +1,8 @@
 import { User } from "iconsax-react";
 import { Flex, Input, Button, Form, Select, message } from "antd";
 import { Link } from "react-router-dom";
-import { register } from "../../utils/apiUtils";
+import { register, getAllRoles, getAllUsers } from "../../utils/apiUtils";
+import { useEffect, useState } from "react";
 
 const options = [
   {
@@ -15,26 +16,71 @@ const options = [
 ];
 
 function Register() {
+  const [roles, setRoles] = useState([]);
+
+  useEffect(() => {
+    async function getRls() {
+      try {
+        const response = await getAllRoles();
+        if (response.status == 200) {
+          setRoles(response.data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    getRls();
+  }, []);
+
+  useEffect(() => {
+    async function getUsrs() {
+      try {
+        const response = await getAllUsers();
+        if (response.status == 200) {
+          console.log("all users", response.data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    getUsrs();
+  }, []);
+
+  console.log("roles on reguster", roles);
+
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
 
+  function utilstringConverter(arr) {
+    return arr.map((role) => {
+      return {
+        name: role.toLowerCase(),
+      };
+    });
+  }
+
   async function handleRegister(values) {
     console.log("register data", values);
+    const newObj = { ...values, roles: utilstringConverter(values.roles) };
+    const serializedObj = JSON.stringify(newObj);
+    console.log("newObj", serializedObj);
     try {
-      const registerData = new FormData();
-      registerData.append("firstName", values.firstName);
-      registerData.append("lastName", values.lastName);
-      registerData.append("email", values.email);
-      registerData.append("password", values.password);
-      registerData.append("userName", values.username);
-      const rolesObj = values.roles.map((role) => {
-        return { name: role };
-      });
-      registerData.append("roles", rolesObj);
-      console.log("rooes", registerData.getAll("roles"));
+      // const registerData = new FormData();
+      // registerData.append("firstName", values.firstName);
+      // registerData.append("lastName", values.lastName);
+      // registerData.append("email", values.email);
+      // registerData.append("password", values.password);
+      // registerData.append("userName", values.username);
+      // const rolesObj = values.roles.map((role) => {
+      //   return { name: role };
+      // });
+      // registerData.append("roles", rolesObj);
+      // console.log("rooes", registerData.getAll("roles"));
       // const response = await register(values);
       // console.log(response);
+      const response = await register(serializedObj);
+      console.log(response);
     } catch (err) {
       console.log(err.message);
       message(err.message);
@@ -63,11 +109,11 @@ function Register() {
           <Form.Item label="Password" name="password">
             <Input size="large" />
           </Form.Item>
-          <Form.Item label="Username" name="username">
+          <Form.Item label="Username" name="userName">
             <Input size="large" />
           </Form.Item>
           <Form.Item label="Roles" name="roles">
-            <Select
+            {/* <Select
               size="large"
               mode="multiple"
               style={{
@@ -76,8 +122,13 @@ function Register() {
               placeholder="select roles"
               onChange={handleChange}
               optionLabelProp="label"
-              options={options}
-            />
+              options={roles}
+            /> */}
+            <Select placeholder="Select store IDs" mode="multiple">
+              {roles?.map((role) => (
+                <Option value={role.name}>{`${role.name}`}</Option>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item className="text-end">
             <Button

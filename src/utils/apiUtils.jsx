@@ -94,6 +94,14 @@ export const register = (userData) => {
   return api.post(endpoints.user.register, userData);
 };
 
+export const getAllRoles = () => {
+  return api.get(endpoints.user.getAllRoles);
+};
+
+export const getAllUsers = () => {
+  return api.get(endpoints.user.getAllUsers);
+};
+
 //SKIN TYPE APIs
 export const determineSkinType = (counts) => {
   return api.get(endpoints.skinType.determine(counts));

@@ -17,10 +17,11 @@ const endpoints = {
   },
   user: {
     register: "/api/User/RegisterUser",
-    getAll: "/api/User/GetAllUsers",
+    getAllUsers: "/api/User/GetAllUsers",
     byId: "/api/User/GetUserById",
     login: "/api/User/Login",
     delete: (id) => `api/User/DeleteUser/${id}`,
+    getAllRoles: "/api/User/GetAllRoles",
   },
   skinType: {
     determine: (counts) => `api/SkinType/DetermineSkinType/${counts}`,
