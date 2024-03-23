@@ -76,8 +76,8 @@ function EditProduct() {
   const [isLoading, setIsLoading] = useState(false);
   const [putImages, setPutImages] = useState([]);
   const { productList, setList } = useAdminProductsStore();
-  const [fileState, setFileState] = useState(null);
   const [curImage, setCurImage] = useState("");
+  const [imagesState, setImagesState] = useState([]);
 
   const [form] = Form.useForm();
 
@@ -94,6 +94,9 @@ function EditProduct() {
     })),
   };
 
+  useEffect(() => {
+    setImagesState(newObj.images);
+  }, []);
   console.log("newObj", newObj);
 
   useEffect(() => {
@@ -162,48 +165,72 @@ function EditProduct() {
   };
 
   const onFinish = async (values) => {
-    console.log("edit values", values);
-    const images = values.images;
+    // console.log("edit values", values);
+    // const images = values.images;
+    // const nonFiles = images.filter(
+    //   (file) => !Object.hasOwn(file, "originFileObj")
+    // );
+    // console.log("nonfiles", nonFiles);
+    // console.log("nonFiles length", nonFiles.length);
+    // const nonFilesQuantity = nonFiles.length;
+    // images.splice(
+    //   0,
+    //   nonFilesQuantity,
+    //   ...nonFiles.map((el) =>
+    //     base64ToFile(el.url.split(",").at(1), el.name, "image/jpeg")
+    //   )
+    // );
+
+    const { images, ...otherFormData } = values;
+
     const nonFiles = images.filter(
-      (file) => !Object.hasOwn(file, "originFileObj")
+      (file) => !Object.prototype.hasOwnProperty.call(file, "originFileObj")
     );
-    console.log("nonfiles", nonFiles);
-    console.log("nonFiles length", nonFiles.length);
-    const nonFilesQuantity = nonFiles.length;
-    images.splice(
-      0,
-      nonFilesQuantity,
-      ...nonFiles.map((el) =>
-        base64ToFile(el.url.split(",").at(1), el.name, "image/jpeg")
-      )
+
+    const convertedFiles = nonFiles.map((image) =>
+      base64ToFile(image.url.split(",")[1], image.name, "image/jpeg")
     );
+
+    const updatedImages = [
+      ...convertedFiles,
+      ...images.slice(nonFiles.length).map((img) => img.originFileObj),
+    ];
+
+    const updatedValues = { ...otherFormData, Images: updatedImages };
+    console.log("chatgpt", updatedValues);
     try {
-      const formData = new FormData();
-      formData.append("id", id);
-      formData.append("name", values.name);
-      formData.append("overview", values.overview);
-      formData.append("howToUse", values.howToUse);
-      formData.append("ingredients", values.ingredients);
-      formData.append("skinType", values.skinType);
-      values.images.forEach((file) => {
-        console.log(file);
-        if (Object.hasOwn(file, "originFileObj")) {
-          formData.append("Images", file.originFileObj);
-        } else {
-          formData.append("Images", file);
-        }
-      });
-      console.log("formData on Edit", formData.getAll("Images"));
-      // const response = await editProduct(
-      //   id,
-      //   formData.get("name"),
-      //   formData.get("overview"),
-      //   formData.get("howToUse"),
-      //   formData.get("ingredients"),
-      //   formData.get("skinType"),
-      //   formData.getAll("Images")
-      // );
-      // console.log("Form submission successful:", response.data);
+      //     const formData = new FormData();
+      //     formData.append("id", id);
+      //     formData.append("name", updatedValues.name);
+      //     formData.append("overview", updatedValues.overview);
+      //     formData.append("howToUse", updatedValues.howToUse);
+      //     formData.append("ingredients", updatedValues.ingredients);
+      //     formData.append("skinType", updatedValues.skinType);
+      //     updatedValues.images.forEach((file, index) => {
+      //       console.log(file);
+      //       if (Object.hasOwn(file, "originFileObj")) {
+      //         formData.append(`Images[${index}]`, file.originFileObj);
+      //       } else {
+      //         formData.append(`Images[${index}]`, file);
+      //       }
+      //     });
+      //     const images = formData.getAll("Images");
+      //     const fdid = formData.get("id");
+      //     const name = formData.get("name");
+      //     const overview = formData.get("overview");
+      //     const howToUse = formData.get("howToUse");
+      //     const ingredients = formData.get("ingredients");
+      //     const skinType = formData.get("skinType");
+      await editProduct(
+        id,
+        updatedValues.name,
+        updatedValues.overview,
+        updatedValues.howToUse,
+        updatedValues.ingredients,
+        updatedValues.skinType,
+        updatedValues.Images
+      );
+      // console.log("Form submission successful:");
       // message.success("Form submitted successfully");
       // form.resetFields();
     } catch (error) {
@@ -211,6 +238,11 @@ function EditProduct() {
       message.error("Failed to submit form");
     }
   };
+
+  function handleChange({ fileList }) {
+    console.log("fileList on change", fileList);
+    setImagesState(fileList);
+  }
 
   return (
     <>
@@ -379,7 +411,7 @@ function EditProduct() {
                   url: `data:image/jpeg;base64,${image}`, // Assuming images are base64 encoded
                 }))}
             ></Upload> */}
-            <ImgUpload />
+            <ImgUpload fileList={imagesState} onChange={handleChange} />
           </Form.Item>
           {/* <Form.Item
             label="Store IDs"

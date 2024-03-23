@@ -13,10 +13,8 @@ import { UploadOutlined } from "@ant-design/icons";
 function AddProduct() {
   const [isLoading, setIsLoading] = useState(false);
   const [stores, setStores] = useState([]);
-  const { imagesState, setImagesState } = useAdminImagesStore((state) => state);
-  console.log("imagesState on add", imagesState);
-  // const { imagesList, setImages } = useAdminImagesStore((state) => state);
-  //   const nameInput = Form.useWatch("name", form);
+  // const { imagesState, setImagesState } = useAdminImagesStore((state) => state);
+  const [imagesState, setImagesState] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {

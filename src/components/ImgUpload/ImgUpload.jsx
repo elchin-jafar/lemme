@@ -11,12 +11,12 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-function ImgUpload({ ...props }) {
+function ImgUpload({ fileList, ...props }) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   // const [fileList, setFileList] = useState([]);
-  const { imagesState, setImagesState } = useAdminImagesStore((state) => state);
+  // const { imagesState, setImagesState } = useAdminImagesStore((state) => state);
 
   // console.log("filelist in upload component", fileList);
   console.log("initialList".initialList);
@@ -97,11 +97,12 @@ function ImgUpload({ ...props }) {
         action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
         listType="picture-card"
         // fileList={imagesState}
+        fileList={fileList}
         onPreview={handlePreview}
         // onChange={handleChange}
         // defaultFileList={defaultImages}
       >
-        {imagesState.length >= 8 ? null : uploadButton}
+        {fileList.length >= 8 ? null : uploadButton}
       </Upload>
       <Modal
         open={previewOpen}
