@@ -1,40 +1,28 @@
 import { useState, useEffect } from "react";
-import { Flex, Button, Form, Input, Select, Spin, message, Upload } from "antd";
+import { Flex, Button, Form, Input, Select, Spin, message } from "antd";
 const { Option } = Select;
 import { User } from "iconsax-react";
 import ImgUpload from "../../../components/ImgUpload/ImgUpload";
-// import Upload from "../../components/Upload/Upload";
 import { Link, useNavigate } from "react-router-dom";
 import { addProduct, getAllStores } from "../../../utils/apiUtils";
-import { useAdminImagesStore } from "../../../store/adminImagesStore";
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import { UploadOutlined } from "@ant-design/icons";
 
 function AddProduct() {
   const [isLoading, setIsLoading] = useState(false);
   const [stores, setStores] = useState([]);
-  // const { imagesState, setImagesState } = useAdminImagesStore((state) => state);
   const [imagesState, setImagesState] = useState([]);
   const navigate = useNavigate();
+  const [form] = Form.useForm();
 
   useEffect(() => {
     async function getStores() {
       const stores = await getAllStores();
-      console.log("stores for add", stores.data);
       setStores(stores.data);
     }
 
     getStores();
   }, []);
 
-  // const [images, setImages] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  const [form] = Form.useForm();
-
-  // console.log("images state", images);
-
   const onFinish = async (values) => {
-    console.log("values", values);
     try {
       setIsLoading(true);
       const formData = new FormData();
@@ -47,10 +35,7 @@ function AddProduct() {
       values.images.forEach((file) => {
         formData.append("images", file.originFileObj);
       });
-      console.log("formData", formData.get("images"));
       const response = await addProduct(formData);
-
-      console.log("Form submission successful:", response.data);
       message.success("Form submitted successfully");
       form.resetFields();
       navigate(-1);
@@ -78,13 +63,11 @@ function AddProduct() {
   };
 
   function handleChange({ fileList }) {
-    console.log("filelist on adding lol", fileList);
     console.log(
       "handle change",
       fileList.map((file) => file.originFileObj)
     );
     setImagesState(fileList.map((file) => file.originFileObj));
-    // form.setFieldValue("images", fileList);
   }
 
   return (
@@ -165,9 +148,6 @@ function AddProduct() {
           rules={[{ required: true, message: "Please select store IDs!" }]}
         >
           <Select placeholder="Select store IDs">
-            {/* <Option value={1}>Store 1</Option>
-            <Option value={2}>Store 2</Option>
-            <Option value={3}>Store 3</Option> */}
             {stores?.map((store) => (
               <Option
                 value={store.id}

@@ -89,10 +89,7 @@ function Stores() {
                 width="10px"
                 render={(_, record) => (
                   <Space size="middle" key={record.id}>
-                    <Link
-                      to={`/admin/editStore/${record.id}`}
-                      onClick={() => console.log(record)}
-                    >
+                    <Link to={`/admin/editStore/${record.id}`}>
                       <Button type="dashed" icon={<EditOutlined />} />
                     </Link>
                     <Popconfirm

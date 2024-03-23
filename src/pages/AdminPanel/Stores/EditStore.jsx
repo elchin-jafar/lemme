@@ -13,7 +13,6 @@ function EditStore() {
 
   async function onFinish(values) {
     const valuesWithID = { ...values, id: id };
-    console.log("valuesWithID", valuesWithID);
     try {
       setIsLoading(true);
       const response = await editStore(valuesWithID);

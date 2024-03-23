@@ -21,26 +21,6 @@ export const addProduct = (productData) => {
   });
 };
 
-// export const editProduct = (
-//   id,
-//   name,
-//   overview,
-//   howToUse,
-//   ingredients,
-//   skinType,
-//   images
-// ) => {
-//   return api.put(
-//     `${endpoints.product.edit}?Id=${id}&Name=${name}&Overview=${overview}&HowToUse=${howToUse}&Ingredients=${ingredients}&SkinType=${skinType}`,
-//     { Images: images },
-//     {
-//       headers: {
-//         "Content-Type": "multipart/form-data",
-//       },
-//     }
-//   );
-// };
-
 export const editProduct = (
   id,
   name,
@@ -51,14 +31,6 @@ export const editProduct = (
   images
 ) => {
   const formData = new FormData();
-  // formData.append("Id", id);
-  // formData.append("Name", name);
-  // formData.append("Overview", overview);
-  // formData.append("HowToUse", howToUse);
-  // formData.append("Ingredients", ingredients);
-  // formData.append("SkinType", skinType);
-
-  // Append images to FormData without []
   images.forEach((image) => {
     formData.append("Images", image);
   });
@@ -85,12 +57,6 @@ export const getAll = () => {
 export const getProductById = (id) => {
   return api.get(endpoints.product.byId(id));
 };
-
-// export const getProductByName = (name) => {
-//   return api.get(endpoints.product.byName, {
-//     params: { productName: name },
-//   });
-// };
 
 export const getProductByName = (name) => {
   return api.get(endpoints.product.byName(name));

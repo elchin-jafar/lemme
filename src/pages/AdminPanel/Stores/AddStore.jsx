@@ -18,7 +18,6 @@ function AddStore() {
         form.resetFields();
         navigate("/admin/stores");
       }
-      console.log(response);
     } catch (error) {
       console.log(error);
       message.error("Əməliyyat uğursuz oldu");

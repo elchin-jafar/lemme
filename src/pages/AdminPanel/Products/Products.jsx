@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { User, ArrowLeft, Add } from "iconsax-react";
+import { User } from "iconsax-react";
 import {
   Flex,
   Skeleton,
   Space,
   Table,
-  Tag,
   Button,
   message,
   Popconfirm,
@@ -47,13 +46,9 @@ function Products() {
     }
   }
 
-  console.log(isLoading);
-  console.log(productList);
-
   const confirm = (id) => {
     handleDeleteProduct(id);
     setList(productList.filter((prod) => prod.id != id));
-    console.log("updatedList", productList);
     message.success("Məhsul silindi");
   };
 
@@ -91,10 +86,7 @@ function Products() {
                 width="10px"
                 render={(_, record) => (
                   <Space size="middle" key={record.id}>
-                    <Link
-                      to={`/admin/editProduct/${record.id}`}
-                      onClick={() => console.log(record)}
-                    >
+                    <Link to={`/admin/editProduct/${record.id}`}>
                       <Button type="dashed" icon={<EditOutlined />} />
                     </Link>
                     <Popconfirm
