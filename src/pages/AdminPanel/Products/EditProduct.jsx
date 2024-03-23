@@ -90,7 +90,7 @@ function EditProduct() {
       uid: index,
       name: `img${index}.png`,
       status: "done",
-      url: file,
+      url: `data:image/jpeg;base64,${file}`,
     })),
   };
 
@@ -272,6 +272,7 @@ function EditProduct() {
         <Form
           className="w-full"
           form={form}
+          // initialValues={{}}
           initialValues={newObj}
           // form={form}
           onFinish={onFinish}
@@ -346,7 +347,7 @@ function EditProduct() {
               maxFileSize={10485760} // 10MB
               handlePreview={handlePreview}
             /> */}
-            <Upload
+            {/* <Upload
               // defaultFileList={[
               //   {
               //     uid: "1",
@@ -360,7 +361,21 @@ function EditProduct() {
               {...props}
             >
               <Button icon={<UploadOutlined />}>Upload</Button>
-            </Upload>
+            </Upload> */}
+            {/* <Upload
+              listType="picture-card"
+              customRequest={handleFileUpload}
+              initialFileList={productList
+                .filter((prod) => prod.id == id)
+                .at(0)
+                .images.map((image, index) => ({
+                  uid: index,
+                  name: `image-${index}`,
+                  status: "done",
+                  url: `data:image/jpeg;base64,${image}`, // Assuming images are base64 encoded
+                }))}
+            ></Upload> */}
+            <ImgUpload></ImgUpload>
           </Form.Item>
           {/* <Form.Item
             label="Store IDs"
