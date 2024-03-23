@@ -167,12 +167,15 @@ function EditProduct() {
     const nonFiles = images.filter(
       (file) => !Object.hasOwn(file, "originFileObj")
     );
-    console.log("nonFiles", nonFiles.length);
+    console.log("nonfiles", nonFiles);
+    console.log("nonFiles length", nonFiles.length);
     const nonFilesQuantity = nonFiles.length;
     images.splice(
       0,
       nonFilesQuantity,
-      ...nonFiles.map((el) => base64ToFile(el.url, el.name, "image/jpeg"))
+      ...nonFiles.map((el) =>
+        base64ToFile(el.url.split(",").at(1), el.name, "image/jpeg")
+      )
     );
     try {
       const formData = new FormData();
@@ -183,6 +186,7 @@ function EditProduct() {
       formData.append("ingredients", values.ingredients);
       formData.append("skinType", values.skinType);
       values.images.forEach((file) => {
+        console.log(file);
         if (Object.hasOwn(file, "originFileObj")) {
           formData.append("Images", file.originFileObj);
         } else {
@@ -190,18 +194,18 @@ function EditProduct() {
         }
       });
       console.log("formData on Edit", formData.getAll("Images"));
-      const response = await editProduct(
-        id,
-        formData.get("name"),
-        formData.get("overview"),
-        formData.get("howToUse"),
-        formData.get("ingredients"),
-        formData.get("skinType"),
-        formData.getAll("Images")
-      );
-      console.log("Form submission successful:", response.data);
-      message.success("Form submitted successfully");
-      form.resetFields();
+      // const response = await editProduct(
+      //   id,
+      //   formData.get("name"),
+      //   formData.get("overview"),
+      //   formData.get("howToUse"),
+      //   formData.get("ingredients"),
+      //   formData.get("skinType"),
+      //   formData.getAll("Images")
+      // );
+      // console.log("Form submission successful:", response.data);
+      // message.success("Form submitted successfully");
+      // form.resetFields();
     } catch (error) {
       console.error("Error submitting form:", error);
       message.error("Failed to submit form");
@@ -375,7 +379,7 @@ function EditProduct() {
                   url: `data:image/jpeg;base64,${image}`, // Assuming images are base64 encoded
                 }))}
             ></Upload> */}
-            <ImgUpload></ImgUpload>
+            <ImgUpload />
           </Form.Item>
           {/* <Form.Item
             label="Store IDs"
