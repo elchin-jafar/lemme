@@ -1,4 +1,5 @@
 import { Flex, Button, Form, Input, Select, message, Spin } from "antd";
+const { Option } = Select;
 import { User } from "iconsax-react";
 import ImgUpload from "../../../components/ImgUpload/ImgUpload";
 import { Link, useParams, useNavigate } from "react-router-dom";

@@ -150,6 +150,7 @@ function AddProduct() {
           <Select placeholder="Select store IDs">
             {stores?.map((store) => (
               <Option
+                key={store.id}
                 value={store.id}
               >{`${store.name} (${store.adress})`}</Option>
             ))}

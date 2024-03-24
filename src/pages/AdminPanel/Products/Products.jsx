@@ -30,13 +30,22 @@ function Products() {
         setIsLoading(true);
         const res = await getAll();
         const data = res?.data;
-        setList(data);
+        setList(
+          data.map((el) => {
+            return { ...el, key: el.id };
+          })
+        );
       } finally {
         setIsLoading(false);
       }
     }
     getProds();
   }, []);
+
+  // const tableData = productList.map((el) => {
+  //   return { ...el, key: el.id };
+  // });
+  // console.log(tableData);
 
   async function handleDeleteProduct(id) {
     try {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import endpoints from "../api/endpoints";
 
-const BASE_URL = "https://lemme.azurewebsites.net/";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const api = axios.create({
   baseURL: BASE_URL,
