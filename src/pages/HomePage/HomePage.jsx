@@ -11,7 +11,6 @@ import debounce from "../../utils/debounce";
 
 function HomePage() {
   const [selected, setSelected] = useState(0);
-  // const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [showPlaceholder, setShowPlaceholder] = useState(false);
   const inputRef = useRef(null);
@@ -44,7 +43,6 @@ function HomePage() {
   const searchProduct = async (value) => {
     const response = await getProductByName(value);
     const data = response.data;
-    console.log("data", data);
     setResults(
       data.map((res) => {
         const { id, name } = res;
@@ -52,9 +50,6 @@ function HomePage() {
       })
     );
   };
-
-  console.log("results", results);
-  console.log("selected", selected);
 
   function onChange(value) {
     if (!value) setResults([]);
