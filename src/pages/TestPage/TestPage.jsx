@@ -106,7 +106,7 @@ function TestPage({ productId }) {
   }
 
   return (
-    <div className="w-full 2xl:h-screen px-4 sm:px-16 pb-[15px] bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
+    <div className="w-full h-screen sm:h-fit md:h-fit 2xl:h-auto px-4 sm:px-16 pb-[15px] bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
       <div className="max-w-[1500px] w-full mx-auto">
         <div className="flex justify-between items-center ">
           <h2 className="text-[20px] sm:text-[30px] font-bold">
