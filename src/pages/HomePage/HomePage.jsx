@@ -67,14 +67,18 @@ function HomePage() {
   //       );
 
   return (
-    <div className="w-full sm:h-auto md:h-screen pt-[4rem] flex flex-col items-center justify-items-center bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
+    <div className="w-full  h-screen pt-[4rem] flex flex-col items-center justify-items-center bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
       <Link
-        to="admin/main"
-        className="bg-white p-2.5 rounded-[1.5rem] fixed top-[4rem] right-[10.4rem]"
+        to="admin/login"
+        className="bg-white p-2.5 rounded-[1.5rem] fixed top-[4rem] right-4 sm:right-6 md:right-20 lg:right-[10.4rem]"
       >
         <Profile color="#85B6FF" />
       </Link>
-      <img src={logo2} alt="" className="w-[42.9rem]" />
+      <img
+        src={logo2}
+        alt=""
+        className=" w-[20rem] sm:w-[30rem] md:w-[42.9rem]"
+      />
       {/* <div className="relative bg-[#EFA0C6] w-[60.4rem] h-[10rem] rounded-[12.6rem] mb-5 flex justify-center items-center">
         <SearchNormal1
           className="absolute right-[6.2rem] top-[3.1rem]"
@@ -88,20 +92,20 @@ function HomePage() {
         />
       </div> */}
 
-      <div className="relative z-20 bg-transparent sm:w-[60.4rem]  h-[100px] sm:h-[9.1rem] rounded-[12.6rem] mb-5 flex justify-center items-center">
+      <div className="relative z-20 bg-transparent sm:w-[60.4rem] h-[100px] sm:h-[9.1rem] rounded-[12.6rem] sm:mb-[2rem] flex justify-center items-center">
         <Combobox value={selected} onChange={setSelected}>
           <div className="mt-1">
             <div className="bg-[#EFA0C6] text-[#2B2727] rounded-[12.6rem] placeholder-[#2B2727] text-center text-[20px]  sm:text-[3.6rem] outline-none max-w-[80%]">
               <Combobox.Input
                 ref={inputRef}
-                className="bg-[#EFA0C6] text-[#2B2727] sm:w-[60.4rem] w-[300px] h-[100px] sm:h-[9.6rem] rounded-[12.6rem] placeholder-[#2B2727] text-center text-[20] sm:text-[3.6rem] focus:bg-[#EFA0C6] outline-none"
+                className="bg-[#EFA0C6] text-[#2B2727] w-[30rem] sm:w-[60.4rem] h-[7rem] sm:h-[9.6rem] rounded-[12.6rem] placeholder-[#2B2727] text-center text-[20] sm:text-[3.6rem] focus:bg-[#EFA0C6] outline-none"
                 placeholder={showPlaceholder ? "" : "Məhsulun adı"}
                 onClick={handleInputClick}
                 onChange={(e) => debounceOnChange(e.target.value)}
               />
               <Combobox.Button className="absolute inset-y-0 right-24 flex items-center">
                 <SearchNormal1
-                  className="sm:text-[37px] text-[20px]"
+                  className="text-[2rem] sm:text-[37px]"
                   color="#2D264B"
                 />
               </Combobox.Button>
@@ -163,11 +167,15 @@ function HomePage() {
       </div>
       <SkinTypeModal productId={selected} />
       <Link to="test" className="relative z-10">
-        <div className="bg-[#EFA0C6] text-[#2B2727] sm:w-[60.4rem] w-[300px] h-[10rem] text-[20px] sm:text-[3.6rem] rounded-[12.6rem] outline-none flex items-center justify-center cursor-pointer">
+        <div className="bg-[#EFA0C6] text-[#2B2727] sm:w-[60.4rem] w-[300px] h-[7rem] sm:h-[9.6rem] text-[20px] sm:text-[3.6rem] rounded-[12.6rem] outline-none flex items-center justify-center cursor-pointer">
           Dəri tipini müəyyən et
         </div>
       </Link>
-      <img src={logo} alt="" className="fixed -bottom-8 -right-8 z-0" />
+      <img
+        src={logo}
+        alt=""
+        className="w-[36rem] fixed -bottom-8 md:-right-8 z-0"
+      />
     </div>
   );
 }

@@ -14,7 +14,7 @@ function MainMenu() {
       </Flex>
       <div>
         <p className="text-[3.8rem] font-semibold">Ana səhifə</p>
-        <Flex gap="large">
+        <Flex gap="large" className="flex-col md:flex-row">
           <Flex gap="small" vertical>
             <Link>
               <Button className="w-[21rem]" size="large">
@@ -22,26 +22,32 @@ function MainMenu() {
               </Button>
             </Link>
             <Button size="large">Ümumi</Button>
-            <Link to="../products">
-              <Button className="w-[21rem]" size="large">
-                Məhsul siyahısı
+            <Link>
+              <Button size="large" className="w-[21rem]">
+                İstifadəçilər
               </Button>
             </Link>
-            <Link to="../addStore">
-              <Button className="w-[21rem]" size="large">
-                Mağaza əlavə et
-              </Button>
-            </Link>
+
+            {/* <Button size="large">Məhsul əlavə et</Button> */}
           </Flex>
           <Flex gap="small" vertical>
-            <Button size="large">Yeni məhsul əlavə et</Button>
             <Link to="../stores">
               <Button className="w-[21rem]" size="large">
                 Mağaza siyahısı
               </Button>
             </Link>
-            <Button size="large">Yeni sual əlavə et</Button>
-            <Button size="large">Sual redaktə et</Button>
+            <Link to="../products">
+              <Button className="w-[21rem]" size="large">
+                Məhsul siyahısı
+              </Button>
+            </Link>
+            {/* <Link to="../addStore">
+              <Button className="w-[21rem]" size="large">
+                Mağaza əlavə et
+              </Button>
+            </Link> */}
+            {/* <Button size="large">Yeni sual əlavə et</Button> */}
+            {/* <Button size="large">Sual redaktə et</Button> */}
           </Flex>
         </Flex>
       </div>

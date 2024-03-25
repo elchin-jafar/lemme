@@ -59,7 +59,7 @@ function ProductPage() {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, skinType]);
 
   const infoText = {
     ingredient: {
@@ -87,12 +87,12 @@ function ProductPage() {
       </div>
     </div>
   ) : (
-    <div className=" flex justify-center sm:h-auto md:h-screen bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
+    <div className=" flex justify-center h-screen sm:h-screen md:h-screen bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
       <div className="max-w-[1319px] py-[14px] px-[22px] w-full md:px-[30px] md:py-[10px]">
         <div className="flex justify-between items-center gap-3 pb-2.5 lg:pb-[15px]">
           <div className="flex md:items-center lg:items-start flex-col gap-[15px] md:flex-row lg:flex-col">
             <h1 className="flex font-bold text-[20px] lg:text-[30px] text-[#212121] ">
-              Məhsulun adı
+              Fonts
             </h1>
             {/* <span className=" w-[140px] h-[24px] px-[10.5px] py-[3px]  lg:px-5 lg:py-2.5 lg:w-[238px] lg:h-[34px] rounded-lg text-white font-bold text-[12px] lg:text-[16px] bg-[#50AB64]">
               dəri tipinizə uyğundur

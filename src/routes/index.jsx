@@ -19,6 +19,7 @@ const routes = [
     path: "/",
     element: <HomePage />,
   },
+
   {
     path: "productPage/:id",
     element: <ProductPage />,

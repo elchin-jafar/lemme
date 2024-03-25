@@ -1,19 +1,16 @@
 import axios from "axios";
-import endpoints from "../api/endpoints";
+// import endpoints from "../api/endpoints";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-const api = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-  },
-});
+// const api = axios.create({
+//   baseURL: import.meta.env.VITE_BASE_URL,
+//   headers: {
+//     "Content-Type": "application/json",
+//     "Access-Control-Allow-Origin": "*",
+//   },
+// });
 
 //PRODUCT APIs
 export const addProduct = (productData) => {
-  console.log("productData on add apiUtil", productData.getAll("images"));
   return api.post(endpoints.product.add, productData, {
     headers: {
       "Content-Type": "multipart/form-data",

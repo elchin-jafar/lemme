@@ -106,7 +106,7 @@ function TestPage({ productId }) {
   }
 
   return (
-    <div className="w-full h-auto px-16 pb-[15px] bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
+    <div className="w-full 2xl:h-screen px-4 sm:px-16 pb-[15px] bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
       <div className="max-w-[1500px] w-full mx-auto">
         <div className="flex justify-between items-center ">
           <h2 className="text-[20px] sm:text-[30px] font-bold">
@@ -115,7 +115,7 @@ function TestPage({ productId }) {
           <img
             src={logo}
             alt="logo"
-            className="w-[200px] h-[100px] hidden lg:flex"
+            className="w-[200px] h-[12rem] hidden lg:flex"
           />
         </div>
 
@@ -143,7 +143,7 @@ function TestPage({ productId }) {
         ) : (
           <div
             onClick={getAnswer}
-            className="px-[2.9rem] py-[10px] mt-[10px] text-[2rem] font-bold text-white bg-[#56A8FF] rounded-[1.5rem] w-fit cursor-pointer "
+            className="w-[100%] text-center px-[2.9rem] py-[10px] mt-[10px] text-[2rem] font-bold text-white bg-[#56A8FF] rounded-[1.5rem] sm:w-fit cursor-pointer"
           >
             Cavabı al
           </div>
@@ -164,14 +164,14 @@ function Models() {
   return (
     <>
       <div className="relative max-w-[603px] h-[548px] mt-[10px] w-full hidden lg:flex">
-        <div className="p-[3rem] border border-black rounded-full max-w-[204px]  xl:max-w-[284px] w-full  bg-[#F6EFF2] absolute lg:left-[80px] lg:bottom-[170px] xl:left-[96px] xl:bottom-[2rem] z-[3]">
-          <ProgressiveImg src={model_S} placeholderSrc={compressed_S} alt="" />
+        <div className="p-[3rem] border border-black rounded-full max-w-[204px] xl:max-w-[284px] w-full  bg-[#F6EFF2] absolute lg:left-[80px] lg:bottom-[170px] xl:left-[96px] xl:bottom-[2rem] z-[3]">
+          <ProgressiveImg placeholderSrc={compressed_S} src={model_S} alt="" />
         </div>
-        <div className="p-[3rem] border border-black rounded-full max-w-[258px]  xl:max-w-[318px] w-full  bg-[#F6EFF2] absolute xl:left-0  z-[2] ">
-          <ProgressiveImg src={model_M} placeholderSrc={compressed_M} alt="" />
+        <div className="p-[3rem] border border-black rounded-full max-w-[258px]  xl:max-w-[318px] w-full  bg-[#F6EFF2] absolute xl:left-0 z-[2] ">
+          <ProgressiveImg placeholderSrc={compressed_M} src={model_M} alt="" />
         </div>
         <div className="p-[3rem] border border-black rounded-full max-w-[326px] xl:max-w-[386px] w-full bg-[#F6EFF2] absolute lg:right-[20px] lg:top-[30px] xl:right-0 xl:top-[59px] z-[1]">
-          <ProgressiveImg src={model_L} placeholderSrc={compressed_L} alt="" />
+          <ProgressiveImg placeholderSrc={compressed_L} src={model_L} alt="" />
         </div>
       </div>
     </>
@@ -188,14 +188,14 @@ function Question({ q, index, handleAnswer }) {
 
   return (
     <div>
-      <p className="text-[17px] sm:text-[25px] max-w-[677px] w-full font-bold">
+      <p className="text-[2.3rem] sm:text-[25px] max-w-[50rem] w-full font-bold">
         {q.question}
       </p>
       <div className="flex gap-x-[1.5rem]">
         {q.answers.map((answer, answerIndex) => (
           <p
             key={answerIndex}
-            className={`text-[12px] flex items-center text-center sm:text-[16px] font-normal py-[7px] px-[10px] my-[20px] cursor-pointer rounded-[3.5rem] w-fit ${
+            className={`text-[1.3rem] flex items-center justify-center text-center min-w-[10rem] w-[15rem] sm:text-[16px] font-normal py-[7px] px-[10px] my-[20px] cursor-pointer rounded-[3.5rem] ${
               selected === answerIndex
                 ? "bg-[#EFA0C6] text-white"
                 : "bg-white text-black"

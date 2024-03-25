@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Modal, Upload } from "antd";
+import fakeUpload from "../../utils/fakeUpload";
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -49,7 +50,8 @@ function ImgUpload({ fileList, ...props }) {
     <>
       <Upload
         {...props}
-        action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+        // action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+        action={fakeUpload}
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}

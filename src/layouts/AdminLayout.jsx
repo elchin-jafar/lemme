@@ -3,7 +3,7 @@ import logo from "../assets/logo2.png";
 
 function AdminLayout() {
   return (
-    <div className="relative  px-[8rem] py-[6rem]">
+    <div className="relative px-[4rem] py-[3rem] md:px-[8rem] md:py-[6rem]">
       <img
         src={logo}
         alt=""
