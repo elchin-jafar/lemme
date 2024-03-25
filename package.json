@@ -17,6 +17,7 @@
     "@headlessui/react": "^1.7.18",
     "antd": "^5.15.1",
     "axios": "^1.6.7",
+    "firebase": "^10.9.0",
     "font-awesome": "^4.7.0",
     "iconsax-react": "^0.0.8",
     "jwt-decode": "^4.0.0",

@@ -25,3 +25,7 @@ dist-ssr
 
 # Environment files
 .env
+
+# Deployment directories and files
+.firebase
+.firebaserc
