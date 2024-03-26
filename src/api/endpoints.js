@@ -19,7 +19,7 @@ const endpoints = {
     getAllUsers: "/api/User/GetAllUsers",
     byId: "/api/User/GetUserById",
     login: "/api/User/Login",
-    delete: (id) => `api/User/DeleteUser/${id}`,
+    delete: (id) => `api/User/DeleteUser?id=${id}`,
     getAllRoles: "/api/User/GetAllRoles",
   },
   skinType: {

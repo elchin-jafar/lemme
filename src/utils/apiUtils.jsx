@@ -97,6 +97,10 @@ export const getAllUsers = () => {
   return api.get(endpoints.user.getAllUsers);
 };
 
+export const deleteUser = (id) => {
+  return api.post(endpoints.user.delete(id));
+};
+
 //SKIN TYPE APIs
 export const determineSkinType = (counts) => {
   return api.get(endpoints.skinType.determine(counts));

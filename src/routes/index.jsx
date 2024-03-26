@@ -14,6 +14,8 @@ import EditStore from "../pages/AdminPanel/Stores/EditStore";
 import Stores from "../pages/AdminPanel/Stores/Stores";
 import Login, { loginLoader } from "../pages/Login";
 import Register from "../pages/Register";
+//USERS
+import Users from "../pages/AdminPanel/Users/Users";
 
 const routes = [
   {
@@ -70,6 +72,10 @@ const routes = [
       {
         path: "stores",
         element: <Stores />,
+      },
+      {
+        path: "users",
+        element: <Users />,
       },
     ],
   },

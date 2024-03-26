@@ -2,8 +2,8 @@ import { Flex, Button, Form, Input, message, Typography, Spin } from "antd";
 import { User } from "iconsax-react";
 import { useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { editStore } from "../../../utils/apiUtils";
-import { useStoreList } from "../../../store/storeList";
+import { editStore } from "../../../../utils/apiUtils";
+import { useStoreList } from "../../../../store/storeList";
 
 function EditStore() {
   const { id } = useParams();

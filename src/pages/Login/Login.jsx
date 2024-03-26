@@ -15,10 +15,8 @@ function Login() {
     try {
       setIsLoading(true);
       const response = await login(values);
-      console.log(response);
       const token = response.data.securityToken;
       const decoded = jwtDecode(token);
-      console.log("decoded", decoded);
       setCookie("login", token, {
         path: "/",
         expires: new Date(decoded.exp * 1000),

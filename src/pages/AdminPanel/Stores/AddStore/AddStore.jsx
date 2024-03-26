@@ -1,7 +1,7 @@
 import { Flex, Button, Form, Input, Spin, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { User } from "iconsax-react";
-import { addStore } from "../../../utils/apiUtils";
+import { addStore } from "../../../../utils/apiUtils";
 import { useState } from "react";
 
 function AddStore() {

@@ -92,7 +92,7 @@ function ProductPage() {
         <div className="flex justify-between items-center gap-3 pb-2.5 lg:pb-[15px]">
           <div className="flex md:items-center lg:items-start flex-col gap-[15px] md:flex-row lg:flex-col">
             <h1 className="flex font-bold text-[20px] lg:text-[30px] text-[#212121] ">
-              Fonts
+              {productData.name}
             </h1>
             {/* <span className=" w-[140px] h-[24px] px-[10.5px] py-[3px]  lg:px-5 lg:py-2.5 lg:w-[238px] lg:h-[34px] rounded-lg text-white font-bold text-[12px] lg:text-[16px] bg-[#50AB64]">
               dəri tipinizə uyğundur
@@ -158,71 +158,6 @@ function ProductPage() {
                   <ImgBase64 data={img} alt="product image" />
                 </div>
               ))}
-              {/* <div
-                className="f-carousel__slide"
-                data-fancybox="gallery"
-                data-src="https://lipsum.app/id/60/1600x1200"
-                data-thumb-src="https://lipsum.app/id/60/200x150"
-              >
-                <img
-                  alt=""
-                  src="https://lipsum.app/id/60/400x300"
-                  width="400"
-                  height="300"
-                />
-              </div>
-              <div
-                className="f-carousel__slide"
-                data-fancybox="gallery"
-                data-src="https://lipsum.app/id/61/1600x1200"
-                data-thumb-src="https://lipsum.app/id/61/200x150"
-              >
-                <img
-                  alt=""
-                  src="https://lipsum.app/id/61/400x300"
-                  width="400"
-                  height="300"
-                />
-              </div>
-              <div
-                className="f-carousel__slide"
-                data-fancybox="gallery"
-                data-src="https://lipsum.app/id/62/1600x1200"
-                data-thumb-src="https://lipsum.app/id/62/200x150"
-              >
-                <img
-                  alt=""
-                  src="https://lipsum.app/id/62/400x300"
-                  width="400"
-                  height="300"
-                />
-              </div>
-              <div
-                className="f-carousel__slide"
-                data-fancybox="gallery"
-                data-src="https://lipsum.app/id/63/1600x1200"
-                data-thumb-src="https://lipsum.app/id/63/200x150"
-              >
-                <img
-                  alt=""
-                  src="https://lipsum.app/id/63/400x300"
-                  width="400"
-                  height="300"
-                />
-              </div>
-              <div
-                className="f-carousel__slide"
-                data-fancybox="gallery"
-                data-src="https://lipsum.app/id/64/1600x1200"
-                data-thumb-src="https://lipsum.app/id/64/200x150"
-              >
-                <img
-                  alt=""
-                  src="https://lipsum.app/id/64/400x300"
-                  width="400"
-                  height="300"
-                />
-              </div> */}
             </CarouselFancy>
           </Fancy>
 
