@@ -1,12 +1,12 @@
 import { Flex, Button, Form, Input, Select, message, Spin } from "antd";
 const { Option } = Select;
 import { User } from "iconsax-react";
-import ImgUpload from "../../../components/ImgUpload/ImgUpload";
+import ImgUpload from "../../../../components/ImgUpload/ImgUpload";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useAdminProductsStore } from "../../../store/adminProductsStore";
+import { useAdminProductsStore } from "../../../../store/adminProductsStore";
 import { useEffect, useState } from "react";
-import { editProduct } from "../../../utils/apiUtils";
-import { base64ToFile } from "../../../utils/Base64toFileConverter";
+import { editProduct } from "../../../../utils/apiUtils";
+import { base64ToFile } from "../../../../utils/Base64toFileConverter";
 
 function EditProduct() {
   const [isLoading, setIsLoading] = useState(false);

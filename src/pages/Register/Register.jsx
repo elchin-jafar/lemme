@@ -1,112 +1,153 @@
 import { User } from "iconsax-react";
-import { Flex } from "antd";
+import { Flex, Input, Button, Form, Select, message } from "antd";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { register } from "../../utils/apiUtils";
+import { register, getAllRoles, getAllUsers } from "../../utils/apiUtils";
+import { useEffect, useState } from "react";
+
+const options = [
+  {
+    label: "Admin",
+    value: "Admin",
+  },
+  {
+    label: "User",
+    value: "User",
+  },
+];
 
 function Register() {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [role, setRole] = useState("admin");
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [roles, setRoles] = useState([]);
 
-    const values = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-      userName: username,
-      roles: [
-        {
-          name: role,
-        },
-      ],
-    };
+  useEffect(() => {
+    async function getRls() {
+      try {
+        const response = await getAllRoles();
+        if (response.status == 200) {
+          setRoles(response.data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    getRls();
+  }, []);
 
-    register(values)
-      .then((res) => res.status === 200 && alert("user succesfully created"))
-      .catch((err) => console.log(err));
+  useEffect(() => {
+    async function getUsrs() {
+      try {
+        const response = await getAllUsers();
+        if (response.status == 200) {
+          console.log("all users", response.data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    getUsrs();
+  }, []);
+
+  console.log("roles on reguster", roles);
+
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
   };
+
+  function utilstringConverter(arr) {
+    return arr.map((role) => {
+      return {
+        name: role.toLowerCase(),
+      };
+    });
+  }
+
+  async function handleRegister(values) {
+    console.log("register data", values);
+    const newObj = { ...values, roles: utilstringConverter(values.roles) };
+    const serializedObj = JSON.stringify(newObj);
+    console.log("newObj", serializedObj);
+    try {
+      // const registerData = new FormData();
+      // registerData.append("firstName", values.firstName);
+      // registerData.append("lastName", values.lastName);
+      // registerData.append("email", values.email);
+      // registerData.append("password", values.password);
+      // registerData.append("userName", values.username);
+      // const rolesObj = values.roles.map((role) => {
+      //   return { name: role };
+      // });
+      // registerData.append("roles", rolesObj);
+      // console.log("rooes", registerData.getAll("roles"));
+      // const response = await register(values);
+      // console.log(response);
+      const response = await register(serializedObj);
+      console.log(response);
+    } catch (err) {
+      console.log(err.message);
+      message(err.message);
+    }
+  }
+
   return (
-    <Flex justify="start" align="start" gap="large">
-      <div>
+    <>
+      <div className="max-w-[70%]">
         <User size="32" color="#85B6FF" />
+
+        <Flex align="center" gap="large">
+          <p className="text-[3.8rem] font-semibold">Register</p>
+        </Flex>
+        <Form onFinish={handleRegister}>
+          <Form.Item label="First Name" name="firstName">
+            <Input size="large" />
+          </Form.Item>
+
+          <Form.Item label="Last Name" name="lastName">
+            <Input size="large" />
+          </Form.Item>
+          <Form.Item label="Email" name="email">
+            <Input size="large" />
+          </Form.Item>
+          <Form.Item label="Password" name="password">
+            <Input size="large" />
+          </Form.Item>
+          <Form.Item label="Username" name="userName">
+            <Input size="large" />
+          </Form.Item>
+          <Form.Item label="Roles" name="roles">
+            {/* <Select
+              size="large"
+              mode="multiple"
+              style={{
+                width: "100%",
+              }}
+              placeholder="select roles"
+              onChange={handleChange}
+              optionLabelProp="label"
+              options={roles}
+            /> */}
+            <Select placeholder="Select store IDs" mode="multiple">
+              {roles?.map((role) => (
+                <Option value={role.name}>{`${role.name}`}</Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item className="text-end">
+            <Button
+              type="primary"
+              htmlType="submit"
+              size="large"
+              className="mr-[2rem]"
+            >
+              Register
+            </Button>
+            <Link to="/admin/login">
+              <Button type="primary" size="large" danger>
+                Geriyə
+              </Button>
+            </Link>
+          </Form.Item>
+        </Form>
       </div>
-      <form className="flex flex-col gap-4 w-[50%]" onSubmit={handleSubmit}>
-        <p className="text-[3.8rem] font-semibold">Daxil ol</p>
-
-        <label htmlFor="lName" className="text-[3rem] font-semibold">
-          Last name
-        </label>
-        <input
-          onChange={(e) => setLastName(e.target.value)}
-          size="large"
-          placeholder="last name"
-          id="lName"
-          className="w-[472px] border-[1px] text-center p-[10px] text-3xl outline-none border-[#727171]"
-        />
-        <label htmlFor="fname" className="text-[3rem] font-semibold">
-          first name
-        </label>
-        <input
-          size="large"
-          placeholder="first name"
-          onChange={(e) => setFirstName(e.target.value)}
-          id="fname"
-          className="w-[472px] border-[1px] text-center p-[10px] text-3xl outline-none border-[#727171]"
-        />
-        <label htmlFor="email" className="text-[3rem] font-semibold">
-          email
-        </label>
-        <input
-          size="large"
-          placeholder="email"
-          onChange={(e) => setEmail(e.target.value)}
-          id="email"
-          type="email"
-          className="w-[472px] border-[1px] text-center p-[10px] text-3xl outline-none border-[#727171]"
-        />
-        <label htmlFor="user" className="text-[3rem] font-semibold">
-          Username
-        </label>
-        <input
-          onChange={(e) => setUsername(e.target.value)}
-          size="large"
-          placeholder="Username"
-          id="user"
-          className="w-[472px] border-[1px] text-center p-[10px] text-3xl outline-none border-[#727171]"
-        />
-
-        <label htmlFor="pass" className="text-[3rem] font-semibold">
-          Şifrə
-        </label>
-        <input
-          size="large"
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="password"
-          id="pass"
-          type="password"
-          className="w-[472px] border-[1px] text-center p-[10px] text-3xl outline-none border-[#727171]"
-        />
-        <div className="flex gap-4">
-          <button
-            type="submit"
-            size="large"
-            className="  border-[1px] text-center py-[4px] px-[15px] text-3xl outline-none border-[#727171]"
-          >
-            Qeydiyatdan keç
-          </button>
-          <button className="  border-[1px] text-center py-[4px] px-[15px] text-3xl outline-none border-[#727171]">
-            {" "}
-            <Link to="/">Geriyə</Link>
-          </button>
-        </div>
-      </form>
-    </Flex>
+    </>
   );
 }
 

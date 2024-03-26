@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Flex, Button, Form, Input, Select, Spin, message } from "antd";
 const { Option } = Select;
 import { User } from "iconsax-react";
-import ImgUpload from "../../../components/ImgUpload/ImgUpload";
+import ImgUpload from "../../../../components/ImgUpload/ImgUpload";
 import { Link, useNavigate } from "react-router-dom";
-import { addProduct, getAllStores } from "../../../utils/apiUtils";
+import { addProduct, getAllStores } from "../../../../utils/apiUtils";
 
 function AddProduct() {
   const [isLoading, setIsLoading] = useState(false);
