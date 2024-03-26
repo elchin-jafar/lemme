@@ -29,7 +29,12 @@ function Stores() {
       try {
         setIsLoading(true);
         const response = await getAllStores();
-        setStoreList(response.data);
+        const data = await response?.data;
+        setStoreList(
+          data.map((el) => {
+            return { ...el, key: el.id };
+          })
+        );
       } catch (error) {
         console.log(error);
         message.error("Əməliyyat uğursuz oldu");

@@ -27,6 +27,10 @@ const endpoints = {
     checkSuit: (id, skinType) =>
       `api/SkinType/CheckIfSuitsSkinType/${id}/${skinType}`,
   },
+  statistics: {
+    searchCountByStore: (id) =>
+      `api/ProductStatistics/GetProductSearchCountForStore/${id}`,
+  },
 };
 
 export default endpoints;

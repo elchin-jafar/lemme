@@ -29,7 +29,7 @@ function Products() {
       try {
         setIsLoading(true);
         const res = await getAll();
-        const data = res?.data;
+        const data = await res?.data;
         setList(
           data.map((el) => {
             return { ...el, key: el.id };

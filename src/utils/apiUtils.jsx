@@ -109,3 +109,8 @@ export const determineSkinType = (counts) => {
 export const checkSuit = (id, skinType) => {
   return api.get(endpoints.skinType.checkSuit(id, skinType));
 };
+
+//STATISTICS
+export const searchCountByStore = (id) => {
+  return api.get(endpoints.statistics.searchCountByStore(id));
+};

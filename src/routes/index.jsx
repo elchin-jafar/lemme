@@ -16,6 +16,8 @@ import Login, { loginLoader } from "../pages/Login";
 import Register from "../pages/Register";
 //USERS
 import Users from "../pages/AdminPanel/Users/Users";
+//GENERAL
+import General from "../pages/AdminPanel/General";
 
 const routes = [
   {
@@ -76,6 +78,10 @@ const routes = [
       {
         path: "users",
         element: <Users />,
+      },
+      {
+        path: "general",
+        element: <General />,
       },
     ],
   },

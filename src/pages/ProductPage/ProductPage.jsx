@@ -24,10 +24,10 @@ function ProductPage() {
 
   const { skinType } = useUserSkinType((state) => state);
 
-  console.log("activeProductId on prod page", activeProductId);
-  console.log("isProdSuits", isProdSuits);
-  console.log("productData", productData);
-  console.log("skinType", skinType);
+  // console.log("activeProductId on prod page", activeProductId);
+  // console.log("isProdSuits", isProdSuits);
+  // console.log("productData", productData);
+  // console.log("skinType", skinType);
   const handleInfoChange = (title) => {
     setActiveButton(title);
   };
@@ -48,7 +48,7 @@ function ProductPage() {
           getProductById(id),
           checkSuit(id, skinType),
         ]);
-        console.log("promise", promise);
+        // console.log("promise", promise);
         setProductData(promise.at(0).data);
         setIsProdSuits(promise.at(1).data.response);
       } catch (err) {

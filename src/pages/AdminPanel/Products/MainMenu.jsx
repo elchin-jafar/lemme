@@ -16,12 +16,11 @@ function MainMenu() {
         <p className="text-[3.8rem] font-semibold">Ana səhifə</p>
         <Flex gap="large" className="flex-col md:flex-row">
           <Flex gap="small" vertical>
-            <Link>
+            <Link to="../general">
               <Button className="w-[21rem]" size="large">
-                Mağaza
+                Ümumi
               </Button>
             </Link>
-            <Button size="large">Ümumi</Button>
             <Link to="../users">
               <Button size="large" className="w-[21rem]">
                 İstifadəçilər
