@@ -8,12 +8,14 @@ import { Combobox, Transition } from "@headlessui/react";
 import SkinTypeModal from "../../components/SkinTypeModal/SkinTypeModal";
 import { getProductByName } from "../../utils/apiUtils";
 import debounce from "../../utils/debounce";
+import { useCookie } from "../../hooks/useCookie";
 
 function HomePage() {
   const [selected, setSelected] = useState(0);
   const [results, setResults] = useState([]);
   const [showPlaceholder, setShowPlaceholder] = useState(false);
   const inputRef = useRef(null);
+  const token = useCookie("login");
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -69,7 +71,7 @@ function HomePage() {
   return (
     <div className="w-full  h-screen pt-[4rem] flex flex-col items-center justify-items-center bg-gradient-to-b from-[#b0ddff] to-[#ffe8f5]">
       <Link
-        to="admin/login"
+        to="login"
         className="bg-white p-2.5 rounded-[1.5rem] fixed top-[4rem] right-4 sm:right-6 md:right-20 lg:right-[10.4rem]"
       >
         <Profile color="#85B6FF" />

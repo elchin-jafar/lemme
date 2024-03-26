@@ -1,6 +1,6 @@
 import { User } from "iconsax-react";
 import { Flex, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
 function MainMenu() {
@@ -56,3 +56,21 @@ function MainMenu() {
 }
 
 export default MainMenu;
+
+// export const mainMenuLoader = () => {
+//   const cookies = document.cookie.split(";");
+//   let token;
+
+//   for (let i = 0; i < cookies.length; i++) {
+//     const cookie = cookies[i].trim();
+//     if (cookie.startsWith("login=")) {
+//       token = cookie.split("=").at(1);
+//       break;
+//     }
+//   }
+
+//   if (!token) {
+//     return redirect("/");
+//   }
+//   return null;
+// };

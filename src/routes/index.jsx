@@ -2,7 +2,7 @@
 import ProductPage from "../pages/ProductPage";
 import HomePage from "../pages/HomePage/HomePage";
 import TestPage from "../pages/TestPage";
-import AdminLayout from "../layouts";
+import AdminLayout, { adminLayoutLoader } from "../layouts";
 //PRODUCTS
 import MainMenu from "../pages/AdminPanel/Products/MainMenu";
 import Products from "../pages/AdminPanel/Products/Products";
@@ -12,7 +12,7 @@ import EditProduct from "../pages/AdminPanel/Products/EditProduct";
 import AddStore from "../pages/AdminPanel/Stores/AddStore";
 import EditStore from "../pages/AdminPanel/Stores/EditStore";
 import Stores from "../pages/AdminPanel/Stores/Stores";
-import Login from "../pages/Login";
+import Login, { loginLoader } from "../pages/Login";
 import Register from "../pages/Register";
 
 const routes = [
@@ -20,7 +20,11 @@ const routes = [
     path: "/",
     element: <HomePage />,
   },
-
+  {
+    path: "login",
+    element: <Login />,
+    loader: loginLoader,
+  },
   {
     path: "productPage/:id",
     element: <ProductPage />,
@@ -32,11 +36,8 @@ const routes = [
   {
     path: "admin",
     element: <AdminLayout />,
+    loader: adminLayoutLoader,
     children: [
-      {
-        path: "login",
-        element: <Login />,
-      },
       {
         path: "register",
         element: <Register />,
@@ -44,6 +45,7 @@ const routes = [
       {
         path: "main",
         element: <MainMenu />,
+        // loader: mainMenuLoader,
       },
       {
         path: "products",
